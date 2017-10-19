@@ -6,5 +6,6 @@ export class User {
                 public role: string,
                 public subsidiary: string,
                 public password: string,
-                public password1: string) { }
+                public password1: string
+                ) { }
 } 

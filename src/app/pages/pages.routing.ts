@@ -6,6 +6,7 @@ import { SearchComponent } from './search/search.component';
 import { UserCreateComponent } from './user/user-create.component';
 import { UserListComponent } from './user/user-list.component';
 import { UserUpdateComponent } from './user/user-update.component';
+import { TransactionOutComponent } from './transaction/transaction-out.component';
 
 export const routes: Routes = [
     {
@@ -18,7 +19,8 @@ export const routes: Routes = [
             { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } },
             { path: 'user-create', component: UserCreateComponent, data: { breadcrumb: 'Crear Usuario' } },
             { path: 'user-list', component: UserListComponent, data: { breadcrumb: 'Ver Usuarios' } },
-            { path: 'user-update/:id', component: UserUpdateComponent, data: { breadcrumb: 'Actualizar Usuario' } }
+            { path: 'user-update/:id', component: UserUpdateComponent, data: { breadcrumb: 'Actualizar Usuario' } },
+            { path: 'transaction-out', component: TransactionOutComponent, data: { breadcrumb: 'Crear Salida' } }
        ]
     }
 ];

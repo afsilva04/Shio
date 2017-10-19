@@ -45,7 +45,7 @@ export const verticalMenuItems = [
     //ENTRADAS Y SALIDAS
     new Menu (224, 'Entradas y Salidas', null, null, 'shopping-cart', null, true, 0),
     new Menu (225, 'Ver Entradas', '/pages/transaction-list', null, 'list-ul', null, false, 224),
-    new Menu (226, 'Crear Entrada/Salida', '/pages/transacion-create', null, 'plus', null, false, 224),
+    new Menu (226, 'Crear Salida', '/pages/transaction-out', null, 'plus', null, false, 224),
 
     //REPORTES
     new Menu (227, 'Reportes', null, null, 'signal', null, true, 0),

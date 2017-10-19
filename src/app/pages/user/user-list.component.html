@@ -1,36 +1,36 @@
 <h3>{{title}}</h3>
 <hr/>
 
-    <div class="col-lg-12 mb-4">
-        <div widget class="card border-0 box-shadow">
-            <div class="card-block pt-0 widget-body table-responsive">
-            	<br>         
-                <table class="table table-bordered col-lg-6">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nombre</th>
-                            <th>Correo</th>
-                            <th>Telefono</th>
-                            <th>Rol</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let user of users">
-                            <th>{{user.id}}</th>
-                            <td>{{user.name}}</td>
-                            <td>{{user.email}}</td>
-                            <td>{{user.phone}}</td>
-                            <td>{{user.role}}</td>
-                            <td align="center">
-                            	<a class="ng2-smart-action ng2-smart-action-edit-edit" [routerLink]="['/pages/user-update', user.id]">
-                            		<i class="fa fa-pencil"></i>
-                            	</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+<div class="col-lg-12 mb-4">
+    <div widget class="card border-0 box-shadow">
+        <div class="card-block pt-0 widget-body table-responsive">
+        	<br>         
+            <table class="table table-bordered col-lg-6">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Telefono</th>
+                        <th>Rol</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <th>{{user.id}}</th>
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.phone}}</td>
+                        <td>{{user.role}}</td>
+                        <td align="center">
+                        	<a class="ng2-smart-action ng2-smart-action-edit-edit" [routerLink]="['/pages/user-update', user.id]">
+                        		<i class="fa fa-pencil"></i>
+                        	</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>

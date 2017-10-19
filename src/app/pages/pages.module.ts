@@ -23,6 +23,9 @@ import { SearchComponent } from './search/search.component';
 import { UserCreateComponent } from './user/user-create.component';
 import { UserListComponent } from './user/user-list.component';
 import { UserUpdateComponent } from './user/user-update.component';
+import { TransactionOutComponent } from './transaction/transaction-out.component';
+
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 
 @NgModule({
@@ -30,7 +33,8 @@ import { UserUpdateComponent } from './user/user-update.component';
     CommonModule,
     PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
     routing,
-    FormsModule 
+    FormsModule,
+    Ng2SmartTableModule 
   ],
   declarations: [
     PagesComponent,
@@ -46,7 +50,8 @@ import { UserUpdateComponent } from './user/user-update.component';
     SearchComponent,
     UserCreateComponent,
     UserListComponent,
-    UserUpdateComponent
+    UserUpdateComponent,
+    TransactionOutComponent
   ]
 })
 export class PagesModule { }
