@@ -8,4 +8,16 @@ export class EntsalItem {
                 public anticipated: boolean,
                 public subsidiary: string
                 ) { }
-} 
+
+	public clean(){
+		this.id = '';
+		this.type = '';
+		this.concept = '';
+		this.quantity = '';
+		this.price = '';
+		this.aditional = '';
+		this.anticipated = false;
+		this.subsidiary = '';
+	} 
+
+}

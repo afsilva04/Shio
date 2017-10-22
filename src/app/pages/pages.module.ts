@@ -26,6 +26,7 @@ import { UserUpdateComponent } from './user/user-update.component';
 import { TransactionOutComponent } from './transaction/transaction-out.component';
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
     routing,
     FormsModule,
-    Ng2SmartTableModule 
+    Ng2SmartTableModule,
+    NgbModule.forRoot()
   ],
   declarations: [
     PagesComponent,
