@@ -4,7 +4,7 @@ import { User } from './user.model';
 
 @Component({
 	selector: 'user-update',
-	templateUrl: './user-update.component.html'
+	templateUrl: './user-form.component.html'
 	})
 export class UserUpdateComponent{
 	public title:string;

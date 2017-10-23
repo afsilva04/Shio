@@ -23,7 +23,10 @@ import { SearchComponent } from './search/search.component';
 import { UserCreateComponent } from './user/user-create.component';
 import { UserListComponent } from './user/user-list.component';
 import { UserUpdateComponent } from './user/user-update.component';
-import { TransactionOutComponent } from './transaction/transaction-out.component';
+import { TransactionOutCreateComponent } from './transaction/transaction-out-create.component';
+import { TransactionOutUpdateComponent } from './transaction/transaction-out-update.component';
+import { TransactionListComponent} from './transaction/transaction-list.component';
+import { SimulateInvoiceComponent } from './invoice/simulate-invoice.component';
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -53,7 +56,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UserCreateComponent,
     UserListComponent,
     UserUpdateComponent,
-    TransactionOutComponent
+    TransactionOutCreateComponent,
+    TransactionOutUpdateComponent,
+    TransactionListComponent,
+    SimulateInvoiceComponent
   ]
 })
 export class PagesModule { }

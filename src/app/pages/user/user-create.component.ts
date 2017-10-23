@@ -3,7 +3,7 @@ import { User } from './user.model';
 
 @Component({
 	selector: 'user-create',
-	templateUrl: './user-create.component.html'
+	templateUrl: './user-form.component.html'
 	})
 export class UserCreateComponent{
 	public title:string;

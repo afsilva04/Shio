@@ -1,0 +1,36 @@
+<h3>{{title}}</h3>
+<hr/>
+
+<div class="col-lg-12 mb-4">
+    <div widget class="card border-0 box-shadow">
+        <div class="card-block pt-0 widget-body table-responsive">
+        	<br>         
+            <table class="table table-bordered col-lg-6">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tipo</th>
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th>Sucursal</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let transaction of transactions">
+                        <th>{{transaction.id}}</th>
+                        <td>{{transaction.reason}}</td>
+                        <td>{{transaction.date}}</td>
+                        <td>{{transaction.client}}</td>
+                        <td>{{transaction.subsidiary}}</td>
+                        <td align="center">
+                        	<a class="ng2-smart-action ng2-smart-action-edit-edit" [routerLink]="['/pages/transaction-out-update', transaction.id]">
+                        		<i class="fa fa-pencil"></i>
+                        	</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

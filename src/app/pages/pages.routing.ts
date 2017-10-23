@@ -6,7 +6,10 @@ import { SearchComponent } from './search/search.component';
 import { UserCreateComponent } from './user/user-create.component';
 import { UserListComponent } from './user/user-list.component';
 import { UserUpdateComponent } from './user/user-update.component';
-import { TransactionOutComponent } from './transaction/transaction-out.component';
+import { TransactionOutCreateComponent } from './transaction/transaction-out-create.component';
+import { TransactionOutUpdateComponent } from './transaction/transaction-out-update.component';
+import { TransactionListComponent} from './transaction/transaction-list.component';
+import { SimulateInvoiceComponent } from './invoice/simulate-invoice.component';
 
 export const routes: Routes = [
     {
@@ -20,7 +23,10 @@ export const routes: Routes = [
             { path: 'user-create', component: UserCreateComponent, data: { breadcrumb: 'Crear Usuario' } },
             { path: 'user-list', component: UserListComponent, data: { breadcrumb: 'Ver Usuarios' } },
             { path: 'user-update/:id', component: UserUpdateComponent, data: { breadcrumb: 'Actualizar Usuario' } },
-            { path: 'transaction-out', component: TransactionOutComponent, data: { breadcrumb: 'Crear Salida' } }
+            { path: 'transaction-out-create', component: TransactionOutCreateComponent },
+            { path: 'transaction-out-update/:id', component: TransactionOutUpdateComponent },
+            { path: 'transaction-list', component: TransactionListComponent },
+            { path: 'simulate-invoice', component: SimulateInvoiceComponent }
        ]
     }
 ];
