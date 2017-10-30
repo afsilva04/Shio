@@ -26,7 +26,7 @@ export class UserUpdateComponent{
 		console.log(this.parametro);
 	}
 
-	onSubmit(){
+	createUser(){
 		console.log(this.user);
 	}
 }
