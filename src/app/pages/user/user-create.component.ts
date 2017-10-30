@@ -11,10 +11,10 @@ export class UserCreateComponent{
 
 	constructor(){
 		this.title = 'Crear Usuario';
-		this.user = new User ('', '', '', '', '', '', '', '');
+		this.user = new User ('', '', '', '', '', '', '', '', true);
 	}
 
-	onSubmit(){
+	createUser(){
 		console.log(this.user);
 	}
 }

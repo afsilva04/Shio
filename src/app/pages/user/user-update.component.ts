@@ -16,7 +16,7 @@ export class UserUpdateComponent{
 		private _router: Router
 		){
 		this.title = 'Modificar Usuario';
-		this.user = new User ('', '', '', '', '', '', '', '');
+		this.user = new User ('', '', '', '', '', '', '', '', false);
 	}
 
 	ngOnInit(){

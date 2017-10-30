@@ -1,125 +1,205 @@
+<div class="col-12">
+    <button class="col-12 btn btn-success" (click)="createInvoice()">Crear Factura</button>
+</div>    
+<br>
+
 <div id="invoice" class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="invoice-title" style="display:inline-block">
-                    <h2>Shio - Sucursal</h2><h3 class="pull-right">Factura Simulada</h3>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-xs-6">
-                        <strong>Cliente:</strong><br>
-                            <h4>Nombre de cliente</h4>
-                    </div>
-                    <div class="col-xs-6 text-right">
-                    <strong>Fecha de la orden:</strong><br>
-                            <h4>fecha</h4>
+
+<!--TITULO Y CABECERA -->   
+
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div widget class="card border-0 box-shadow">
+                <div class="card-block widget-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="invoice-title">
+                                <h2 class="col-6">Shio - Sucursal {{subsidiary}}</h2><h3 class="col-6 pull-right">Factura Simulada{{id}}</h3>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <strong>Cliente:</strong><br>
+                                    <h4>Nombre de cliente</h4>
+                                </div>
+                                <div class="form-group col-6">
+                                    <strong>Fecha de la orden:</strong><br>
+                                    <h4>fecha</h4>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>    
         
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><strong>Resumen de Pedidos</strong></h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-condensed">
-                                <thead>
-                                    <tr>
-                                        <td><strong>Item</strong></td>
-                                        <td class="text-center"><strong>Cantidad</strong></td>
-                                        <td class="text-center"><strong>Precio Unitario</strong></td>
-                                        <td class="text-right"><strong>Total</strong></td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!--?php $cant_total = 0;
-                                    $precio_total = 0;                        
-                                     foreach ($inventory_i as $key => $value){ 
-                                         if ($key < sizeof($inventory_i)-1){
-                                            $cant_total = $cant_total + $inventory_i[$key]->Cantidad;
-                                            $precio_total = $precio_total +($inventory_i[$key]->Valor*$inventory_i[$key]->Cantidad);
-                                         } else {
-                                            $cant_total = $cant_total + $inventory_i[$key]->Cantidad; 
-                                            $precio_total = $precio_total + ($inventory_i[$key]->Valor*$inventory_i[$key]->Cantidad);
-                                         }
-                                     ?-->
-                                    <tr *ngFor="let item of items">
-                                        <td>{{item.id}}</td>
-                                        <td class="text-center">{{item.quantity}}</td>
-                                        <td class="text-center">{{item.price}}</td>
-                                        <td class="text-right">{{item.aditional}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Subtotal</strong></td>
-                                        <td class="text-center"></td>
-                                        <td class="text-center"></td>
-                                        <td class="text-right"></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>IVA</strong></td>
-                                        <td class="text-center"></td>
-                                        <td class="text-center"></td>
-                                        <td class="text-right"></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Total</strong></td>
-                                        <td class="text-center"></td>
-                                        <td class="text-center"></td>
-                                        <td class="text-right"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8"></div>
-                <div class="form-group col-md-4">
-                    <select id="metodo_pago" class="form-control">
-                        <option value="01">Efectivo</option>
-                        <option value="02">Cheque nominativo</option>
-                        <option value="03">Transferencia Electronica de fondos</option>
-                        <option value="04">Tarjeta de Crédito</option>
-                        <option value="05">Monedero Electrónico</option>
-                        <option value="06">Dinero Electrónico</option>
-                        <option value="08">Vales de Despensa</option>
-                        <option value="28">Tarjeta de Debito</option>
-                        <option value="29">Tarjeta de Crédito</option>
-                        <option value="99">Otros</option>
-                        <option value="NA">No Aplica</option>
-                    </select>
-                </div>
-            </div>
-             <div class="row">
-                <div class="col-md-9">
-                </div>
-                <div class="col-md-3">
-                    <div class="input checkbox"><div class="checkbox"><input type="hidden" name="facturar_empresa" id="emp_" value="0"><label for="emp"><input type="checkbox" name="facturar_empresa" id="emp" value="1" class="emp">¿Otros Datos de Facturación?</label></div></div>
-    
-                        <div class="to-info clearfix" id="emp_cont" style="display: none;">
-                            <input type="hidden" name="emp" id="emp_" value="0">
-                            <input type="checkbox" name="emp" div="form-group div-emp width: 100%;visibility:hidden;height:0px;" class="form-control" id="emp" placeholder="Facturar a empresa" onclick="nombre_empresa,nit_empresa" style="visibility:hidden;height:0px;" value="1">
-                            <div class="form-group div-nombre_empresa" style="width: 100%;">
-                                <input name="nombre_empresa" class="form-control" id="nombre_empresa" placeholder="Nombre empresa" style="" type="text">
-                            </div>
-                            <div class="form-group div-nit_empresa" style="width: 100%;">
-                                <input name="nit_empresa" class="form-control" id="nit_empresa" placeholder="RFC" style="" type="text">
+<!-- TABLA ITEMS -->    
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div widget class="card border-0 box-shadow">
+                <div class="card-block widget-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><strong>Resumen de Pedidos</strong></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-condensed">
+                                            <thead>
+                                                <tr>
+                                                    <td><strong>Item</strong></td>
+                                                    <td class="text-center"><strong>Cantidad</strong></td>
+                                                    <td class="text-center"><strong>Precio Unitario</strong></td>
+                                                    <td class="text-right"><strong>Total</strong></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of items">
+                                                    <td>{{item.id}}</td>
+                                                    <td class="text-center">{{item.quantity}}</td>
+                                                    <td class="text-center">{{item.price}}</td>
+                                                    <td class="text-right">{{item.aditional}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Subtotal</strong></td>
+                                                    <td class="text-center"></td>
+                                                    <td class="text-center"></td>
+                                                    <td class="text-right">{{subtotal}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>IVA</strong></td>
+                                                    <td class="text-center"></td>
+                                                    <td class="text-center"></td>
+                                                    <td class="text-right">{{tax}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Total</strong></td>
+                                                    <td class="text-center"></td>
+                                                    <td class="text-center"></td>
+                                                    <td class="text-right">{{total}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-            </div>
-            <div class="row">
-               <div class="col-md-10">
-                    <a class="btn btn-info" href="">Volver</a>
-                </div>
-                <div class="col-md-2">
-                <a target="_blank" class="btn btn-success ingresar_timbre" href="#">Crear Factura</a>
                 </div>
             </div>
         </div>
+    </div>
+
+<!-- RFC -->
+    <div class="row">
+        <div class="col-12">
+            <div widget class="card border-0 box-shadow">
+                <div class="card-block widget-body">  
+                    <form class="row form-inline">  
+                        <div class="form-group col-4">
+                            <label class="custom-control custom-checkbox">
+                                <input class="custom-control-input checkbox-primary" name="rfc" type="checkbox" [(ngModel)]="anotherRFC">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">¿Otro RFC?</span>
+                            </label>
+                        </div>                         
+                        <div class="form-group col-4" *ngIf="anotherRFC == true">
+                            <input type="text" class="form-control" placeholder="Nombre Empresa">
+                        </div>
+                        <div class="form-group col-4" *ngIf="anotherRFC == true">
+                            <input type="text" class="form-control" placeholder="RFC">
+                        </div>                         
+                    </form>              
+                </div>
+            </div>
+        </div>    
+    </div>
+
+</div>
+
+<!-- BOTONES -->
+<br>
+<div class="col-12">
+    <button class="btn btn-primary" (click)="addPaymentMethodModal(modalPaymentMethod)">Agregar Metodo de Pago</button> 
+    <!--button class="btn btn-success" (click)="createInvoice()">Crear Factura</button-->
+</div>
+
+<!--TABLA METODOS DE PAGO-->
+<div class="col-12" *ngIf="paymentMethods[0] != null">
+    <br>
+    <!--h3>Metodos de Pago</h3-->
+    <div widget class="card border-0 box-shadow">
+        <div class="card-block pt-0 widget-body table-responsive">
+            <br>
+            <table class="table table-bordered col-lg-6">
+                <thead>
+                    <tr>
+                        <th>METODO DE PAGO</th>
+                        <th>VALOR</th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let paymentMethod of paymentMethods; let i = index;">
+                        <td>{{paymentMethod.type}}</td>
+                        <td>{{paymentMethod.value}}</td>
+                        <td align="center">
+                            <a (click)="updatePaymentMethodModal(i, modalPaymentMethod)" href="javascript:void(0)">
+                        		<i class="fa fa-pencil"></i>
+                            </a>
+                            <a (click)="deletePaymentMethod(i)" href="javascript:void(0)">
+                        		<i class="fa fa-trash-o text-danger"></i>
+                            </a>                             
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL METODOS DE PAGO -->
+<ng-template #modalPaymentMethod>
+    <div class="modal-header">
+        {{paymentMethodTitle}}
+    </div>
+    <div class="modal-body">
+                <form #formPaymentMethod="ngForm" class="form-horizontal">
+                    <div class="form-group col-md-12 col-lg-12">
+                        <label>Tipo</label>
+                        <!--input type="text" #type="ngModel" [(ngModel)]="paymentMethod.type" name="type" class="form-control"-->
+                        <select class="form-control custom-select" type="text" #type="ngModel" name="type" 
+                        [(ngModel)]="paymentMethod.type">
+                            <option value="01">Efectivo</option>
+                            <option value="02">Cheque nominativo</option>
+                            <option value="03">Transferencia Electronica de fondos</option>
+                            <option value="04">Tarjeta de Crédito</option>
+                            <option value="05">Monedero Electrónico</option>
+                            <option value="06">Dinero Electrónico</option>
+                            <option value="08">Vales de Despensa</option>
+                            <option value="28">Tarjeta de Debito</option>
+                            <option value="29">Tarjeta de Crédito</option>
+                            <option value="99">Otros</option>
+                            <option value="NA">No Aplica</option>
+                        </select>                          
+                    </div>
+                    <div class="form-group col-md-12 col-lg-12">
+                        <label>Valor</label>
+                        <input type="text" #value="ngModel" name="value" [(ngModel)]="paymentMethod.value" class="form-control">
+                    </div>   
+                    <br>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <button type="submit" *ngIf="mode == 'add'" (click)="addPaymentMethod()" class="btn btn-primary btn-block">Agregar Metodo de Pago</button> 
+                        </div> 
+                        <div class="form-group col-12">
+                            <button type="button" *ngIf="mode == 'update'" (click)="updatePaymentMethod(paymentMethod.id)" class="btn btn-info btn-block">Modificar  Metodo de Pago</button>  
+                            <button type="button" *ngIf="mode == 'update'" (click)="cancelPaymentMethodUpdate()" class="btn btn-danger btn-block">Cancelar Modificación</button>
+                        </div>
+                    </div>
+                </form>         
+    </div>
+</ng-template>

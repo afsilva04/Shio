@@ -29,7 +29,7 @@ export class TransactionOutCreateComponent{
 		private modalService:NgbModal
 		){
 		this.title = 'Crear Salida';
-		this.header = new EntsalHeader('1','','','','','');
+		this.header = new EntsalHeader('1','','','','','1');
 		this.item = new EntsalItem('','','','','','',false, '');
 		this.item1 = new EntsalItem('1','Producto','Dabalash','2','1850','0', true, 'Obregon');
 		this.item2 = new EntsalItem('2','Servicio','Corte','1','150','20', false, 'Obregon');

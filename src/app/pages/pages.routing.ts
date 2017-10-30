@@ -26,7 +26,7 @@ export const routes: Routes = [
             { path: 'transaction-out-create', component: TransactionOutCreateComponent },
             { path: 'transaction-out-update/:id', component: TransactionOutUpdateComponent },
             { path: 'transaction-list', component: TransactionListComponent },
-            { path: 'simulate-invoice', component: SimulateInvoiceComponent }
+            { path: 'simulate-invoice/:id/:sub', component: SimulateInvoiceComponent }
        ]
     }
 ];
