@@ -10,6 +10,7 @@ import { TransactionOutCreateComponent } from './transaction/transaction-out-cre
 import { TransactionOutUpdateComponent } from './transaction/transaction-out-update.component';
 import { TransactionListComponent} from './transaction/transaction-list.component';
 import { SimulateInvoiceComponent } from './invoice/simulate-invoice.component';
+import { AppointmentCreateComponent } from './appointment/appointment-create.component';
 
 export const routes: Routes = [
     {
@@ -26,7 +27,8 @@ export const routes: Routes = [
             { path: 'transaction-out-create', component: TransactionOutCreateComponent },
             { path: 'transaction-out-update/:id', component: TransactionOutUpdateComponent },
             { path: 'transaction-list', component: TransactionListComponent },
-            { path: 'simulate-invoice/:id/:sub', component: SimulateInvoiceComponent }
+            { path: 'simulate-invoice/:id/:sub', component: SimulateInvoiceComponent },
+            { path: 'appointment-create', component: AppointmentCreateComponent }
        ]
     }
 ];

@@ -27,6 +27,7 @@ import { TransactionOutCreateComponent } from './transaction/transaction-out-cre
 import { TransactionOutUpdateComponent } from './transaction/transaction-out-update.component';
 import { TransactionListComponent} from './transaction/transaction-list.component';
 import { SimulateInvoiceComponent } from './invoice/simulate-invoice.component';
+import { AppointmentCreateComponent } from './appointment/appointment-create.component';
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -59,7 +60,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TransactionOutCreateComponent,
     TransactionOutUpdateComponent,
     TransactionListComponent,
-    SimulateInvoiceComponent
+    SimulateInvoiceComponent,
+    AppointmentCreateComponent
   ]
 })
 export class PagesModule { }
