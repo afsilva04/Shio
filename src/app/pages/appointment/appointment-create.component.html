@@ -28,7 +28,7 @@
                                 Fecha*
                             </label>
                             <div class="input-group">
-                                <input class="form-control" placeholder="aaaa-mm-dd" name="date" [displayMonths]="'2'" [navigation]="'select'" ngbDatepicker #date="ngbDatepicker" [(ngModel)]="appointment.date" (ngModelChange)="onChangeDate()">
+                                <input class="form-control" placeholder="aaaa-mm-dd" name="date" [displayMonths]="'1'" [navigation]="'select'" ngbDatepicker #date="ngbDatepicker" [(ngModel)]="appointment.date" (ngModelChange)="onChangeDate()">
                                 <div class="input-group-addon" (click)="date.toggle()">
                                     <i class="fa fa-calendar"></i>
                                 </div>
@@ -63,7 +63,7 @@
 							<input type="text" #subsidiary="ngModel" name="subsidiary" [(ngModel)]="appointment.subsidiary" class="form-control" required>
                         </div-->		
                         
-                        <div class="form-group col-6">
+                        <div class="form-group col-md-12 col-6">
                             <label>Sucursal*</label>
                             <select class="form-control custom-select" type="text" name="subsidiary" #subsidiary="ngModel" [(ngModel)]="appointment.subsidiary">
                                 <option value="0" selected></option>
@@ -143,7 +143,7 @@
 <div class="row" *ngIf="appointment.date">
     <div class="col-12 mb-4">
         <div widget class="card border-0 box-shadow">
-            <div class="card-block widget-body">
+            <div class="card-block widget-body table-responsive">
                 <!--Si no hay citas-->
                 <h5 *ngIf="appointmentServices[0] == null">No hay citas agendadas el {{appointment.date.year}}-{{appointment.date.month}}-{{appointment.date.day}}</h5>
                 <!--Si hay citas-->
