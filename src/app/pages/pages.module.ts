@@ -23,6 +23,8 @@ import { SearchComponent } from './search/search.component';
 import { UserCreateComponent } from './user/user-create.component';
 import { UserListComponent } from './user/user-list.component';
 import { UserUpdateComponent } from './user/user-update.component';
+import { ClientCreateComponent } from './client/client-create.component';
+import { ClientListComponent } from './client/client-list.component';
 import { TransactionOutCreateComponent } from './transaction/transaction-out-create.component';
 import { TransactionOutUpdateComponent } from './transaction/transaction-out-update.component';
 import { TransactionListComponent} from './transaction/transaction-list.component';
@@ -31,6 +33,7 @@ import { AppointmentCreateComponent } from './appointment/appointment-create.com
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -40,7 +43,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     routing,
     FormsModule,
     Ng2SmartTableModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    NgxChartsModule
   ],
   declarations: [
     PagesComponent,
@@ -61,7 +65,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TransactionOutUpdateComponent,
     TransactionListComponent,
     SimulateInvoiceComponent,
-    AppointmentCreateComponent
+    AppointmentCreateComponent,
+    ClientCreateComponent,
+    ClientListComponent
   ]
 })
 export class PagesModule { }

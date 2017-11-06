@@ -1,0 +1,110 @@
+<h3>{{title}}</h3>
+<hr/>
+
+<div class="row">
+	<div class="col-12 mb-4">
+		<div widget class="card border-0 box-shadow">
+			<div class="card-block widget-body">
+				
+				<form #formCreateClient="ngForm" (ngSubmit)="createClient()" class="form">
+
+					<div class="row">
+						<div class="form-group col-md-12 col-lg-6">
+							<label>Nombre*</label>
+							<!--input type="text" #name="ngModel" name="name" [(ngModel)]="client.name" class="form-control" required-->
+							<input type="text" #name="ngModel" name="nombre" [(ngModel)]="client.nombre" class="form-control" required>
+						</div>
+
+						<div class="form-group col-md-12 col-lg-6">
+							<label>Telefono*</label>
+							<input type="text" #phone="ngModel" name="phone" [(ngModel)]="client.phone" class="form-control">
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group col-md-12 col-lg-6">
+							<label>Correo</label>
+							<input type="text" #email="ngModel" name="email" [(ngModel)]="client.email" class="form-control">
+						</div>	
+
+						<div class="form-group col-md-12 col-lg-6">
+							<label>País</label>
+							<select class="form-control custom-select" type="text" name="country" #country="ngModel" [(ngModel)]="client.country">
+								<option value="0" selected></option>
+								<option value="1">Mexico</option>
+							</select>  
+						</div>	
+					</div>
+
+					<div class="row">
+						<div class="form-group col-md-12 col-lg-6">
+							<label>Estado</label>
+							<select class="form-control custom-select" type="text" name="state" #state="ngModel" [(ngModel)]="client.state">
+								<option value="0" selected></option>
+								<option value="1">Sonora</option>
+							</select>  
+						</div>							
+
+						<div class="form-group col-md-12 col-lg-6">
+							<label>Ciudad</label>
+							<select class="form-control custom-select" type="text" name="city" #city="ngModel" [(ngModel)]="client.city">
+								<option value="0" selected></option>
+								<option value="1">Obregon</option>
+							</select> 
+						</div>	
+					</div>
+
+					<div class="row">
+						<div class="form-group col-md-12 col-lg-6">
+							<label>Colonia</label>
+							<select class="form-control custom-select" type="text" name="colony" #colony="ngModel" [(ngModel)]="client.colony">
+								<option value="0" selected></option>
+								<option value="1">Colonia1</option>
+							</select>  
+						</div>		
+
+						<div class="form-group col-md-12 col-lg-6">
+							<label>Dirección</label>
+							<input type="text" #address="ngModel" name="address" [(ngModel)]="client.address" class="form-control">
+						</div>							
+					</div>
+
+					<div class="row">
+						<div class="form-group col-md-12 col-lg-6">
+							<label>Código Postal</label>
+							<input type="text" #zip="ngModel" name="zip" [(ngModel)]="client.zip" class="form-control">
+						</div>		
+
+						<div class="form-group col-md-12 col-lg-6">
+							<label>RFC</label>
+							<input type="text" #rfc="ngModel" name="rfc" [(ngModel)]="client.rfc" class="form-control">
+						</div>							
+					</div>					
+
+					<div class="row">
+						<div class="form-group col-md-12 col-lg-6">
+							<label>Sucursal*</label>
+							<select class="form-control custom-select" type="text" name="subsidiary" #subsidiary="ngModel" [(ngModel)]="client.subsidiary">
+								<option value="0" selected></option>
+								<option value="1">Obregon</option>
+								<option value="2">Girasol</option>
+								<option value="3">Reforma</option>
+								<option value="4">Dila</option>
+								<option value="3">Olivares</option>
+								<option value="3">Luis Orci</option>
+							</select>  
+						</div>	
+					</div>					
+
+					<br>
+					<div class="row" align="right">
+						<div class="form-group col-md-12 col-lg-12">
+							<input type="submit" value="{{title}}" class="btn btn-primary">
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

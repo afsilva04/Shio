@@ -10,7 +10,7 @@ export class UserService{
     constructor(
         private _http:Http
     ){
-        this.url = 'https://';
+        this.url = 'https://localhost:8080/';
     }
 
     getUsers(){

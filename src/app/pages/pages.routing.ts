@@ -11,6 +11,8 @@ import { TransactionOutUpdateComponent } from './transaction/transaction-out-upd
 import { TransactionListComponent} from './transaction/transaction-list.component';
 import { SimulateInvoiceComponent } from './invoice/simulate-invoice.component';
 import { AppointmentCreateComponent } from './appointment/appointment-create.component';
+import { ClientCreateComponent } from './client/client-create.component';
+import { ClientListComponent } from './client/client-list.component';
 
 export const routes: Routes = [
     {
@@ -24,6 +26,8 @@ export const routes: Routes = [
             { path: 'user-create', component: UserCreateComponent, data: { breadcrumb: 'Crear Usuario' } },
             { path: 'user-list', component: UserListComponent, data: { breadcrumb: 'Ver Usuarios' } },
             { path: 'user-update/:id', component: UserUpdateComponent, data: { breadcrumb: 'Actualizar Usuario' } },
+            { path: 'client-create', component: ClientCreateComponent, data: { breadcrumb: 'Crear Usuario' } },
+            { path: 'client-list', component: ClientListComponent, data: { breadcrumb: 'Ver Usuarios' } },            
             { path: 'transaction-out-create', component: TransactionOutCreateComponent },
             { path: 'transaction-out-update/:id', component: TransactionOutUpdateComponent },
             { path: 'transaction-list', component: TransactionListComponent },

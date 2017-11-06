@@ -9,19 +9,16 @@
 				<form #formCreateUser="ngForm" (ngSubmit)="createDate()" class="form">
 
 					<div class="row">
-						<div class="form-group col-md-12 col-lg-6">
-							<label>
-								Cliente*
-							</label>
-							<input type="text" #client="ngModel" name="client" [(ngModel)]="appointment.client" class="form-control" required>
-						</div>
 
-						<!--div class="form-group col-md-12 col-lg-6">
-							<label>
-								Fecha*
-							</label>
-							<input type="text" #date="ngModel" name="date" [(ngModel)]="appointment.date" class="form-control">
-                        </div-->
+                        <div class="form-group col-md-12 col-lg-6">
+                            <label>Cliente*</label>
+                            <select class="form-control custom-select" type="text" name="client" #client="ngModel" [(ngModel)]="appointment.client">
+                                <option value="0" selected></option>
+                                <option value="1">Cliente 1</option>
+                                <option value="2">Cliente 2</option>
+                                <option value="3">Cliente 3</option>
+                            </select>  
+                        </div>
                         
                         <div class="form-group col-md-12 col-lg-6">
                             <label>
@@ -55,15 +52,9 @@
 						</div>	
 					</div>
 
-					<div class="row">
-						<!--div class="form-group col-md-12 col-lg-6">
-							<label>
-								Sucursal*
-							</label>
-							<input type="text" #subsidiary="ngModel" name="subsidiary" [(ngModel)]="appointment.subsidiary" class="form-control" required>
-                        </div-->		
+					<div class="row">	
                         
-                        <div class="form-group col-md-12 col-6">
+                        <div class="form-group col-md-12 col-lg-6">
                             <label>Sucursal*</label>
                             <select class="form-control custom-select" type="text" name="subsidiary" #subsidiary="ngModel" [(ngModel)]="appointment.subsidiary">
                                 <option value="0" selected></option>

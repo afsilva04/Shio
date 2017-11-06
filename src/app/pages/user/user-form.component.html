@@ -35,21 +35,31 @@
 						</div>	
 
 						<div class="form-group col-md-12 col-lg-6">
-							<label>
-								Rol
-							</label>
-							<input type="text" #role="ngModel" name="role" [(ngModel)]="user.role" class="form-control">
+							<label>Rol</label>
+							<select class="form-control custom-select" type="text" name="role" #role="ngModel" [(ngModel)]="user.role">
+								<option value="0" selected></option>
+								<option value="1">Administrador</option>
+								<option value="2">Gerente</option>
+								<option value="3">Asistente</option>
+							</select>  
 						</div>	
+
 					</div>
 
 					<div class="row">
+
 						<div class="form-group col-md-12 col-lg-6">
-							<label>
-								Sucursal*
-								<!--span *ngIf="!subsidiary.valid && subsidiary.touched" class="label label-danger text-danger">La sucursal es obligatoria</span-->
-							</label>
-							<input type="text" #subsidiary="ngModel" name="subsidiary" [(ngModel)]="user.subsidiary" class="form-control" required>
-						</div>		
+							<label>Sucursal*</label>
+							<select class="form-control custom-select" type="text" name="subsidiary" #subsidiary="ngModel" [(ngModel)]="user.subsidiary">
+								<option value="0" selected></option>
+								<option value="1">Obregon</option>
+								<option value="2">Girasol</option>
+								<option value="3">Reforma</option>
+								<option value="4">Dila</option>
+								<option value="3">Olivares</option>
+								<option value="3">Luis Orci</option>
+							</select>  
+						</div>							
 
 						<div class="form-group col-md-12 col-lg-6">
 							<label>
