@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
-import { GLOBAL } from '../global';
+import { Global } from '../global';
 
 @Injectable()
 export class TransactionService{
@@ -11,7 +11,7 @@ export class TransactionService{
     constructor(
         private _http:Http
     ){
-        this.url = GLOBAL.url;
+        this.url = Global.url;
     }
 
     getTransaction(id){

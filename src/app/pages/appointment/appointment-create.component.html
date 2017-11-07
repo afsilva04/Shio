@@ -102,19 +102,21 @@
                         <label>Servicio</label>                        
                         <select class="form-control custom-select" type="text" #service="ngModel" name="service" 
                         [(ngModel)]="appointmentService.service">
+                            <option value="00" selected></option>
                             <option value="01">Corte</option>
                             <option value="02">Depilación</option>
                         </select>                         
                     </div>   
                     <div class="form-group col-md-12 col-lg-12">
-                            <label>Estado</label>
-                            <select class="form-control custom-select" type="text" #state="ngModel" name="state" 
-                            [(ngModel)]="appointmentService.state">
-                                <option value="01">Agendada</option>
-                                <option value="02">Confirmada</option>
-                                <option value="03">Iniciada</option>
-                            </select> 
-                        </div>                       
+                        <label>Estado</label>
+                        <select class="form-control custom-select" type="text" #state="ngModel" name="state" 
+                        [(ngModel)]="appointmentService.state">
+                            <option value="00" selected></option>
+                            <option value="01">Agendada</option>
+                            <option value="02">Confirmada</option>
+                            <option value="03">Iniciada</option>
+                        </select> 
+                    </div>                       
                     <br>
                     <div class="row">
                         <div class="form-group col-12">

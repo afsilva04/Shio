@@ -3,6 +3,7 @@ import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { Client } from './client.model' ;
+import { Global } from '../global';
 
 @Injectable()
 export class ClientService{
@@ -11,11 +12,12 @@ export class ClientService{
     constructor(
         private _http:Http
     ){
-        this.url = 'http://localhost:8080/';
+        this.url = Global.url;
     }
 
-    getClients(){
-        return this._http.get(this.url + 'clients').map(res => res.json());
+    getClients(text?){
+        console.log(this.url + 'clients/?search_txt=' + text);
+        return this._http.get(this.url + 'clients/?search_txt=' + text).map(res => res.json());
     }
 
     getClient(id){

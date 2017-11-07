@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Client } from './client.model';
-//import { ClientFilter } from './client-filter.model';
+import { ClientFilter } from './client-filter.model';
 import { ClientService } from './client.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'client-list',
@@ -12,7 +13,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 export class ClientListComponent{
 	public title:string;
 	public client:Client;
-	//public clientFilter:ClientFilter;
+	public clientFilter:ClientFilter;
 	public clients:Client[];
 	public mode = 'update';
 	private modalRef:NgbModalRef;
@@ -57,7 +58,7 @@ export class ClientListComponent{
 		},
 		noDataMessage: 'No se encontraton clientes',
 		columns: {     
-		  nombre: {
+		  name: {
 			title: 'Nombre',
 			type: 'string',
 			filter: false
@@ -80,22 +81,23 @@ export class ClientListComponent{
 	
 	constructor(
 		private _clientService:ClientService,
-		private _modalService:NgbModal
+		private _modalService:NgbModal,
+		private _router:Router
 	){
 		this.title = 'Clientes';
 		this.client = new Client('', '', '', '', '', '', '', '', '', '', '', '');
-		//this.userFilter = new UserFilter('', '', '', '', '', null);
+		this.clientFilter = new ClientFilter('');
 	}
 
 	ngOnInit(){
 		
-		this._clientService.getClients().subscribe(
+		this._clientService.getClients(this.clientFilter.text).subscribe(
 			result => {
 				if(result.code == 200){
 					//this.clients = result.data;
 					//console.log(result);
 				} else {
-					//console.log(result);
+					console.log(result);
 					this.clients = result;
 					console.log(this.clients);
 					//console.log(result[0].nombre);
@@ -103,6 +105,10 @@ export class ClientListComponent{
 			}
 		);
 
+	}
+
+	updateClient(event){
+		this._router.navigate(['/pages/client-update/', event.data.id]);
 	}
 
 	public updateClientModal(event, modal): void{
@@ -126,7 +132,7 @@ export class ClientListComponent{
 		this.modalRef = this._modalService.open(modal);
 	}
 
-	public updateClient(){
+	public createOrUpdateClient(){
 
 		//Actualizar Cliente
 		this._clientService.updateClient(this.client).subscribe(
@@ -144,7 +150,7 @@ export class ClientListComponent{
 		);
 
 		//Actualizar lista de clientes
-		this._clientService.getClients().subscribe(
+		this._clientService.getClients(this.clientFilter.text).subscribe(
 			result => {
 				if(result.code == 200){
 					//this.clients = result.data;
@@ -177,7 +183,22 @@ export class ClientListComponent{
 	}
 
 	public searchClients(){
-		//console.log(this.userFilter);
+		console.log(this.clientFilter);
+
+		this._clientService.getClients(this.clientFilter.text).subscribe(
+			result => {
+				if(result.code == 200){
+					//this.clients = result.data;
+					//console.log(result);
+				} else {
+					//console.log(result);
+					this.clients = result;
+					console.log(this.clients);
+					//console.log(result[0].nombre);
+				}
+			}
+		);
+
 	}
 
 	public exportToExcel(){

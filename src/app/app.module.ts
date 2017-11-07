@@ -5,6 +5,7 @@ import { AppSettings } from './app.settings';
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 import { FormsModule }  from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FormsModule }  from '@angular/forms';
   imports: [
     BrowserModule,
     routing,
-    FormsModule 
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [ AppSettings ],
   bootstrap: [ AppComponent ]

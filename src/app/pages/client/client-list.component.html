@@ -2,12 +2,24 @@
 <hr/>
 
 <!-- FILTROS -->
-<!--div class="row">
+<div class="row">
     <div class="col-12 mb-4">
         <div widget class="card border-0 box-shadow">
             <div class="card-block widget-body">
                 <form class="form">
                     <div class="row">
+                        <div class="form-group col-9">
+                            <label>Buscar</label>
+                            <input name="text" class="form-control" type="text" #text="ngModel" [(ngModel)]="clientFilter.text">
+                        </div>
+
+                        <div class="form-group col-3">
+                            <br>
+                            <button class="btn btn-primary btn-block" type="submit" (click)="searchClients()">Consultar</button>
+                        </div>                        
+                    </div>
+
+                    <!--div class="row">
                         <div class="form-group col-6">
                             <label>Nombre</label>
                             <input name="name" class="form-control" type="text" #name="ngModel" [(ngModel)]="userFilter.name">
@@ -56,16 +68,16 @@
                                 <option value="3">Luis Orci</option>
                             </select>  
                         </div>
-                    </div>                    
+                    </div-->                    
                     
-                    <div class="form-group col-12">
-                        <button class="btn btn-primary btn-block" type="submit" (click)="searchUsers()">Consultar</button>
-                    </div>
+                    <!--div class="form-group col-12">
+                        <button class="btn btn-primary btn-block" type="submit" (click)="searchClients()">Consultar</button>
+                    </div-->
                 </form> 
             </div>
         </div>
     </div>
-</div-->
+</div>
 
 <!-- TABLA SMART-->
 <div widget class="card border-0 box-shadow">
@@ -77,7 +89,7 @@
             <ng2-smart-table  class="table table-hover"
                               [settings]="settings" 
                               [source]="clients" 
-                              (edit)="updateClientModal($event, modalClient)"
+                              (edit)="updateClient($event)"
                               (custom)="changeClientStatus($event)"></ng2-smart-table>
         </div>          
     </div>
@@ -168,7 +180,7 @@
                             <button type="submit" *ngIf="mode == 'add'" (click)="addItem()" class="btn btn-primary btn-block">Agregar Cliente</button> 
                         </div> 
                         <div class="form-group col-12">
-                            <button type="button" *ngIf="mode == 'update'" (click)="updateClient()" class="btn btn-info btn-block">Modificar Cliente</button>  
+                            <button type="button" *ngIf="mode == 'update'" (click)="createOrUpdateClient()" class="btn btn-info btn-block">Modificar Cliente</button>  
                             <button type="button" *ngIf="mode == 'update'" (click)="cancelItemUpdate()" class="btn btn-danger btn-block">Cancelar Modificación</button>
                         </div>
                     </div>
