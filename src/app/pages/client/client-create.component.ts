@@ -43,25 +43,25 @@ export class ClientCreateComponent{
 			response => {
 				if(response.code == 200){
 					//this._router.navigate(['/pages/client-list']);
-					console.log(response);
+					console.log(response.headers);
 				} else {
-					console.log(response);
+					console.log(response.headers);
 				}
 			},
 			error => {
 				console.log(<any>error)
 			}
-		);		
+		);
 
-		//console.log(this.client);
+		this.showMessage('success', 'Transacción exitosa', 'Cliente creado correctamente');
 	}
 
-	public openToast(){
+	public showMessage(type, title, message){
 
 		//this._toastrService.success('Hello world!', 'Toastr fun!');
 		
-		let m = this.toastrMessage;
-		let t = this.toastrTitle;
+		//let m = this.toastrMessage;
+		//let t = this.toastrTitle;
 		//let type = 'success';
 
 		this.options.tapToDismiss = true;
@@ -69,16 +69,16 @@ export class ClientCreateComponent{
 		this.options.positionClass = 'toast-top-right';
 
 		this._toastrService.toastrConfig.timeOut = 10000;
-		this._toastrService.toastrConfig.extendedTimeOut = 10000;
+		this._toastrService.toastrConfig.extendedTimeOut = 5000;
 		this._toastrService.toastrConfig.maxOpened = 0;
-		this._toastrService.toastrConfig.tapToDismiss = false;
+		this._toastrService.toastrConfig.tapToDismiss = true;
 		this._toastrService.toastrConfig.positionClass = 'toast-top-right';
 		this._toastrService.toastrConfig.titleClass = 'toast-title';
-		//this._toastrService.toasts.push(this._toastrService['success'](m,t));
+		this._toastrService.toasts.push(this._toastrService[type](message,title));
 
 		//const opt = JSON.parse(JSON.stringify(this.options));
 
-		this._toastrService.success(m,t);
+		//this._toastrService.error(m,t);
 
 		console.log(this._toastrService);
 
