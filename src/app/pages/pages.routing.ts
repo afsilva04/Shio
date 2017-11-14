@@ -16,19 +16,21 @@ import { ClientCreateComponent } from './client/client-create.component';
 import { ClientUpdateComponent } from './client/client-update.component';
 import { ClientListComponent } from './client/client-list.component';
 
+import { AuthGuard } from '../auth.guard';
+
 export const routes: Routes = [
     {
         path: '', 
         component: PagesComponent,
         children:[
             { path:'', redirectTo:'dashboard', pathMatch:'full' },
-            { path: 'dashboard', loadChildren: 'app/pages/dashboard/dashboard.module#DashboardModule', data: { breadcrumb: 'Dashboard' }  },          
+            { path: 'dashboard', loadChildren: 'app/pages/dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard] },          
             { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } },
             { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } },
             { path: 'user-create', component: UserCreateComponent, data: { breadcrumb: 'Crear Usuario' } },
             { path: 'user-list', component: UserListComponent, data: { breadcrumb: 'Ver Usuarios' } },
             { path: 'user-update/:id', component: UserUpdateComponent, data: { breadcrumb: 'Actualizar Usuario' } },
-            { path: 'client-create', component: ClientCreateComponent },
+            { path: 'client-create', component: ClientCreateComponent, canActivate: [AuthGuard] },
             { path: 'client-update/:id', component: ClientUpdateComponent },
             { path: 'client-list', component: ClientListComponent },            
             { path: 'transaction-out-create', component: TransactionOutCreateComponent },

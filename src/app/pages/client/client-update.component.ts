@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Client } from './client.model';
 import { ClientService } from './client.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ToastrService, ToastrConfig } from 'ngx-toastr';
 
 @Component({
 	selector: 'client-update',
@@ -11,15 +12,18 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 export class ClientUpdateComponent{
 	public title:string;
     public client:Client;
-    public id:string;
+	public id:string;
+	public options:ToastrConfig;
 
 	constructor(
 		private _clientService:ClientService,
         private _route:ActivatedRoute,
-        private _router:Router
+		private _router:Router,
+		private _toastrService:ToastrService
 	){
 		this.title = 'Actualizar Cliente';
 		this.client = new Client ('', '', '', '', '', '', '', '', '', '', '', '');
+		this.options = this._toastrService.toastrConfig;
     }
     
     ngOnInit(){
@@ -47,18 +51,41 @@ export class ClientUpdateComponent{
 		//Update Client
 		this._clientService.updateClient(this.client).subscribe(
 			response => {
-				if(response.code == 200){
-					//this._router.navigate(['/productos']);
-					console.log(response);
-				} else {
-					console.log(response);
-				}
+				this.showMessage('success', 'Modificación exitosa', 'Cliente ' + this.client.name + ' modificado correctamente');
+				//Redirect To Client List
+				this._router.navigate(['/pages/client-list']);
 			},
 			error => {
-				console.log(<any>error)
+				let body = error.json();
+				console.log(body);
+				for(let e of body){
+					this.showMessage('error', 'Error', e);
+				}
 			}	
 		);
-		//Redirect To Client List
-		this._router.navigate(['/pages/client-list']);
 	}
+
+	public showMessage(type, title, message){
+		this.options.tapToDismiss = true;
+		this.options.timeOut = 10000;
+		this.options.positionClass = 'toast-top-right';
+
+		this._toastrService.toastrConfig.timeOut = 10000;
+		this._toastrService.toastrConfig.extendedTimeOut = 5000;
+		this._toastrService.toastrConfig.maxOpened = 0;
+		this._toastrService.toastrConfig.tapToDismiss = true;
+		this._toastrService.toastrConfig.positionClass = 'toast-top-right';
+		this._toastrService.toastrConfig.titleClass = 'toast-title';
+		this._toastrService.toasts.push(this._toastrService[type](message,title));
+
+		/*
+		const inserted = this._toastrService[type](m, t, opt);
+		console.log(inserted);
+		if (inserted) {
+			this.lastInserted.push(inserted.toastId);
+			console.log(this.lastInserted);
+		}
+		return inserted;
+		*/
+	}	
 }

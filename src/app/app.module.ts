@@ -6,7 +6,11 @@ import { AppComponent } from './app.component';
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 import { FormsModule }  from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpModule } from '@angular/http';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
+import { AuthGuard } from './auth.guard';
+import { UserService } from './pages/user/user.service';
 
 @NgModule({
   declarations: [
@@ -17,9 +21,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     routing,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpModule,
+    NgxChartsModule
   ],
-  providers: [ AppSettings ],
+  providers: [ AppSettings, AuthGuard, UserService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

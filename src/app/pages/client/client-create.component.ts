@@ -25,45 +25,30 @@ export class ClientCreateComponent{
 	){
 		this.title = 'Crear Cliente';
 		this.success = null;
-		this.client = new Client ('', '', '', '', '', '', '', '', '', '', '', '');
+		//this.client = new Client ('', '', '', '', '', '', '', '', '', '', '', '');
+		this.client = new Client (null, null, null, null, null, null, null, null, null, null, null, null);
 		this.options = this._toastrService.toastrConfig;
 		this.toastrMessage = 'Mensaje!!!';
 		this.toastrTitle = 'Titulo!!!';
 	}
 
-	ngOnInit(){
-		setTimeout(() => {
-			this._toastrService.success('Welcome to toaster page!', 'Toastr fun!');
-		});
-	}
-
 	public createOrUpdateClient(){
-
 		this._clientService.addClient(this.client).subscribe(
 			response => {
-				if(response.code == 200){
-					//this._router.navigate(['/pages/client-list']);
-					console.log(response.headers);
-				} else {
-					console.log(response.headers);
-				}
+				this.showMessage('success', 'Creación exitosa', 'Cliente ' + this.client.name + ' creado correctamente');
+				this._router.navigate(['/pages/client-list']);
 			},
 			error => {
-				console.log(<any>error)
+				let body = error.json();
+				console.log(body);
+				for(let e of body){
+					this.showMessage('error', 'Error', e);
+				}
 			}
 		);
-
-		this.showMessage('success', 'Transacción exitosa', 'Cliente creado correctamente');
 	}
 
 	public showMessage(type, title, message){
-
-		//this._toastrService.success('Hello world!', 'Toastr fun!');
-		
-		//let m = this.toastrMessage;
-		//let t = this.toastrTitle;
-		//let type = 'success';
-
 		this.options.tapToDismiss = true;
 		this.options.timeOut = 10000;
 		this.options.positionClass = 'toast-top-right';
@@ -75,12 +60,6 @@ export class ClientCreateComponent{
 		this._toastrService.toastrConfig.positionClass = 'toast-top-right';
 		this._toastrService.toastrConfig.titleClass = 'toast-title';
 		this._toastrService.toasts.push(this._toastrService[type](message,title));
-
-		//const opt = JSON.parse(JSON.stringify(this.options));
-
-		//this._toastrService.error(m,t);
-
-		console.log(this._toastrService);
 
 		/*
 		const inserted = this._toastrService[type](m, t, opt);

@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, AbstractControl, FormBuilder, Validators} from '@angular/forms';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent {
   public email:AbstractControl;
   public password:AbstractControl;
 
-  constructor(router:Router, fb:FormBuilder) {
+  constructor(router:Router, fb:FormBuilder, private user: UserService) {
       this.router = router;
       this.form = fb.group({
           'email': ['', Validators.compose([Validators.required, emailValidator])],
@@ -27,6 +28,7 @@ export class LoginComponent {
 
   public onSubmit(values:Object):void {
       if (this.form.valid) {
+          this.user.setUserLoggedIn();
           this.router.navigate(['pages/dashboard']);
       }
   }

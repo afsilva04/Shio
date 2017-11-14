@@ -102,6 +102,7 @@ export class ClientListComponent{
 					console.log(this.clients);
 					//console.log(result[0].nombre);
 				}
+				console.log(result);
 			}
 		);
 

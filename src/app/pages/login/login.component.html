@@ -1,34 +1,34 @@
 <div class="d-flex justify-content-center align-items-center w-100 h-100 login-container">
     <div class="col-xl-4 col-md-6 col-10">
         <div class="card border-0 box-shadow rounded-0">
-            <div class="card-header d-flex justify-content-center align-items-center border-0 box-shadow">
+            <!--div class="card-header d-flex justify-content-center align-items-center border-0 box-shadow">
                 <i class="fa fa-sign-in" aria-hidden="true"></i>
-            </div>
+            </div-->
             <div class="card-block text-center pb-1">
                 <h2>SHIO login</h2>
                 <!--a routerLink="/register" class="transition">Don't have an account? Sign up now!</a-->
-
                 <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="text-left mt-4">
                     <div class="form-group">
                         <input [formControl]="email" class="form-control validation-field" placeholder="Email" type="text">                      
-                        <small class="text-danger" *ngIf="form.get('email').touched && form.get('email').hasError('required')">Email is required</small>                              
-                        <small class="text-danger" *ngIf="form.get('email').touched && form.get('email').hasError('email')">Invalid email address</small>
+                        <small class="text-danger" *ngIf="form.get('email').touched && form.get('email').hasError('required')">Email es obligatorio</small>                              
+                        <small class="text-danger" *ngIf="form.get('email').touched && form.get('email').hasError('email')">Email invalido</small>
                     </div>
                     <div class="form-group">
                         <input [formControl]="password" class="form-control validation-field" placeholder="Password" type="password">
-                        <small class="text-danger" *ngIf="form.get('password').touched && form.get('password').hasError('required')">Password is required</small>                              
-                        <small class="text-danger" *ngIf="form.get('password').touched && form.get('password').hasError('minlength')">Password isn't long enough, minimum of 6 characters</small>
+                        <small class="text-danger" *ngIf="form.get('password').touched && form.get('password').hasError('required')">Contraseña es obligatoria</small>                              
+                        <small class="text-danger" *ngIf="form.get('password').touched && form.get('password').hasError('minlength')">Contraseña muy corta, minimo 6 caracteres</small>
                     </div>
-                    <div class="form-group">
+                    <!--div class="form-group">
                         <label class="custom-control custom-checkbox">
                             <input class="custom-control-input checkbox-main" type="checkbox">
                             <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description align-middle">Keep me signed in.</span>
+                            <span class="custom-control-description align-middle">Manetenerme conectado</span>
                         </label>
-                        <a class="transition pull-right" href="javascript:void(0);">Forgot password?</a>                     
-                    </div>
+                        <a class="transition pull-right" href="javascript:void(0);">¿Olvidaste la contraseña?</a>                     
+                    </div-->
+                    <br>
                     <div class="form-group">
-                        <button [disabled]="!form.valid" class="btn btn-block" type="submit">Sign in</button>
+                        <button [disabled]="!form.valid" class="btn btn-block" type="submit">Entrar</button>
                     </div>
                 </form>
             </div>
