@@ -1,9 +1,17 @@
 export class Appointment {
-    constructor(public id: string,
-                public client: string,
+    constructor(public id: number,
                 public date: string,
-                public retaken: boolean,
-                public notes: string,
-                public subsidiary: string
+                public note: string,
+                public rescheduled: string,
+                public clientId: number,
+                public clientName: string,
+                public subsidiaryId: number,
+                public subsidiaryName: string
                 ) { }
 } 
+
+export class AppointmentForm {
+    constructor(
+        
+    ){ }
+}

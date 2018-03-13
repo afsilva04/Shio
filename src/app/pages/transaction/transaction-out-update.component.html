@@ -1,0 +1,404 @@
+<h3>{{title}}</h3>
+<hr/>
+
+<!--BOTONES-->
+<!--form #formCreateOut="ngForm" (ngSubmit)="onSubmit()" class="form-group col-md-12 col-lg-12">
+	<br>
+	<div class="row" align="right">
+		<div class="form-group col-md-12 col-lg-12">
+			<input type="submit" value="Crear Salida" [disabled]="!formCreateOut.form.valid || header.invoiceCode != ''" class="btn btn-primary btn-block">
+		</div>
+	</div>
+</form-->
+
+<!--CABECERA-->
+<div class="row">
+     <div class="col">
+        
+        <div widget class="card border-0 box-shadow">
+            <div class="card-header  transparent border-0 text-muted">
+                <h5 class="mb-0">Cabecera</h5>
+            </div>
+            <hr/>
+            <div class="card-block widget-body">
+
+                <form #formCreateOut="ngForm" (ngSubmit)="onSubmit()" class="form-group col-md-12 col-lg-12">
+
+				<div class="row">
+					<div class="form-group col-md-12 col-lg-6">
+						<label>
+							Número de documento*
+						</label>
+						<input type="text" #numdoc="ngModel" name="numdoc" [(ngModel)]="header.id" class="form-control" required disabled>
+					</div>
+
+					<!--div class="form-group col-md-12 col-lg-6">
+						<label>
+							Fecha*
+						</label>
+						<input type="text" #date="ngModel" name="date" [(ngModel)]="header.date" class="form-control">
+                    </div-->
+                    
+                    <div class="form-group col-md-12 col-lg-6">
+                        <label>
+                            Fecha*
+                        </label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="aaaa-mm-dd" name="date" [displayMonths]="'1'" [navigation]="'select'" ngbDatepicker #date="ngbDatepicker" [(ngModel)]="dateStruct">
+                            <div class="input-group-addon" (click)="date.toggle()">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12 col-lg-6">
+						<label>
+							Folio Fiscal de Factura
+						</label>
+						<input type="text" #invoiceCode="ngModel" name="invoiceCode" [(ngModel)]="header.invoice" class="form-control" disabled>
+					</div>	
+
+					<!--div class="form-group col-md-12 col-lg-6">
+						<label>
+							Motivo*
+						</label>
+						<input type="text" #reason="ngModel" name="reason" [(ngModel)]="header.reason" class="form-control">
+                    </div-->
+                    
+                    <div class="form-group col-md-12 col-lg-6">
+                        <label>Motivo*</label>
+                        <select class="form-control custom-select" type="text" #reason="ngModel" name="reason" 
+                        [(ngModel)]="header.reasonId">
+                            <option value="0" selected></option>
+                            <option value="1">Venta</option>
+                            <option value="2">Cortesia/Promocion</option>
+                            <option value="3">Vencimiento</option>
+                            <option value="2">Costo de sucursal</option>
+                            <option value="3">Venta anticipada</option>
+                        </select> 
+                    </div>   
+
+				</div>
+
+				<div class="row">
+					<!--div class="form-group col-md-12 col-lg-6">
+						<label>
+							Cliente*
+						</label>
+						<input type="text" #client="ngModel" name="client" [(ngModel)]="header.client" class="form-control" required>
+                    </div-->	
+                    
+                    <div class="form-group col-md-12 col-lg-6">
+                        <label>Cliente*</label>
+                        <select class="form-control custom-select" type="text" name="client" #client="ngModel" 
+                        [(ngModel)]="header.clientId">
+                            <option value="0" selected></option>
+                            <option value="1">Cliente 1</option>
+                            <option value="2">Cliente 2</option>
+                            <option value="3">Cliente 3</option>
+                        </select>  
+                    </div>
+
+					<!--div class="form-group col-md-12 col-lg-6">
+						<label>
+							Sucursal*
+						</label>
+						<input type="text" #subsidiary="ngModel" name="subsidiary" [(ngModel)]="header.subsidiary" class="form-control" required>
+                    </div-->	
+                    
+                    <div class="form-group col-md-12 col-lg-6">
+                        <label>Sucursal*</label>
+                        <select class="form-control custom-select" type="text" name="subsidiary" #subsidiary="ngModel" 
+                        [(ngModel)]="header.subsidiaryId">
+                            <option value="0" selected></option>
+                            <option value="1">Olivares</option>
+                            <option value="2">Luis Orci</option>
+                            <option value="3">Dila</option>
+                            <option value="4">Reforma</option>
+                            <option value="5">Obregon</option>
+                            <option value="6">Girasol</option>
+                        </select>  
+                    </div>
+
+                </div>	
+
+                <div class="row" align="right">
+                    <div class="form-group col-md-12 col-lg-12">
+                        <input type="submit" value="Modificar Salida" class="btn btn-primary">
+                    </div>
+                </div>
+                
+                </form>
+               
+            </div>
+        </div>
+
+    </div>    
+</div>
+
+<br>
+
+<!--FORMULARIO AGREGAR ITEM-->
+<!--div class="row">
+     <div class="col">
+     
+        <div widget class="card border-0 box-shadow">
+            <div class="card-header  transparent border-0 text-muted">
+                <h5 class="mb-0">{{itemsTitle}}</h5>
+            </div>
+            <hr/>
+            <div class="card-block widget-body">
+                
+                <form #formCreateItem="ngForm" (ngSubmit)="onSubmitAddItem()" class="row form-group">
+                    <div class="form-group col-md-12 col-lg-3">
+                    	<label>Tipo</label>
+                        <input type="text" #type="ngModel" name="client" [(ngModel)]="item.type" name="type" class="form-control">
+                    </div>
+                    <div class="form-group col-md-12 col-lg-3">
+                    	<label>Producto/Servicio</label>
+                        <input type="text" #concept="ngModel" name="concept" [(ngModel)]="item.concept" name="concept" class="form-control">
+                    </div> 
+                    <div class="form-group col-md-12 col-lg-3">
+                    	<label>Cantidad</label>
+                        <input type="text" #quantity="ngModel" name="quantity" [(ngModel)]="item.quantity" name="quantity" class="form-control">
+                    </div>   
+                    <div class="form-group col-md-12 col-lg-3">
+                    	<label>Precio Unitario</label>
+                        <input type="text" #price="ngModel" name="price" [(ngModel)]="item.price" name="price" class="form-control">
+                    </div>                                        
+                    <div class="form-group col-md-12 col-lg-3">
+                    	<label>Costo Adicional</label>
+                        <input type="text" #aditional="ngModel" name="aditional" [(ngModel)]="item.aditional" name="aditional" class="form-control">
+                    </div>                       
+                    <div class="form-group col-md-12 col-lg-3" align="center">
+                    	<br>
+                        <label class="custom-control custom-checkbox">
+                            <input class="custom-control-input checkbox-primary" type="checkbox" #anticipated="ngModel" name="anticipated" [(ngModel)]="item.anticipated" name="anticipated">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">Anticipado</span>
+                        </label>
+                    </div> 
+                    <div class="form-group col-md-12 col-lg-3" align="center">
+                    	<br>
+                        <button type="submit" *ngIf="mode == 'add'" class="btn btn-primary">Agregar Item</button>
+                        <button type="button" *ngIf="mode == 'update'" (click)="OnSubmitUpdateItem(item.id)" class="btn btn-info">Modificar Item</button>                        
+                    </div> 
+					<div class="form-group col-md-12 col-lg-3" align="center">
+                    	<br>                    
+                    	<button type="button" *ngIf="mode == 'update'" (click)="cancelUpdate()" class="btn btn-danger">Cancelar Modificación</button>
+                    </div>
+                </form>              
+               
+            </div>
+        </div>
+
+    </div>    
+</div>
+<br-->
+
+<!--TABLA ITEMS-->
+<div class="" *ngIf="items[0] != null">
+    <h3>Items</h3>
+    <div widget class="card border-0 box-shadow">
+        <div class="card-block pt-0 widget-body table-responsive">
+        	<br>        
+            <table class="table table-bordered col-lg-6">
+                <thead>
+                    <tr>
+                        <!--th>TIPO</th-->
+                        <th>CONCEPTO</th>
+                        <th>CANTIDAD</th>
+                        <th>PRECIO</th>
+                        <th>ADICIONAL</th>
+                        <!--th>ANTICIPADO</th-->
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items; let i = index;">
+                        <!--td>{{item.type}}</td-->
+                        <td>{{item.productId? item.productName : item.serviceName}}</td>
+                        <td>{{item.quantity }}</td>
+                        <td>{{item.price}}</td>
+                        <td>{{item.aditional}}</td>
+                        <!--td align="center"><input type="checkbox" ng-checked="item.anticipated == true" name="anticipated" disabled/></td-->
+                        <td align="center">
+                        	<!--input type="button" (click)="updateItemModal(i, modalItem)" class="btn btn-primary" value="E" /-->
+                            <!--input type="button" (click)="deleteItem(i)" class="btn btn-danger" value="B" /-->
+                            <a (click)="updateItemModal(i, modalItem)" href="javascript:void(0)">
+                        		<i class="fa fa-pencil"></i>
+                            </a>
+                            <a (click)="deleteItem(i)" href="javascript:void(0)">
+                        		<i class="fa fa-trash-o text-danger"></i>
+                            </a>                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--TABLA VALES-->
+<div class="" *ngIf="coupons[0] != null">
+    <h3>Vales</h3>
+    <div widget class="card border-0 box-shadow">
+        <div class="card-block pt-0 widget-body table-responsive">
+            <br>        
+            <table class="table table-bordered col-lg-6">
+                <thead>
+                    <tr>
+                        <th>CÓDIGO</th>
+                        <th>TIPO</th>
+                        <th>CONCEPTO</th>
+                        <th>PRECIO</th>
+                        <th>CANTIDAD</th>
+                        <th>FECHA</th>
+                        <th>FECHA USADA</th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let coupon of coupons; let i = index;">
+                        <td>{{coupon.code}}</td>
+                        <td>{{coupon.type}}</td>
+                        <td>{{coupon.concept}}</td>
+                        <td>{{coupon.price}}</td>
+                        <td>{{coupon.quantity}}</td>
+                        <td>{{coupon.date}}</td>
+                        <td>{{coupon.dateUsed}}</td>
+                        <td align="center">
+                            <!--a [routerLink]="['/pages/user-update', item.id]">
+                            <a href="javascript:void(0)" ng-click="addItemForm()">
+                                <i class="fa fa-pencil"></i>
+                            </a-->
+                            <input type="button" (click)="updateCouponModal(i, modalCoupon)" class="btn btn-primary" value="E" />
+                            <input type="button" (click)="deleteCoupon(i)" class="btn btn-danger" value="B" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--BUTTONS-->
+<br>
+<button class="btn btn-primary" *ngIf="header.invoice == ''" (click)="addItemModal(modalItem)">Agregar Item</button>
+<button class="btn btn-primary" *ngIf="header.invoice == ''" (click)="addCouponModal(modalCoupon)">Agregar Vale</button>
+<button class="btn btn-info" *ngIf="header.invoice == ''" (click)="simulateInvoice()" 
+    [routerLink]="['/pages/simulate-invoice', header.id, header.subsidiaryId]">Simular Factura</button>
+
+<button class="btn btn-danger" *ngIf="header.invoice != ''" (click)="cancelInvoice()">Cancelar Factura</button>
+<button class="btn btn-info" *ngIf="header.invoice != ''" (click)="addItemModal(modalItem)">Imprimir Factura</button>
+<button class="btn btn-info" *ngIf="header.invoice != ''" (click)="addItemModal(modalItem)">Imprimir Ticket</button>
+
+<!-- MODAL WINDOW TO CREATE AND UPDATE ITEMS -->
+<ng-template #modalItem>
+    <div class="modal-header">
+        {{itemsTitle}}
+    </div>
+    <div class="modal-body">
+                <form #formCreateItem="ngForm" class="form-horizontal">
+                    <div class="form-group col-md-12 col-lg-12">
+                        <label>Tipo</label>
+                        <input type="text" #type="ngModel" name="client" [(ngModel)]="item.type" name="type" class="form-control">
+                    </div>
+                    <div class="form-group col-md-12 col-lg-12">
+                        <label>Producto</label>
+                        <input type="text" #product="ngModel" name="product" [(ngModel)]="item.productId" name="product" class="form-control">
+                    </div> 
+                    <div class="form-group col-md-12 col-lg-12">
+                        <label>Servicio</label>
+                        <input type="text" #service="ngModel" name="service" [(ngModel)]="item.serviceId" name="service" class="form-control">
+                    </div> 
+                    <div class="form-group col-md-12 col-lg-12">
+                        <label>Cantidad</label>
+                        <input type="text" #quantity="ngModel" name="quantity" [(ngModel)]="item.quantity" name="quantity" class="form-control">
+                    </div>   
+                    <div class="form-group col-md-12 col-lg-12">
+                        <label>Precio Unitario</label>
+                        <input type="text" #price="ngModel" name="price" [(ngModel)]="item.price" name="price" class="form-control">
+                    </div>                                        
+                    <div class="form-group col-md-12 col-lg-12">
+                        <label>Costo Adicional</label>
+                        <input type="text" #aditional="ngModel" name="aditional" [(ngModel)]="item.aditional" name="aditional" class="form-control">
+                    </div>                       
+                    <!--div class="form-group col-md-12 col-lg-12">
+                        <label class="custom-control custom-checkbox">
+                            <input class="custom-control-input checkbox-primary" type="checkbox" #anticipated="ngModel" name="anticipated" [(ngModel)]="item.anticipated" name="anticipated">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">Anticipado</span>
+                        </label>
+                    </div--> 
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <button type="button" *ngIf="modeItem == 'add'" (click)="addItem()" class="btn btn-primary btn-block">Agregar Item</button> 
+                        </div> 
+                        <div class="form-group col-12">
+                            <button type="button" *ngIf="modeItem == 'update'" (click)="updateItem(item.id)" class="btn btn-primary btn-block">Modificar Item</button>  
+                            <!--button type="button" *ngIf="modeItem == 'update'" (click)="cancelItemUpdate()" class="btn btn-danger btn-block">Cancelar Modificación</button-->
+                        </div>
+                    </div>
+                </form>         
+    </div>
+</ng-template>
+
+
+<!-- MODAL WINDOW TO CREATE AND UPDATE COUPONS -->
+<ng-template #modalCoupon>
+    <div class="modal-header">
+        {{couponsTitle}}
+    </div>
+    <div class="modal-body">
+                <form #formCreateItem="ngForm" class="form-horizontal">
+                    <div class="form-group col-md-12 col-lg-12">
+                        <label>Código</label>
+                        <input type="text" #code="ngModel" name="client" [(ngModel)]="coupon.code" name="code" class="form-control" disabled>
+                    </div>
+                    <div class="form-group col-md-12 col-lg-12">
+                        <label>Tipo</label>
+                        <!--input type="text" #type="ngModel" name="client" [(ngModel)]="coupon.type" name="type" class="form-control"-->
+                        <select class="form-control custom-select" type="text" #type="ngModel" name="client" [(ngModel)]="coupon.type" name="type" >
+                            <option selected>Escoja un tipo de vale</option>
+                            <option value="1">Dinero</option>
+                            <option value="2">Producto</option>
+                            <option value="3">Servicio</option>
+                        </select>                        
+                    </div>
+                    <div class="form-group col-md-12 col-lg-12" *ngIf="coupon.type == 2 || coupon.type == 3">
+                        <label>Producto/Servicio</label>
+                        <input type="text" #concept="ngModel" name="concept" [(ngModel)]="coupon.concept" name="concept" class="form-control">
+                    </div>                     
+                    <div class="form-group col-md-12 col-lg-12" *ngIf="coupon.type == 1">
+                        <label>Precio</label>
+                        <input type="text" #price="ngModel" name="price" [(ngModel)]="coupon.price" name="price" class="form-control">
+                    </div>                     
+                    <div class="form-group col-md-12 col-lg-12">
+                        <label>Cantidad</label>
+                        <input type="text" #quantity="ngModel" name="quantity" [(ngModel)]="coupon.quantity" name="quantity" class="form-control">
+                    </div>                        
+                    <div class="form-group col-md-12 col-lg-12">
+                        <label>Fecha</label>
+                        <input type="text" #date="ngModel" name="date" [(ngModel)]="coupon.date" name="date" class="form-control">
+                    </div>  
+                    <div class="form-group col-md-12 col-lg-12">
+                        <label>Fecha Uso</label>
+                        <input type="text" #dateUsed="ngModel" name="dateUsed" [(ngModel)]="coupon.dateUsed" name="dateUsed" class="form-control">
+                    </div>                                                               
+                    <br>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <button type="button" *ngIf="modeCoupon == 'add'" (click)="addCoupon()" class="btn btn-primary btn-block">Agregar Vale</button> 
+                        </div> 
+                        <div class="form-group col-12">
+                            <button type="button" *ngIf="modeCoupon == 'update'" (click)="updateCoupon(coupon.id)" class="btn btn-info btn-block">Modificar Vale</button>
+                            <button type="button" *ngIf="modeCoupon == 'update'" (click)="cancelCouponUpdate()" class="btn btn-danger btn-block">Cancelar Modificación</button>
+                        </div>
+                    </div>
+                </form>         
+    </div>
+</ng-template>

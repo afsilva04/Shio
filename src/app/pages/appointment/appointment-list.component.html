@@ -1,8 +1,27 @@
 <h3>{{title}}</h3>
 <hr/>
 
+<!-- TABLA SMART-->
+<div widget class="card border-0 box-shadow">
+    <div class="card-header transparent border-0 text-muted">
+        <!--h5 class="mb-0">Users Table</h5-->      
+    </div>
+    <div class="card-block pt-0 widget-body">
+        <div class="table-responsive">
+            <ng2-smart-table  class="table table-hover"
+                              [settings]="settings" 
+                              [source]="appointments" 
+                              (edit)="updateAppointment($event)">
+            </ng2-smart-table>
+        </div>          
+    </div>
+</div>
+
+<!-- COLLAPSE -->
+<!--
 <div class="col-12">
     <div id="accordion-1" role="tablist" aria-multiselectable="true">
+
       <div class="card">
         <div class="card-header" role="tab" id="headingOne">
           <h5 class="mb-0">
@@ -24,6 +43,8 @@
           </div>
         </div>
       </div>
+
+
       <div class="card">
         <div class="card-header" role="tab" id="headingTwo">
           <h5 class="mb-0">
@@ -45,6 +66,8 @@
           </div>
         </div>
       </div>
+
+
       <div class="card">
         <div class="card-header" role="tab" id="headingThree">
           <h5 class="mb-0">
@@ -53,6 +76,7 @@
             </a>
           </h5>
         </div>
+
         <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
           <div class="card-block">
             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
@@ -62,3 +86,4 @@
     </div>
                       
 </div>
+-->

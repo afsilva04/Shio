@@ -6,13 +6,13 @@
 		<div widget class="card border-0 box-shadow">
 			<div class="card-block widget-body">
 				
-				<form #formCreateUser="ngForm" (ngSubmit)="createDate()" class="form">
+				<form #formCreateUser="ngForm" (ngSubmit)="createAppointment()" class="form">
 
 					<div class="row">
 
                         <div class="form-group col-md-12 col-lg-6">
                             <label>Cliente*</label>
-                            <select class="form-control custom-select" type="text" name="client" #client="ngModel" [(ngModel)]="appointment.client">
+                            <select class="form-control custom-select" type="text" name="client" #client="ngModel" [(ngModel)]="appointment.clientId">
                                 <option value="0" selected></option>
                                 <option value="1">Cliente 1</option>
                                 <option value="2">Cliente 2</option>
@@ -25,7 +25,7 @@
                                 Fecha*
                             </label>
                             <div class="input-group">
-                                <input class="form-control" placeholder="aaaa-mm-dd" name="date" [displayMonths]="'1'" [navigation]="'select'" ngbDatepicker #date="ngbDatepicker" [(ngModel)]="appointment.date" (ngModelChange)="onChangeDate()">
+                                <input class="form-control" placeholder="aaaa-mm-dd" name="date" [displayMonths]="'1'" [navigation]="'select'" ngbDatepicker #date="ngbDatepicker" [(ngModel)]="dateStruct" (ngModelChange)="onChangeDate()">
                                 <div class="input-group-addon" (click)="date.toggle()">
                                     <i class="fa fa-calendar"></i>
                                 </div>
@@ -39,13 +39,13 @@
 							<label>
 								Notas
 							</label>
-                            <textarea type="text" #notes="ngModel" name="notes" [(ngModel)]="appointment.notes" class="form-control" required></textarea>
+                            <textarea type="text" #notes="ngModel" name="notes" [(ngModel)]="appointment.note" class="form-control" required></textarea>
 						</div>		
 
 						<div class="form-group col-md-12 col-lg-6">
 							<br>
 							<label class="custom-control custom-checkbox">
-								<input type="checkbox" #retaken="ngModel" name="retaken" [(ngModel)]="appointment.retaken" class="custom-control-input checkbox-primary">
+								<input type="checkbox" #retaken="ngModel" name="retaken" [(ngModel)]="appointment.rescheduled" class="custom-control-input checkbox-primary">
 								<span class="custom-control-indicator"></span>
 								<span class="custom-control-description">Reagendada</span>
 							</label>
@@ -56,7 +56,7 @@
                         
                         <div class="form-group col-md-12 col-lg-6">
                             <label>Sucursal*</label>
-                            <select class="form-control custom-select" type="text" name="subsidiary" #subsidiary="ngModel" [(ngModel)]="appointment.subsidiary">
+                            <select class="form-control custom-select" type="text" name="subsidiary" #subsidiary="ngModel" [(ngModel)]="appointment.subsidiaryId">
                                 <option value="0" selected></option>
                                 <option value="1">Obregon</option>
                                 <option value="2">Girasol</option>
@@ -93,15 +93,15 @@
         {{titleService}}
     </div>
     <div class="modal-body">
-                <form #formService="ngForm" class="form-horizontal">
+                <form #formService="ngForm" (ngSubmit)="createAppointmentItem()" class="form-horizontal">
                     <div class="form-group col-md-12 col-lg-12">
                         <label>Hora</label>
-                        <ngb-timepicker name="time" [(ngModel)]="appointmentService.time" [meridian]="true"></ngb-timepicker>                     
+                        <ngb-timepicker name="time" [(ngModel)]="timeStruct" [meridian]="true"></ngb-timepicker>                     
                     </div>
                     <div class="form-group col-md-12 col-lg-12">
                         <label>Servicio</label>                        
                         <select class="form-control custom-select" type="text" #service="ngModel" name="service" 
-                        [(ngModel)]="appointmentService.service">
+                        [(ngModel)]="appointmentItem.serviceId">
                             <option value="00" selected></option>
                             <option value="01">Corte</option>
                             <option value="02">Depilación</option>
@@ -110,7 +110,7 @@
                     <div class="form-group col-md-12 col-lg-12">
                         <label>Estado</label>
                         <select class="form-control custom-select" type="text" #state="ngModel" name="state" 
-                        [(ngModel)]="appointmentService.state">
+                        [(ngModel)]="appointmentItem.status">
                             <option value="00" selected></option>
                             <option value="01">Agendada</option>
                             <option value="02">Confirmada</option>
@@ -120,7 +120,7 @@
                     <br>
                     <div class="row">
                         <div class="form-group col-12">
-                            <button type="submit" *ngIf="mode == 'add'" (click)="addService()" class="btn btn-primary btn-block">Agregar Servicio</button> 
+                            <button type="submit" *ngIf="mode == 'add'" class="btn btn-primary btn-block">Agregar Servicio</button> 
                         </div> 
                         <div class="form-group col-12">
                             <button type="button" *ngIf="mode == 'update'" (click)="updatePaymentMethod(paymentMethod.id)" class="btn btn-info btn-block">Modificar Servicio</button>  
@@ -132,14 +132,14 @@
 </ng-template>
 
 <!--CITAS AGENDADAS-->
-<br>
+<!--br>
 <div class="row" *ngIf="appointment.date">
     <div class="col-12 mb-4">
         <div widget class="card border-0 box-shadow">
             <div class="card-block widget-body table-responsive">
-                <!--Si no hay citas-->
+                
                 <h5 *ngIf="appointmentServices[0] == null">No hay citas agendadas el {{appointment.date.year}}-{{appointment.date.month}}-{{appointment.date.day}}</h5>
-                <!--Si hay citas-->
+                
                 <div *ngIf="appointmentServices">
                     <h5>Citas agendadas el {{appointment.date.year}}-{{appointment.date.month}}-{{appointment.date.day}}</h5>
                     <br>
@@ -167,4 +167,4 @@
             </div>
         </div>
     </div>
-</div>                    
+</div-->                    

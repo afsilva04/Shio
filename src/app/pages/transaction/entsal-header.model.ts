@@ -1,9 +1,13 @@
 export class EntsalHeader {
-    constructor(public id: string,
+    constructor(public id: number,
                 public date: string,
-                public invoiceCode: string,
-                public reason: string,
-                public client: string,
-                public subsidiary: string
+                public invoice: string,
+                public canceled: boolean,
+                public processed: boolean,
+                public reasonId: string,
+                public clientId: number,
+                public clientName: string,
+                public subsidiaryId: number,
+                public subsidiaryName: string
                 ) { }
 } 

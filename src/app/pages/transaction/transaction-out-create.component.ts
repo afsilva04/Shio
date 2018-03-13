@@ -3,11 +3,15 @@ import { EntsalHeader } from './entsal-header.model';
 import { EntsalItem } from './entsal-item.model';
 import { EntsalCoupon } from './entsal-coupon.model';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { TransactionService } from './transaction.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
 	selector: 'transaction-out-create',
 	templateUrl: './transaction-out-form.component.html',
-	encapsulation: ViewEncapsulation.None
+	providers: [TransactionService]
 	})
 export class TransactionOutCreateComponent{
 	public title:string;
@@ -24,15 +28,16 @@ export class TransactionOutCreateComponent{
 	public modeCoupon:string;
 	private modalItemRef:NgbModalRef;
 	private modalCouponRef:NgbModalRef;
+	public dateStruct:NgbDateStruct;
 
 	constructor(
-		private modalService:NgbModal
+		private modalService:NgbModal,
+		private _transactionService: TransactionService,
+		private ngbDateParserFormatter: NgbDateParserFormatter,
+		private _router:Router
 		){
 		this.title = 'Crear Salida';
-		this.header = new EntsalHeader('1','','','','','1');
-		this.item = new EntsalItem('','','','','','',false, '');
-		this.item1 = new EntsalItem('1','Producto','Dabalash','2','1850','0', true, 'Obregon');
-		this.item2 = new EntsalItem('2','Servicio','Corte','1','150','20', false, 'Obregon');
+		this.header = new EntsalHeader(0, '', '', false, false, '', 0, '', 0, '');
 		this.items = []; //[ this.item1, this.item2 ];
 		this.mode = 'add';
 		this.modeCoupon = 'add';
@@ -47,36 +52,27 @@ export class TransactionOutCreateComponent{
 // ------------------- CABECERA
 	onSubmit(){
 		console.log(this.header);
+		this.header.date = this.ngbDateParserFormatter.format(this.dateStruct);
+		
+		this._transactionService.createTransaction(this.header).subscribe(
+			response => {
+				//this.showMessage('success', 'Creación exitosa', 'Cita ' + this.appointment.date + ' creada correctamente');
+				console.log('Transaccion creada1!');
+				this._router.navigate(['/pages/transaction-out-update', response.id]);
+			},
+			error => {
+				let body = error.json();
+				console.log(body);
+				/*for(let e of body){
+					this.showMessage('error', 'Error', e);
+				}*/
+			}
+		);
 	}
 
 // ------------------- ITEMS
 	public addItemModal(modal){
 		this.item.clean();
-		this.modalItemRef = this.modalService.open(modal);
-	}
-
-	public addItem(){
-		//Llamar servicio de agregar item
-		//si pudo agregar
-		let itemToAdd = new EntsalItem('',this.item.type, this.item.concept, 
-			this.item.quantity, this.item.price, this.item.aditional, 
-			this.item.anticipated, this.item.subsidiary);
-
-		this.items.push(itemToAdd);
-		this.item.clean();
-		this.modalItemRef.close();
-	}	
-
-	public updateItemModal(index, modal){
-		let itemIndex = this.items[index];
-		let itemToUpdate = new EntsalItem(itemIndex.id, itemIndex.type, itemIndex.concept, 
-			itemIndex.quantity, itemIndex.price, itemIndex.aditional, 
-			itemIndex.anticipated, itemIndex.subsidiary);
-
-		this.item = itemToUpdate;
-		this.mode = 'update';
-		this.itemsTitle = 'Modificar Item';
-
 		this.modalItemRef = this.modalService.open(modal);
 	}
 
@@ -160,11 +156,11 @@ export class TransactionOutCreateComponent{
 
 // ------------------- FACTURA
 	public simulateInvoice(){
-		this.header.invoiceCode = '123';
+		this.header.invoice = '123';
 	}	
 
 	public cancelInvoice(){
-		this.header.invoiceCode = '';
+		this.header.invoice = '';
 	}
 
 }

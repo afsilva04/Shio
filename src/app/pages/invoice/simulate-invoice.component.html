@@ -14,17 +14,17 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="invoice-title">
-                                <h2 class="col-6">Shio - Sucursal {{subsidiary}}</h2><h3 class="col-6 pull-right">Factura Simulada{{id}}</h3>
+                                <h2 class="col-6">Shio - Sucursal {{header.subsidiaryName}}</h2><h3 class="col-6 pull-right">Factura Simulada</h3>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="form-group col-6">
                                     <strong>Cliente:</strong><br>
-                                    <h4>Nombre de cliente</h4>
+                                    <h4>{{header.clientName}}</h4>
                                 </div>
                                 <div class="form-group col-6">
                                     <strong>Fecha de la orden:</strong><br>
-                                    <h4>fecha</h4>
+                                    <h4>{{header.date}}</h4>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr *ngFor="let item of items">
-                                                    <td>{{item.id}}</td>
+                                                    <td>{{item.productId? item.productName : item.serviceName}}</td>
                                                     <td class="text-center">{{item.quantity}}</td>
                                                     <td class="text-center">{{item.price}}</td>
                                                     <td class="text-right">{{item.aditional}}</td>

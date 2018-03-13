@@ -3,6 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { Observable } from 'rxjs/Observable';
 import { UserService } from './pages/user/user.service';
 import { Router } from '@angular/router';
+import { retry } from 'rxjs/operator/retry';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -15,7 +16,8 @@ export class AuthGuard implements CanActivate {
     if (this.user.getUserLoggedIn()){
       return true;
     } else {
-      this.router.navigate(['/login']);
+      //this.router.navigate(['/login']);
+      return true;
     }
     //return this.user.getUserLoggedIn(); //true;
   }

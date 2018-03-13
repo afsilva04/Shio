@@ -1,23 +1,27 @@
 export class EntsalItem {
-    constructor(public id: string,
+    constructor(public id: number,
                 public type: string,
-                public concept: string,
-                public quantity:string,
-                public price: string,
-                public aditional: string,
-                public anticipated: boolean,
-                public subsidiary: string
+                public quantity: number,
+                public price: number,
+                public aditional: number,
+				public productId: number,
+				public productName: string,
+				public serviceId: number,
+				public serviceName: string,
+				public transactionId: number
                 ) { }
 
 	public clean(){
-		this.id = '';
+		this.id = null;
 		this.type = '';
-		this.concept = '';
-		this.quantity = '';
-		this.price = '';
-		this.aditional = '';
-		this.anticipated = false;
-		this.subsidiary = '';
+		this.quantity = null;
+		this.price = null;
+		this.aditional = null;
+		this.productId = null;
+		this.productName = '';
+		this.serviceId = null;
+		this.serviceName = '';
+		this.transactionId = null;
 	} 
 
 }

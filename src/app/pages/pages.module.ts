@@ -31,7 +31,9 @@ import { TransactionOutUpdateComponent } from './transaction/transaction-out-upd
 import { TransactionListComponent} from './transaction/transaction-list.component';
 import { SimulateInvoiceComponent } from './invoice/simulate-invoice.component';
 import { AppointmentCreateComponent } from './appointment/appointment-create.component';
+import { AppointmentUpdateComponent } from './appointment/appointment-update.component';
 import { AppointmentListComponent } from './appointment/appointment-list.component';
+import { TicketComponent } from './appointment/ticket.component'
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -70,10 +72,12 @@ import { ToastrModule } from 'ngx-toastr';
     TransactionListComponent,
     SimulateInvoiceComponent,
     AppointmentCreateComponent,
+    AppointmentUpdateComponent,
     AppointmentListComponent,
     ClientCreateComponent,
     ClientUpdateComponent,
-    ClientListComponent
+    ClientListComponent,
+    TicketComponent
   ]
 })
 export class PagesModule { }

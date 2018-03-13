@@ -4,13 +4,18 @@ import { EntsalItem } from './entsal-item.model';
 import { EntsalCoupon } from './entsal-coupon.model';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { TransactionService } from './transaction.service';
+import { error } from 'selenium-webdriver';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
 	selector: 'transaction-out-update',
-	templateUrl: './transaction-out-form.component.html',
+	templateUrl: './transaction-out-update.component.html',
+	providers: [TransactionService]
 	})
 export class TransactionOutUpdateComponent{
-    public id:string;
+    public id:number;
     public header:EntsalHeader;
     public item:EntsalItem;
 	public items:EntsalItem[];
@@ -23,15 +28,18 @@ export class TransactionOutUpdateComponent{
 	public couponsTitle:string;
 	private modalItemRef:NgbModalRef;
 	private modalCouponRef:NgbModalRef;
+	public dateStruct:NgbDateStruct;
 
 	constructor(
         private modalService:NgbModal,
         private _route: ActivatedRoute,
-		private _router: Router
+		private _router: Router,
+		private _transactionService: TransactionService,
+		private ngbDateParserFormatter: NgbDateParserFormatter
 		){    
             this.title = 'Modificar Salida';
-            this.header = new EntsalHeader('','','','','','');
-            this.item = new EntsalItem('','','','','','',false, '');
+            this.header = new EntsalHeader(0,'','',false,false,'',0,'',0,'');
+            this.item = new EntsalItem(null, '', null, null, null, null, '', null, '', null);
             this.items = []; 
             this.coupon = new EntsalCoupon('','','','','','','','','');
             this.coupons = [];
@@ -46,62 +54,113 @@ export class TransactionOutUpdateComponent{
 			this.id = params['id'];
         });
         
-        /* CARGAR SALIDA
-		this._userService.getTransaction(this.id).subscribe(
-			result => {
-				if(result.code == 200){
-                    this.header = result.data.header;
-                    this.items = result.data.items;
-                    this.coupons = result.data.coupons;
-				} else {
-					console.log(result);
-				}
+		this._transactionService.getTransaction(this.id).subscribe(
+			response => {
+				this.header = response;
+				this.dateStruct = this.ngbDateParserFormatter.parse(this.header.date);
+				//this.items = response.data.items;
+				//this.coupons = response.data.coupons;
+			},
+			error => {
+				console.log(error.JSON());
 			}
-        )*/
+		)
+		
+		this._transactionService.getTransactionItems(this.id).subscribe(
+			response => {
+				this.items = response;
+			},
+			error => {
+				console.log(error.JSON());
+			}
+		);
     }
 
 // ------------------- CABECERA
 	onSubmit(){
 		console.log(this.header);
+		this.header.date = this.ngbDateParserFormatter.format(this.dateStruct);
+		
+		this._transactionService.updateTransaction(this.header).subscribe(
+			response => {
+				//this.showMessage('success', 'Creación exitosa', 'Cita ' + this.appointment.date + ' creada correctamente');
+				console.log('Transaccion actualizada!');
+				this._router.navigate(['/pages/transaction-list']);
+			},
+			error => {
+				let body = error.json();
+				console.log(body);
+				/*for(let e of body){
+					this.showMessage('error', 'Error', e);
+				}*/
+			}
+		);
 	}
 
 // ------------------- ITEMS
 	public addItemModal(modal){
 		this.item.clean();
+		this.modeItem = 'add';
+		this.itemsTitle = 'Agregar Item';
 		this.modalItemRef = this.modalService.open(modal);
 	}
 
 	public addItem(){
-		//Llamar servicio de agregar item
-		//si pudo agregar
-		let itemToAdd = new EntsalItem('',this.item.type, this.item.concept, 
-			this.item.quantity, this.item.price, this.item.aditional, 
-			this.item.anticipated, this.item.subsidiary);
+		this.item.transactionId = this.id;
+		this._transactionService.createTransactionItem(this.item).subscribe(
+			response => {
+				this._transactionService.getTransactionItems(this.id).subscribe(
+					response => {
+						this.items = response;
+					},
+					error => {
+						console.log(error.JSON());
+					}
+				);
+			},
+			error => {
+				console.log(error.JSON());
+			}
+		);
 
-		this.items.push(itemToAdd);
-		this.item.clean();
+		//this.item.clean();
 		this.modalItemRef.close();
 	}	
 
 	public updateItemModal(index, modal){
-		let itemIndex = this.items[index];
-		let itemToUpdate = new EntsalItem(itemIndex.id, itemIndex.type, itemIndex.concept, 
-			itemIndex.quantity, itemIndex.price, itemIndex.aditional, 
-			itemIndex.anticipated, itemIndex.subsidiary);
+		this.item = this.items[index];
 
-		this.item = itemToUpdate;
+		/*let itemIndex = this.items[index];
+		let itemToUpdate = new EntsalItem(itemIndex.id, itemIndex.type, 
+			itemIndex.quantity, itemIndex.price, itemIndex.aditional, 
+			itemIndex.productId, itemIndex.productName, itemIndex.serviceId, 
+			itemIndex.serviceName, itemIndex.transactionId);
+
+		this.item = itemToUpdate;*/
 		this.modeItem = 'update';
 		this.itemsTitle = 'Modificar Item';
-
 		this.modalItemRef = this.modalService.open(modal);
 	}
 
 	public updateItem(id){
-		//Llamar servicio de modificación por id
-		//Si e pudo modificar -> Actualizar lista de items
-		this.item.clean();		
-		this.modeItem = 'add';
-		this.itemsTitle = 'Agregar Item';
+		//this.item.transactionId = this.id;
+		console.log(this.item);
+		this._transactionService.updateTransactionItem(this.item).subscribe(
+			response => {
+				this._transactionService.getTransactionItems(this.id).subscribe(
+					response => {
+						this.items = response;
+					},
+					error => {
+						console.log(error.JSON());
+					}
+				);
+			},
+			error => {
+				console.log(error.JSON());
+			}
+		);
+		//this.item.clean();		
 		this.modalItemRef.close();
 	}	
 
@@ -113,11 +172,19 @@ export class TransactionOutUpdateComponent{
 	}	
 
 	public deleteItem(index){
-		let itemToDelete = this.items[index];
-		console.log(itemToDelete);
-		//Llamar servicio borrar por id
-		//Si pudo borrar
-		this.items.splice(index,1);
+		this._transactionService.deleteTransactionItem(this.items[index].id).subscribe(
+			response => {
+				this._transactionService.getTransactionItems(this.id).subscribe(
+					response => {
+						this.items = response;
+					},
+					error => {
+						console.log(error.JSON());
+					}
+				);
+			}
+		);
+		//this.items.splice(index,1);
 	}	
 
 // ------------------- VALES
@@ -176,11 +243,11 @@ export class TransactionOutUpdateComponent{
 
 // ------------------- FACTURA
 	public simulateInvoice(){
-		this.header.invoiceCode = '123';
+		this.header.invoice = '123';
 	}	
 
 	public cancelInvoice(){
-		this.header.invoiceCode = '';
+		this.header.invoice = '';
 	}
 
 }

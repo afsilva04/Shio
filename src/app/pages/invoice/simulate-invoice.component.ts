@@ -5,10 +5,12 @@ import { EntsalCoupon } from '../transaction/entsal-coupon.model';
 import { PaymentMethod } from './payment-method.model';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { TransactionService } from '../transaction/transaction.service';
 
 @Component({
 	selector: 'simulate-invoice',
-	templateUrl: './simulate-invoice.component.html',
+    templateUrl: './simulate-invoice.component.html',
+    providers: [TransactionService]
 	})
 export class SimulateInvoiceComponent{
     public paymentMethodTitle:string;
@@ -30,7 +32,8 @@ export class SimulateInvoiceComponent{
     constructor(
         private modalService:NgbModal,
         private _route: ActivatedRoute,
-		private _router: Router
+        private _router: Router,
+        private _transactionService: TransactionService
     ){
         this.paymentMethodTitle = 'Agregar Medoto de Pago';
         this.mode = 'add';
@@ -49,11 +52,25 @@ export class SimulateInvoiceComponent{
             this.subsidiary = params['sub'];
         });
 
+        this.header = new EntsalHeader(null, null, null, null, null, null, null, null, null, null);
+
         //Llamar servicio del back que recibe id, sub y retorna la información de la factura simulada
         //header, items, calculos (subtotal, iva, total)
 
-        let item = new EntsalItem('1', '1', 'concepto', '3', '330.00', '990.00', false, '1'); 
-        this.items = [item];
+        this._transactionService.getTransaction(this.id).subscribe(
+            response => {
+                this.header = response;
+                console.log(this.header);
+            }
+        );
+
+        this._transactionService.getTransactionItems(this.id).subscribe(
+            response => {
+                this.items = response;
+                console.log(this.items);
+            }
+        );
+
     }
 
 // ------------------- METODOS DE PAGO 

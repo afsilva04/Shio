@@ -11,10 +11,12 @@ import { TransactionOutUpdateComponent } from './transaction/transaction-out-upd
 import { TransactionListComponent} from './transaction/transaction-list.component';
 import { SimulateInvoiceComponent } from './invoice/simulate-invoice.component';
 import { AppointmentCreateComponent } from './appointment/appointment-create.component';
+import { AppointmentUpdateComponent } from './appointment/appointment-update.component';
 import { AppointmentListComponent } from './appointment/appointment-list.component';
 import { ClientCreateComponent } from './client/client-create.component';
 import { ClientUpdateComponent } from './client/client-update.component';
 import { ClientListComponent } from './client/client-list.component';
+import { TicketComponent } from './appointment/ticket.component'
 
 import { AuthGuard } from '../auth.guard';
 
@@ -38,7 +40,9 @@ export const routes: Routes = [
             { path: 'transaction-list', component: TransactionListComponent },
             { path: 'simulate-invoice/:id/:sub', component: SimulateInvoiceComponent },
             { path: 'appointment-create', component: AppointmentCreateComponent },
-            { path: 'appointment-list', component: AppointmentListComponent }
+            { path: 'appointment-update/:id', component: AppointmentUpdateComponent },            
+            { path: 'appointment-list', component: AppointmentListComponent },
+            { path: 'ticket/:id', component: TicketComponent }
        ]
     }
 ];

@@ -1,0 +1,123 @@
+
+<style media="print">
+    @page {
+     size: auto;
+     margin: 0;
+          }
+   
+   @media print {
+       @page {
+         size: A7;
+         margin: 0;
+      }
+     #printPageButton {
+       display: none;
+     }
+   }       
+   </style>
+   
+   <div id="invoice" class="container">
+   <div class="row">
+           <div class="col-md-10"></div>
+           <div class="col-md-2"></div>
+       </div>
+       <div class="row">
+           <div class="col-md-10"></div>
+       </div>
+       <div class="row">
+           <div class="col-12">
+               <div class="invoice-title" align="center">
+                   <h1 style="font-size:20px">Shio Belleza</h1>
+               </div>
+               <hr>
+               <div class="row">
+                   <div class="col-12">
+                       <p style="font-size:20px"> <strong style="font-size:20px">Cliente:</strong> Cliente1<!--?php echo $cliente->Nombre; ?--></p>
+                   </div>
+                   <div class="col-12">
+                   <p style="font-size:20px"> <strong>Fecha de la orden:</strong>2018 <!--?php echo $fecha; ?--></p>
+                           <h4><!--?php //echo explode("%",$fecha)[0]; ?--></h4>
+                   </div>
+               </div>
+           </div>
+       </div>
+       
+       <div class="row">
+           <div class="col-md-12">
+               <div class="table-responsive">
+                   <table class="table table-bordered" style="font-size:20px">
+                       <thead>
+                           <tr >
+                               <td class="text-center" width="4%"><strong>Item</strong></td>
+                               <td class="text-center" width="48%"><strong>Asesor(a)</strong></td>
+                               <td class="text-center" width="48%"><strong>Servicio</strong></td>
+                           </tr>
+                       </thead>
+                       <tbody>
+   
+                            <tr *ngFor="let a of appointmentItems; let i = index;">
+                                <td align="center">{{i+1}}</td>
+                                <td align="center"></td>
+                                <td align="center">{{a.serviceName}}</td>
+                            </tr>        
+
+                           <tr>
+                               <td align="center">{{numItems+1}}</td>
+                               <td align="center"></td>
+                               <td align="center"></td>
+                           </tr>      
+   
+                           <tr>
+                               <td align="center">{{numItems+2}}</td>
+                               <td align="center"></td>
+                               <td align="center"></td>
+                           </tr>                                              
+                       
+                       </tbody>
+                   </table>
+   
+                   <table class="table table-bordered" style="font-size:20px">                
+                       <tbody>  
+                           <tr>
+                               <td align="center" colspan="4"><strong>¿Como le atendimos el día de hoy?</strong></td>
+                           </tr>                                               
+                           <tr>
+                               <td align="center" width="25%"><strong>Calidad</strong></td>
+                               <td align="center" width="25%">Excelente</td>
+                               <td align="center" width="25%">Bueno</td>
+                               <td align="center" width="25%">Regular</td>
+                           </tr> 
+                           <tr>
+                               <td align="center"><strong>Tiempo</strong></td>
+                               <td align="center">Excelente</td>
+                               <td align="center">Bueno</td>
+                               <td align="center">Regular</td>
+                           </tr> 
+                           <tr>
+                               <td align="center"><strong>Servicio</strong></td>
+                               <td align="center">Excelente</td>
+                               <td align="center">Bueno</td>
+                               <td align="center">Regular</td>
+                           </tr>       
+                           <tr>
+                               <td align="center" colspan="4"><strong>¿Asesor que le atendio mejor fue?</strong></td>
+                           </tr>
+                           <tr>
+                               <td colspan="4"><strong>Asesor:</strong></td>
+                           </tr>
+                           <tr>
+                               <td colspan="4" height="120px"><strong>Comentarios:</strong></td>
+                           </tr>                                                                                         
+                       </tbody>
+                   </table>
+               </div>
+           </div>
+       </div>      
+   
+       <div class="row">
+           <div class="col-md-12" align="right">               
+               <a id="printPageButton" onClick="window.print();" class="btn btn-info">Imprimir</a>
+           </div> 
+       </div> 
+   
+   </div>

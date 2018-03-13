@@ -1,40 +1,67 @@
 import { Component } from '@angular/core';
 import { Appointment } from './appointment.model';
-import { AppointmentService } from './appointment-service.model';
+import { AppointmentItem } from './appointment-item.model';
+import { AppointmentService } from './appointment.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
 	selector: 'appointment-create',
-	templateUrl: './appointment-create.component.html'
+	templateUrl: './appointment-create.component.html',
+	providers: [AppointmentService]
 	})
 export class AppointmentCreateComponent{
 	public title:string;
 	public titleService:string;
 	private mode;
 	public appointment:Appointment;
-	public appointmentService:AppointmentService;
-	public appointmentService1:AppointmentService;
-	public appointmentServices:AppointmentService[];
+	public appointmentItem:AppointmentItem;
+	public appointmentItem1:AppointmentItem;
+	public appointmentItems:AppointmentItem[];
 	private modalServiceRef:NgbModalRef;
+	public dateStruct:NgbDateStruct;
+	public timeStruct:NgbTimeStruct;
 
 	constructor(
-		private modalService:NgbModal
+		private modalService:NgbModal,
+		private _appointmentService: AppointmentService,
+		private _router:Router,
+		private ngbDateParserFormatter: NgbDateParserFormatter
 	){
 		this.title = "Crear Cita";
 		this.titleService = "Crear Servicio";
 		this.mode = 'add';
-		this.appointment = new Appointment('', '', '', false, '', '');
-		this.appointmentService = new AppointmentService('', '', '', '', '', '');
-		this.appointmentService1 = new AppointmentService('1', '10:00 - 11:00', 'Agendada', '3335566', 'Lupita', 'Corte');
-		this.appointmentServices = [this.appointmentService1];
+		//this.appointment = new Appointment(0, '', '', '', 0, 0);
+		this.appointment = new Appointment(0, '20180909', 'not', '1', 1, '', 1, '');
+		this.appointmentItem = new AppointmentItem(0, '', '', 0, '', 0);
+		this.appointmentItem1 = new AppointmentItem(1, '10:00', 'Agendada', 1, '', 1);
+		this.appointmentItems = [this.appointmentItem1];
 	}
 
-	public createDate(){
-		console.log(this.appointment);
+	public createAppointment(){
+		this.appointment.date = this.ngbDateParserFormatter.format(this.dateStruct);
+
+		this._appointmentService.createAppointment(this.appointment).subscribe(
+			response => {
+				//this.showMessage('success', 'Creación exitosa', 'Cita ' + this.appointment.date + ' creada correctamente');
+				console.log('Cita creada1!');
+				this._router.navigate(['/pages/appointment-list']);
+			},
+			error => {
+				let body = error.json();
+				console.log(body);
+				/*for(let e of body){
+					this.showMessage('error', 'Error', e);
+				}*/
+			}
+		)
 	}
 
 	public onChangeDate(){
 		console.log('cambie la fecha');
+		console.log(this.dateStruct);
 	}
 
 // ------------------- SERVICIOS
@@ -45,6 +72,8 @@ export class AppointmentCreateComponent{
 	}
 	
 	public addService(){
-		console.log(this.appointmentService);
+		console.log(this.appointmentItem);
 	}
+
+
 }
