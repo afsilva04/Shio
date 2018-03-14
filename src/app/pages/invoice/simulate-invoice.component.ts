@@ -6,11 +6,14 @@ import { PaymentMethod } from './payment-method.model';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TransactionService } from '../transaction/transaction.service';
+import { InvoiceService } from './invoice.service';
+import { Invoice } from 'app/pages/invoice/invoice.model';
+import { concat } from 'rxjs/observable/concat';
 
 @Component({
 	selector: 'simulate-invoice',
     templateUrl: './simulate-invoice.component.html',
-    providers: [TransactionService]
+    providers: [TransactionService, InvoiceService]
 	})
 export class SimulateInvoiceComponent{
     public paymentMethodTitle:string;
@@ -28,12 +31,14 @@ export class SimulateInvoiceComponent{
     public subtotal:number;
     public tax:number;
     public total;
+    public invoice: Invoice;
 
     constructor(
         private modalService:NgbModal,
         private _route: ActivatedRoute,
         private _router: Router,
-        private _transactionService: TransactionService
+        private _transactionService: TransactionService,
+        private _invoiceService: InvoiceService
     ){
         this.paymentMethodTitle = 'Agregar Medoto de Pago';
         this.mode = 'add';
@@ -44,6 +49,7 @@ export class SimulateInvoiceComponent{
         this.subtotal = 853.44;
         this.tax = 136.56;
         this.total = 990.00;
+        this.invoice = new Invoice(new EntsalHeader(0, '', '', false, false, '', 0, '', 0, ''), 0, 0, 0, []);
     }
 
     ngOnInit(){
@@ -57,6 +63,14 @@ export class SimulateInvoiceComponent{
         //Llamar servicio del back que recibe id, sub y retorna la información de la factura simulada
         //header, items, calculos (subtotal, iva, total)
 
+        this._invoiceService.getInvoiceInfo(this.id).subscribe(
+            response => {
+                this.invoice = response;
+                console.log(this.invoice);
+            }
+        );
+    
+        /*
         this._transactionService.getTransaction(this.id).subscribe(
             response => {
                 this.header = response;
@@ -70,6 +84,7 @@ export class SimulateInvoiceComponent{
                 console.log(this.items);
             }
         );
+        */
 
     }
 
