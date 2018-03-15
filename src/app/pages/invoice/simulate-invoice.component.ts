@@ -7,7 +7,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TransactionService } from '../transaction/transaction.service';
 import { InvoiceService } from './invoice.service';
-import { Invoice } from 'app/pages/invoice/invoice.model';
+import { Invoice, InvoiceSat, InvoiceSatUpdate } from 'app/pages/invoice/invoice.model';
 import { concat } from 'rxjs/observable/concat';
 
 @Component({
@@ -17,7 +17,7 @@ import { concat } from 'rxjs/observable/concat';
 	})
 export class SimulateInvoiceComponent{
     public paymentMethodTitle:string;
-    public id:string;
+    public id:number;
     public subsidiary:string;
     public header:EntsalHeader;
     public items:EntsalItem[];
@@ -32,6 +32,9 @@ export class SimulateInvoiceComponent{
     public tax:number;
     public total;
     public invoice: Invoice;
+    public invoiceSat: InvoiceSat;
+    public pdf;
+    public invoiceSatUpdate: InvoiceSatUpdate
 
     constructor(
         private modalService:NgbModal,
@@ -49,7 +52,11 @@ export class SimulateInvoiceComponent{
         this.subtotal = 853.44;
         this.tax = 136.56;
         this.total = 990.00;
-        this.invoice = new Invoice(new EntsalHeader(0, '', '', false, false, '', 0, '', 0, ''), 0, 0, 0, []);
+        this.invoice = new Invoice(new EntsalHeader(0, '', '', '', false, false, '', 0, '', 0, ''), 0, 0, 0, []);
+        this.invoiceSat = new InvoiceSat(0, '', '', '');
+        this.pdf = '';
+        this.invoiceSatUpdate = new InvoiceSatUpdate(0, '', '');
+
     }
 
     ngOnInit(){
@@ -58,7 +65,7 @@ export class SimulateInvoiceComponent{
             this.subsidiary = params['sub'];
         });
 
-        this.header = new EntsalHeader(null, null, null, null, null, null, null, null, null, null);
+        this.header = new EntsalHeader(null, null, null, null, null, null, null, null, null, null, null);
 
         //Llamar servicio del back que recibe id, sub y retorna la información de la factura simulada
         //header, items, calculos (subtotal, iva, total)
@@ -69,22 +76,6 @@ export class SimulateInvoiceComponent{
                 console.log(this.invoice);
             }
         );
-    
-        /*
-        this._transactionService.getTransaction(this.id).subscribe(
-            response => {
-                this.header = response;
-                console.log(this.header);
-            }
-        );
-
-        this._transactionService.getTransactionItems(this.id).subscribe(
-            response => {
-                this.items = response;
-                console.log(this.items);
-            }
-        );
-        */
 
     }
 
@@ -157,14 +148,24 @@ export class SimulateInvoiceComponent{
 // ------------------- FACTURAR
     
     public createInvoice(){
-        //Llamar servicio del backend para:
-        // 1. Generar XML de la factura
-        // 2. Consumir servicio SOAP para timbrar la factura
-        // 3. Si es exitoso -> - Registrar resultado (Folio Fiscal) en cabecera 
-        //                     - Navegar a la salida correspondiente
-        //                     - Habilitar botones de imprimir ticket, imprimir factura y cancelar factura
-        //    Si NO es exitoso -> Mostrar mensaje de error y permanecer en "Simular Factura"
-        console.log('Entre a createInvoice');
+
+        this.invoiceSat.transactionId = this.id;
+        this.invoiceSat.paymentMethod = '99';
+        
+        this._invoiceService.createInvoice(this.invoiceSat).subscribe(
+            response => {
+                this.invoiceSatUpdate.transaction = this.id;
+                this.invoiceSatUpdate.pdf = response.cfdi.PDF;
+                this.invoiceSatUpdate.invoice = response.cfdi.UUID;
+
+                this._invoiceService.updateTransaction(this.invoiceSatUpdate).subscribe(
+                    response => {
+                        this._router.navigate(['/pages/transaction-out-update/' + this.id]);
+                        window.open(this.invoiceSatUpdate.pdf, "_blank");                    }
+                );
+            }
+        );
+
     }
     
 

@@ -15,6 +15,10 @@ export class ClientService{
         this.url = Global.url;
     }
 
+    getAllClients(){
+        return this._http.get(this.url + 'clients').map(res => res.json());
+    }
+
     getClients(text?){
         console.log(this.url + 'clients/?search_txt=' + text);
         return this._http.get(this.url + 'clients/?search_txt=' + text).map(res => res.json());

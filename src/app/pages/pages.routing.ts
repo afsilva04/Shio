@@ -17,6 +17,8 @@ import { ClientCreateComponent } from './client/client-create.component';
 import { ClientUpdateComponent } from './client/client-update.component';
 import { ClientListComponent } from './client/client-list.component';
 import { TicketComponent } from './appointment/ticket.component'
+import { TicketInvoiceComponent } from './invoice/ticket-invoice.component';
+
 
 import { AuthGuard } from '../auth.guard';
 
@@ -42,7 +44,8 @@ export const routes: Routes = [
             { path: 'appointment-create', component: AppointmentCreateComponent },
             { path: 'appointment-update/:id', component: AppointmentUpdateComponent },            
             { path: 'appointment-list', component: AppointmentListComponent },
-            { path: 'ticket/:id', component: TicketComponent }
+            { path: 'ticket/:id', component: TicketComponent },
+            { path: 'ticket-invoice/:id', component: TicketInvoiceComponent }
        ]
     }
 ];

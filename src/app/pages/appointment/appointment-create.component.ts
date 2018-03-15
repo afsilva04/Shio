@@ -6,11 +6,13 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Client } from 'app/pages/client/client.model';
+import { ClientService } from 'app/pages/client/client.service';
 
 @Component({
 	selector: 'appointment-create',
 	templateUrl: './appointment-create.component.html',
-	providers: [AppointmentService]
+	providers: [AppointmentService, ClientService]
 	})
 export class AppointmentCreateComponent{
 	public title:string;
@@ -23,21 +25,33 @@ export class AppointmentCreateComponent{
 	private modalServiceRef:NgbModalRef;
 	public dateStruct:NgbDateStruct;
 	public timeStruct:NgbTimeStruct;
+	public clients: Client[];
 
 	constructor(
 		private modalService:NgbModal,
 		private _appointmentService: AppointmentService,
 		private _router:Router,
+		private _clientService: ClientService,		
 		private ngbDateParserFormatter: NgbDateParserFormatter
 	){
 		this.title = "Crear Cita";
 		this.titleService = "Crear Servicio";
 		this.mode = 'add';
 		//this.appointment = new Appointment(0, '', '', '', 0, 0);
-		this.appointment = new Appointment(0, '20180909', 'not', '1', 1, '', 1, '');
+		this.appointment = new Appointment(0, '', '', '', 0, '', 0, '');
 		this.appointmentItem = new AppointmentItem(0, '', '', 0, '', 0);
 		this.appointmentItem1 = new AppointmentItem(1, '10:00', 'Agendada', 1, '', 1);
 		this.appointmentItems = [this.appointmentItem1];
+		this.clients = [];
+	}
+
+	ngOnInit(){
+		this._clientService.getAllClients().subscribe(
+			response => {
+				this.clients = response;
+				console.log(this.clients);
+			}
+		);
 	}
 
 	public createAppointment(){

@@ -8,11 +8,17 @@ import { TransactionService } from './transaction.service';
 import { error } from 'selenium-webdriver';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Product } from 'app/pages/product/product.model';
+import { ProductService } from 'app/pages/product/product.service';
+import { Service } from 'app/pages/service/service.model';
+import { ServiceService } from 'app/pages/service/service.service';
+import { Client } from 'app/pages/client/client.model';
+import { ClientService } from 'app/pages/client/client.service';
 
 @Component({
 	selector: 'transaction-out-update',
 	templateUrl: './transaction-out-update.component.html',
-	providers: [TransactionService]
+	providers: [TransactionService, ProductService, ServiceService, ClientService]
 	})
 export class TransactionOutUpdateComponent{
     public id:number;
@@ -29,16 +35,22 @@ export class TransactionOutUpdateComponent{
 	private modalItemRef:NgbModalRef;
 	private modalCouponRef:NgbModalRef;
 	public dateStruct:NgbDateStruct;
+	public products:Product[];
+	public services:Service[];
+	public clients: Client[];
 
 	constructor(
         private modalService:NgbModal,
         private _route: ActivatedRoute,
 		private _router: Router,
 		private _transactionService: TransactionService,
+		private _productService: ProductService,
+		private _serviceService: ServiceService,
+		private _clientService: ClientService,
 		private ngbDateParserFormatter: NgbDateParserFormatter
 		){    
             this.title = 'Modificar Salida';
-            this.header = new EntsalHeader(0,'','',false,false,'',0,'',0,'');
+            this.header = new EntsalHeader(0,'','','',false,false,'',0,'',0,'');
             this.item = new EntsalItem(null, '', null, null, null, null, '', null, '', null);
             this.items = []; 
             this.coupon = new EntsalCoupon('','','','','','','','','');
@@ -46,7 +58,10 @@ export class TransactionOutUpdateComponent{
             this.modeItem = 'add';
             this.modeCoupon = 'add';
             this.itemsTitle = 'Agregar Item';
-            this.couponsTitle = 'Agregar Vale';
+			this.couponsTitle = 'Agregar Vale';
+			this.products = [];
+			this.services = [];
+			this.clients = [];
 	}
 
     ngOnInit(){
@@ -64,7 +79,7 @@ export class TransactionOutUpdateComponent{
 			error => {
 				console.log(error.JSON());
 			}
-		)
+		);
 		
 		this._transactionService.getTransactionItems(this.id).subscribe(
 			response => {
@@ -74,6 +89,26 @@ export class TransactionOutUpdateComponent{
 				console.log(error.JSON());
 			}
 		);
+
+		this._productService.getProducts().subscribe(
+			response => {
+				this.products = response;
+			}
+		);
+
+		this._serviceService.getServices().subscribe(
+			response => {
+				this.services = response;
+			}
+		);
+
+		this._clientService.getAllClients().subscribe(
+			response => {
+				this.clients = response;
+				console.log(this.clients);
+			}
+		);
+
     }
 
 // ------------------- CABECERA
@@ -107,6 +142,7 @@ export class TransactionOutUpdateComponent{
 
 	public addItem(){
 		this.item.transactionId = this.id;
+		this.item.aditional = 0;
 		this._transactionService.createTransactionItem(this.item).subscribe(
 			response => {
 				this._transactionService.getTransactionItems(this.id).subscribe(
@@ -247,7 +283,11 @@ export class TransactionOutUpdateComponent{
 	}	
 
 	public cancelInvoice(){
-		this.header.invoice = '';
+		//this.header.invoice = '';
+	}
+
+	public printInvoice(){
+		window.open(this.header.invoicePdf, "_blank");     
 	}
 
 }

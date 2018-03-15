@@ -7,11 +7,13 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { error } from 'util';
+import { Client } from 'app/pages/client/client.model';
+import { ClientService } from 'app/pages/client/client.service';
 
 @Component({
 	selector: 'appointment-update',
 	templateUrl: './appointment-update.component.html',
-	providers: [AppointmentService]
+	providers: [AppointmentService, ClientService]
 	})
 export class AppointmentUpdateComponent{
 	public title:string;
@@ -24,12 +26,14 @@ export class AppointmentUpdateComponent{
 	private modalServiceRef:NgbModalRef;
 	public dateStruct:NgbDateStruct;
 	public timeStruct:NgbTimeStruct;
+	public clients: Client[];	
 
 	constructor(
 		private modalService:NgbModal,
 		private _appointmentService: AppointmentService,
 		private _route:ActivatedRoute,
 		private _router:Router,
+		private _clientService: ClientService,				
 		private ngbDateParserFormatter: NgbDateParserFormatter
 	){
 		this.title = "Modificar Cita";
@@ -40,6 +44,7 @@ export class AppointmentUpdateComponent{
 		this.appointmentItem = new AppointmentItem(0, '', '', 0, '', 0);
 		this.appointmentItem1 = new AppointmentItem(1, '10:00', 'Agendada', 1, '', 1);
 		this.appointmentItems = [this.appointmentItem1];
+		this.clients = [];		
 	}
 
 	ngOnInit(){
@@ -47,8 +52,16 @@ export class AppointmentUpdateComponent{
 			this.appointment.id = params['id'];
 		});
 
+		this._clientService.getAllClients().subscribe(
+			response => {
+				this.clients = response;
+				console.log(this.clients);
+			}
+		);
+
 		this.getAppointment();
 		this.getAppointmentItems();
+
 	}
 
 	getAppointment(){

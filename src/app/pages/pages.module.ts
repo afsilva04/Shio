@@ -34,6 +34,7 @@ import { AppointmentCreateComponent } from './appointment/appointment-create.com
 import { AppointmentUpdateComponent } from './appointment/appointment-update.component';
 import { AppointmentListComponent } from './appointment/appointment-list.component';
 import { TicketComponent } from './appointment/ticket.component'
+import { TicketInvoiceComponent } from './invoice/ticket-invoice.component';
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -77,7 +78,8 @@ import { ToastrModule } from 'ngx-toastr';
     ClientCreateComponent,
     ClientUpdateComponent,
     ClientListComponent,
-    TicketComponent
+    TicketComponent,
+    TicketInvoiceComponent
   ]
 })
 export class PagesModule { }

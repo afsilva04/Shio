@@ -2,6 +2,7 @@ export class EntsalHeader {
     constructor(public id: number,
                 public date: string,
                 public invoice: string,
+                public invoicePdf: string,
                 public canceled: boolean,
                 public processed: boolean,
                 public reasonId: string,

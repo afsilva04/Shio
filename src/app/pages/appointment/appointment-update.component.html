@@ -12,12 +12,11 @@
 
                         <div class="form-group col-md-12 col-lg-6">
                             <label>Cliente*</label>
-                            <select class="form-control custom-select" type="text" name="client" #client="ngModel" [(ngModel)]="appointment.clientId">
-                                <option value="0" selected></option>
-                                <option value="1">Cliente 1</option>
-                                <option value="2">Cliente 2</option>
-                                <option value="3">Cliente 3</option>
-                            </select>  
+                            <select class="form-control custom-select" type="text" #client="ngModel" name="client" [(ngModel)]="appointment.clientId">
+                                <option *ngFor="let client of clients" [value]="client.id">
+                                    {{client.name}}
+                                </option>
+                            </select>                        
                         </div>
                         
                         <div class="form-group col-md-12 col-lg-6">

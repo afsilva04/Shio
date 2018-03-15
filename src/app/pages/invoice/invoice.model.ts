@@ -10,3 +10,22 @@ export class Invoice {
         public transactionItems: EntsalItem[]
     ) { }                 
 }
+
+export class InvoiceSat {
+    constructor(
+        public transactionId: number,
+        public paymentMethod: string,
+        public rfc: string,
+        public rfcName: string
+    ) { }
+}
+
+export class InvoiceSatUpdate{
+    constructor(
+        public transaction: number,
+        public invoice: string,
+        public pdf: string
+    ) { }
+}
+    
+

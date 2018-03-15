@@ -91,7 +91,7 @@
 						<input type="text" #client="ngModel" name="client" [(ngModel)]="header.client" class="form-control" required>
                     </div-->	
                     
-                    <div class="form-group col-md-12 col-lg-6">
+                    <!--div class="form-group col-md-12 col-lg-6">
                         <label>Cliente*</label>
                         <select class="form-control custom-select" type="text" name="client" #client="ngModel" 
                         [(ngModel)]="header.clientId">
@@ -100,6 +100,15 @@
                             <option value="2">Cliente 2</option>
                             <option value="3">Cliente 3</option>
                         </select>  
+                    </div-->
+
+                    <div class="form-group col-md-12 col-lg-6">
+                        <label>Cliente*</label>
+                        <select class="form-control custom-select" type="text" #client="ngModel" name="client" [(ngModel)]="header.clientId">
+                            <option *ngFor="let client of clients" [value]="client.id">
+                                {{client.name}}
+                            </option>
+                        </select>                        
                     </div>
 
 					<!--div class="form-group col-md-12 col-lg-6">

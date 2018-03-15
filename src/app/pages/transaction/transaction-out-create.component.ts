@@ -7,11 +7,13 @@ import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TransactionService } from './transaction.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Client } from 'app/pages/client/client.model';
+import { ClientService } from 'app/pages/client/client.service';
 
 @Component({
 	selector: 'transaction-out-create',
 	templateUrl: './transaction-out-form.component.html',
-	providers: [TransactionService]
+	providers: [TransactionService, ClientService]
 	})
 export class TransactionOutCreateComponent{
 	public title:string;
@@ -29,15 +31,17 @@ export class TransactionOutCreateComponent{
 	private modalItemRef:NgbModalRef;
 	private modalCouponRef:NgbModalRef;
 	public dateStruct:NgbDateStruct;
+	public clients: Client[];
 
 	constructor(
 		private modalService:NgbModal,
 		private _transactionService: TransactionService,
 		private ngbDateParserFormatter: NgbDateParserFormatter,
-		private _router:Router
+		private _router:Router,
+		private _clientService: ClientService,
 		){
 		this.title = 'Crear Salida';
-		this.header = new EntsalHeader(0, '', '', false, false, '', 0, '', 0, '');
+		this.header = new EntsalHeader(0, '', '', '', false, false, '', 0, '', 0, '');
 		this.items = []; //[ this.item1, this.item2 ];
 		this.mode = 'add';
 		this.modeCoupon = 'add';
@@ -45,9 +49,17 @@ export class TransactionOutCreateComponent{
 		this.couponsTitle = 'Agregar Vale';
 		this.coupon = new EntsalCoupon('','','','','','','','','');
 		this.coupons = [];	
+		this.clients = [];
 	}
 
-	ngOnInit(){}
+	ngOnInit(){
+		this._clientService.getAllClients().subscribe(
+			response => {
+				this.clients = response;
+				console.log(this.clients);
+			}
+		);
+	}
 
 // ------------------- CABECERA
 	onSubmit(){
@@ -68,6 +80,7 @@ export class TransactionOutCreateComponent{
 				}*/
 			}
 		);
+
 	}
 
 // ------------------- ITEMS

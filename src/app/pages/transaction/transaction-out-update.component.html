@@ -91,7 +91,7 @@
 						<input type="text" #client="ngModel" name="client" [(ngModel)]="header.client" class="form-control" required>
                     </div-->	
                     
-                    <div class="form-group col-md-12 col-lg-6">
+                    <!--div class="form-group col-md-12 col-lg-6">
                         <label>Cliente*</label>
                         <select class="form-control custom-select" type="text" name="client" #client="ngModel" 
                         [(ngModel)]="header.clientId">
@@ -100,6 +100,15 @@
                             <option value="2">Cliente 2</option>
                             <option value="3">Cliente 3</option>
                         </select>  
+                    </div-->
+
+                    <div class="form-group col-md-12 col-lg-6">
+                        <label>Cliente*</label>
+                        <select class="form-control custom-select" type="text" #client="ngModel" name="client" [(ngModel)]="header.clientId">
+                            <option *ngFor="let client of clients" [value]="client.id">
+                                {{client.name}}
+                            </option>
+                        </select>                        
                     </div>
 
 					<!--div class="form-group col-md-12 col-lg-6">
@@ -212,7 +221,7 @@
                         <th>CONCEPTO</th>
                         <th>CANTIDAD</th>
                         <th>PRECIO</th>
-                        <th>ADICIONAL</th>
+                        <!--th>ADICIONAL</th-->
                         <!--th>ANTICIPADO</th-->
                         <th>ACCIONES</th>
                     </tr>
@@ -223,7 +232,7 @@
                         <td>{{item.productId? item.productName : item.serviceName}}</td>
                         <td>{{item.quantity }}</td>
                         <td>{{item.price}}</td>
-                        <td>{{item.aditional}}</td>
+                        <!--td>{{item.aditional}}</td-->
                         <!--td align="center"><input type="checkbox" ng-checked="item.anticipated == true" name="anticipated" disabled/></td-->
                         <td align="center">
                         	<!--input type="button" (click)="updateItemModal(i, modalItem)" class="btn btn-primary" value="E" /-->
@@ -293,8 +302,9 @@
     [routerLink]="['/pages/simulate-invoice', header.id, header.subsidiaryId]">Simular Factura</button>
 
 <button class="btn btn-danger" *ngIf="header.invoice != ''" (click)="cancelInvoice()">Cancelar Factura</button>
-<button class="btn btn-info" *ngIf="header.invoice != ''" (click)="addItemModal(modalItem)">Imprimir Factura</button>
-<button class="btn btn-info" *ngIf="header.invoice != ''" (click)="addItemModal(modalItem)">Imprimir Ticket</button>
+<button class="btn btn-info" *ngIf="header.invoice != ''" (click)="printInvoice()">Imprimir Factura</button>
+<a class="btn btn-info" *ngIf="header.invoice != ''" [routerLink]="['../../ticket-invoice', header.id]" target="_blank">Imprimir Ticket</a>
+
 
 <!-- MODAL WINDOW TO CREATE AND UPDATE ITEMS -->
 <ng-template #modalItem>
@@ -303,18 +313,34 @@
     </div>
     <div class="modal-body">
                 <form #formCreateItem="ngForm" class="form-horizontal">
-                    <div class="form-group col-md-12 col-lg-12">
+                    <!--div class="form-group col-md-12 col-lg-12">
                         <label>Tipo</label>
                         <input type="text" #type="ngModel" name="client" [(ngModel)]="item.type" name="type" class="form-control">
-                    </div>
+                    </div-->
                     <div class="form-group col-md-12 col-lg-12">
                         <label>Producto</label>
+                        <select class="form-control custom-select" type="text" #product="ngModel" name="product" [(ngModel)]="item.productId">
+                            <option *ngFor="let product of products" [value]="product.id">
+                                {{product.name}}
+                            </option>
+                        </select>                        
+                    </div>
+                    <!--div class="form-group col-md-12 col-lg-12">
+                        <label>Producto</label>
                         <input type="text" #product="ngModel" name="product" [(ngModel)]="item.productId" name="product" class="form-control">
-                    </div> 
+                    </div--> 
                     <div class="form-group col-md-12 col-lg-12">
                         <label>Servicio</label>
+                        <select class="form-control custom-select" type="text" #service="ngModel" name="service" [(ngModel)]="item.serviceId">
+                            <option *ngFor="let service of services" [value]="service.id">
+                                {{service.name}}
+                            </option>
+                        </select>                        
+                    </div>
+                    <!--div class="form-group col-md-12 col-lg-12">
+                        <label>Servicio</label>
                         <input type="text" #service="ngModel" name="service" [(ngModel)]="item.serviceId" name="service" class="form-control">
-                    </div> 
+                    </div--> 
                     <div class="form-group col-md-12 col-lg-12">
                         <label>Cantidad</label>
                         <input type="text" #quantity="ngModel" name="quantity" [(ngModel)]="item.quantity" name="quantity" class="form-control">
@@ -323,10 +349,10 @@
                         <label>Precio Unitario</label>
                         <input type="text" #price="ngModel" name="price" [(ngModel)]="item.price" name="price" class="form-control">
                     </div>                                        
-                    <div class="form-group col-md-12 col-lg-12">
+                    <!--div class="form-group col-md-12 col-lg-12">
                         <label>Costo Adicional</label>
                         <input type="text" #aditional="ngModel" name="aditional" [(ngModel)]="item.aditional" name="aditional" class="form-control">
-                    </div>                       
+                    </div-->                       
                     <!--div class="form-group col-md-12 col-lg-12">
                         <label class="custom-control custom-checkbox">
                             <input class="custom-control-input checkbox-primary" type="checkbox" #anticipated="ngModel" name="anticipated" [(ngModel)]="item.anticipated" name="anticipated">
@@ -334,6 +360,7 @@
                             <span class="custom-control-description">Anticipado</span>
                         </label>
                     </div--> 
+                    <br>
                     <div class="row">
                         <div class="form-group col-12">
                             <button type="button" *ngIf="modeItem == 'add'" (click)="addItem()" class="btn btn-primary btn-block">Agregar Item</button> 
