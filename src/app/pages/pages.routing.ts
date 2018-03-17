@@ -25,6 +25,9 @@ import { ServiceListComponent } from './service/service-list.component';
 import { CompanyListComponent } from './company/company-list.component';
 import { InventoryReportComponent } from './reports/inventory/inventory-report.component';
 import { EntryCreateComponent } from './entry/entry-create.component';
+import { EntryListComponent } from './entry/entry-list.component';
+import { EntryUpdateComponent } from './entry/entry-update.component';
+
 
 import { AuthGuard } from '../auth.guard';
 
@@ -58,7 +61,10 @@ export const routes: Routes = [
             { path: 'service-list', component: ServiceListComponent },
             { path: 'company-list', component: CompanyListComponent },
             { path: 'report-inventory', component: InventoryReportComponent },
-            { path: 'entry-create', component: EntryCreateComponent }                                  
+            { path: 'entry-create', component: EntryCreateComponent },        
+            { path: 'entry-list', component: EntryListComponent },
+            { path: 'entry-update/:id', component: EntryUpdateComponent }            
+            
             
        ]
     }

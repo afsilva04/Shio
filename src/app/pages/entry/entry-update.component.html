@@ -1,0 +1,157 @@
+<h3>{{title}}</h3>
+<hr/>
+
+<!--BUTTONS-->
+<button class="btn btn-success btn-block" *ngIf="entry.confirmed == 0 && items[0] != null" (click)="confirmEntry()">Confirmar Entrada</button>
+<br> 
+
+<!--CABECERA-->
+<div class="row">
+     <div class="col">
+        
+        <div widget class="card border-0 box-shadow">
+            <div class="card-header  transparent border-0 text-muted">
+                <h5 class="mb-0">Cabecera</h5>
+            </div>
+            <hr/>
+            <div class="card-block widget-body">
+
+                <form #formCreateOut="ngForm" (ngSubmit)="updateEntry()" class="form-group col-md-12 col-lg-12">
+
+				<div class="row">
+					<div class="form-group col-md-12 col-lg-6">
+						<label>
+							Número de documento*
+						</label>
+						<input type="text" #numdoc="ngModel" name="numdoc" [(ngModel)]="entry.id" class="form-control" disabled>
+					</div>
+                    
+                    <div class="form-group col-md-12 col-lg-6">
+                        <label>
+                            Fecha*
+                        </label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="aaaa-mm-dd" name="date" [displayMonths]="'1'" 
+                            [navigation]="'select'" ngbDatepicker #date="ngbDatepicker" [(ngModel)]="dateStruct"
+                            [disabled]="entry.confirmed == 1">
+                            <div class="input-group-addon" (click)="entry.confirmed == 0? date.toggle(): 1"> 
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+				</div>
+
+				<div class="row">
+                    
+                    <div class="form-group col-md-12 col-lg-6">
+                        <label>Sucursal*</label>
+                        <select class="form-control custom-select" type="text" name="subsidiary" #subsidiary="ngModel" 
+                        [(ngModel)]="entry.subsidiaryId" [disabled]="entry.confirmed == 1">
+                            <option value="0" selected></option>
+                            <option value="1">Olivares</option>
+                            <option value="2">Luis Orci</option>
+                            <option value="3">Dila</option>
+                            <option value="4">Reforma</option>
+                            <option value="5">Obregon</option>
+                            <option value="6">Girasol</option>
+                        </select>  
+                    </div>
+
+                    <div class="form-group col-md-12 col-lg-6">
+                        <label>
+                            Estado
+                        </label>
+                        <input type="text" #status="ngModel" name="status" [(ngModel)]="entry.confirmedName" class="form-control" disabled>
+                    </div>
+
+                </div>	
+
+                <div class="row" align="right">
+                    <div class="form-group col-md-12 col-lg-12">
+                        <input type="submit" value="Modificar Entrada" *ngIf="entry.confirmed == 0" class="btn btn-primary">
+                    </div>
+                </div>
+                
+                </form>
+               
+            </div>
+        </div>
+
+    </div>    
+</div>
+
+<br>
+
+<!--TABLA ITEMS-->
+<div class="" *ngIf="items[0] != null">
+    <h3>Items</h3>
+    <div widget class="card border-0 box-shadow">
+        <div class="card-block pt-0 widget-body table-responsive">
+        	<br>        
+            <table class="table table-bordered col-lg-6">
+                <thead>
+                    <tr>
+                        <th>PRODUCTO</th>
+                        <th>CANTIDAD</th>
+                        <th *ngIf="entry.confirmed == 0">ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items; let i = index;">
+                        <td>{{item.productName}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td align="center" *ngIf="entry.confirmed == 0">
+                            <a (click)="updateItemModal(i, modalItem)" href="javascript:void(0)">
+                        		<i class="fa fa-pencil"></i>
+                            </a>
+                            <a (click)="deleteItem(i)" href="javascript:void(0)">
+                        		<i class="fa fa-trash-o text-danger"></i>
+                            </a>                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--BUTTONS-->
+<br>
+<button class="btn btn-primary" *ngIf="entry.confirmed == 0" (click)="addItemModal(modalItem)">Agregar Item</button>
+
+<!-- MODAL WINDOW TO CREATE AND UPDATE ITEMS -->
+<ng-template #modalItem>
+    <div class="modal-header">
+        {{itemsTitle}}
+    </div>
+    <div class="modal-body">
+        <form #formCreateItem="ngForm" class="form-horizontal">
+
+            <div class="form-group col-md-12 col-lg-12">
+                <label>Producto</label>
+                <select class="form-control custom-select" type="text" #product="ngModel" name="product" [(ngModel)]="item.productId">
+                    <option *ngFor="let product of products" [value]="product.id">
+                        {{product.name}}
+                    </option>
+                </select>                        
+            </div>  
+
+            <div class="form-group col-md-12 col-lg-12">
+                <label>Cantidad</label>
+                <input type="text" #quantity="ngModel" name="quantity" [(ngModel)]="item.quantity" class="form-control">
+            </div>                                                             
+
+            <br>
+            <div class="row">
+                <div class="form-group col-12">
+                    <button type="submit" *ngIf="modeItem == 'add'" (click)="addItem()" class="btn btn-primary btn-block">Agregar Item</button> 
+                </div> 
+                <div class="form-group col-12">
+                    <button type="button" *ngIf="modeItem == 'update'" (click)="updateItem(item.id)" class="btn btn-info btn-block">Modificar Item</button>  
+                </div>
+            </div>
+
+        </form>         
+    </div>
+</ng-template>

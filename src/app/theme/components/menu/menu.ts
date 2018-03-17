@@ -42,13 +42,18 @@ export const verticalMenuItems = [
     new Menu (210, 'Ver Citas', '/pages/appointment-list', null, 'calendar-check-o', null, false, 209),
     new Menu (211, 'Crear Cita', '/pages/appointment-create', null, 'calendar-plus-o', null, false, 209),
 
-    //ENTRADAS Y SALIDAS
-    new Menu (224, 'Entradas y Salidas', null, null, 'shopping-cart', null, true, 0),
+    //ENTRADAS
+    new Menu (230, 'Entradas', null, null, 'sort-amount-asc', null, true, 0),
+    new Menu (231, 'Ver Entradas', '/pages/entry-list', null, 'list-ul', null, false, 230),
+    new Menu (232, 'Crear Entradas', '/pages/entry-create', null, 'plus', null, false, 230),
+
+    //SALIDAS
+    new Menu (224, 'Salidas', null, null, 'shopping-cart', null, true, 0),
     new Menu (225, 'Ver Salidas', '/pages/transaction-list', null, 'list-ul', null, false, 224),
     new Menu (226, 'Crear Salida', '/pages/transaction-out-create', null, 'plus', null, false, 224),
 
     //REPORTES
-    new Menu (227, 'Reportes', null, null, 'signal', null, true, 0),
+    new Menu (227, 'Reportes', null, null, 'line-chart', null, true, 0),
     new Menu (228, 'Inventario', '/pages/report-inventory', null, 'list-ul', null, false, 227),
     new Menu (229, 'Citas', '/pages/report-appointments', null, 'list-ul', null, false, 227),    
 
@@ -70,7 +75,9 @@ export const verticalMenuItems = [
     //PRODUCTOS
     new Menu (221, 'Productos', null, null, 'dropbox', null, true, 0),
     new Menu (222, 'Ver Productos', '/pages/product-list', null, 'list-ul', null, false, 221),
-    new Menu (223, 'Crear Producto', '/pages/product-create', null, 'plus', null, false, 221)    
+    new Menu (223, 'Crear Producto', '/pages/product-create', null, 'plus', null, false, 221)   
+
+
 
     //EXTERNAL LINK
     //new Menu (200, 'External Link', null, 'http://themeseason.com', 'external-link', '_blank', false, 0)

@@ -39,4 +39,9 @@ export class InventoryService{
         return this._http.post(this.url + 'inventory/add/' + transaction, null, {headers: headers});
     }
 
+    addInventoryByEntry(entry){
+        let headers = new Headers({'Content-Type':'application/json'});
+        return this._http.post(this.url + 'inventory/add-by-entry/' + entry, null, {headers: headers});
+    }
+
 }

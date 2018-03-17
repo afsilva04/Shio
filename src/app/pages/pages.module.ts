@@ -42,6 +42,8 @@ import { ServiceListComponent } from './service/service-list.component';
 import { CompanyListComponent } from './company/company-list.component';
 import { InventoryReportComponent } from './reports/inventory/inventory-report.component';
 import { EntryCreateComponent } from './entry/entry-create.component';
+import { EntryListComponent } from './entry/entry-list.component';
+import { EntryUpdateComponent } from './entry/entry-update.component';
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -93,7 +95,9 @@ import { ToastrModule } from 'ngx-toastr';
     ServiceListComponent,
     CompanyListComponent,
     InventoryReportComponent,
-    EntryCreateComponent
+    EntryCreateComponent,
+    EntryListComponent,
+    EntryUpdateComponent
   ]
 })
 export class PagesModule { }
