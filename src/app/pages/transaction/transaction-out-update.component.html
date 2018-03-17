@@ -221,6 +221,7 @@
                         <th>CONCEPTO</th>
                         <th>CANTIDAD</th>
                         <th>PRECIO</th>
+                        <th>EMPLEADO</th>
                         <!--th>ADICIONAL</th-->
                         <!--th>ANTICIPADO</th-->
                         <th>ACCIONES</th>
@@ -232,6 +233,7 @@
                         <td>{{item.productId? item.productName : item.serviceName}}</td>
                         <td>{{item.quantity }}</td>
                         <td>{{item.price}}</td>
+                        <td>{{item.employeeName}}</td>
                         <!--td>{{item.aditional}}</td-->
                         <!--td align="center"><input type="checkbox" ng-checked="item.anticipated == true" name="anticipated" disabled/></td-->
                         <td align="center">
@@ -296,14 +298,14 @@
 
 <!--BUTTONS-->
 <br>
-<button class="btn btn-primary" *ngIf="header.invoice == ''" (click)="addItemModal(modalItem)">Agregar Item</button>
-<button class="btn btn-primary" *ngIf="header.invoice == ''" (click)="addCouponModal(modalCoupon)">Agregar Vale</button>
-<button class="btn btn-info" *ngIf="header.invoice == ''" (click)="simulateInvoice()" 
+<button class="btn btn-primary" *ngIf="!header.invoice" (click)="addItemModal(modalItem)">Agregar Item</button>
+<button class="btn btn-primary" *ngIf="!header.invoice" (click)="addCouponModal(modalCoupon)">Agregar Vale</button>
+<button class="btn btn-info" *ngIf="!header.invoice" (click)="simulateInvoice()" 
     [routerLink]="['/pages/simulate-invoice', header.id, header.subsidiaryId]">Simular Factura</button>
 
-<button class="btn btn-danger" *ngIf="header.invoice != ''" (click)="cancelInvoice()">Cancelar Factura</button>
-<button class="btn btn-info" *ngIf="header.invoice != ''" (click)="printInvoice()">Imprimir Factura</button>
-<a class="btn btn-info" *ngIf="header.invoice != ''" [routerLink]="['../../ticket-invoice', header.id]" target="_blank">Imprimir Ticket</a>
+<button class="btn btn-danger" *ngIf="header.invoice" (click)="cancelInvoice()">Cancelar Factura</button>
+<button class="btn btn-info" *ngIf="header.invoice" (click)="printInvoice()">Imprimir Factura</button>
+<a class="btn btn-info" *ngIf="header.invoice" [routerLink]="['../../ticket-invoice', header.id]" target="_blank">Imprimir Ticket</a>
 
 
 <!-- MODAL WINDOW TO CREATE AND UPDATE ITEMS -->
@@ -348,7 +350,18 @@
                     <div class="form-group col-md-12 col-lg-12">
                         <label>Precio Unitario</label>
                         <input type="text" #price="ngModel" name="price" [(ngModel)]="item.price" name="price" class="form-control">
-                    </div>                                        
+                    </div>           
+                    
+                    <div class="form-group col-md-12 col-lg-12">
+                        <label>Empleado</label>                        
+                        <select class="form-control custom-select" type="text" #employee="ngModel" name="employee" 
+                        [(ngModel)]="item.employeeId">
+                            <option *ngFor="let employee of employees" [value]="employee.id">
+                                {{employee.name}}
+                            </option>
+                        </select>                         
+                    </div>  
+
                     <!--div class="form-group col-md-12 col-lg-12">
                         <label>Costo Adicional</label>
                         <input type="text" #aditional="ngModel" name="aditional" [(ngModel)]="item.aditional" name="aditional" class="form-control">

@@ -35,6 +35,13 @@ import { AppointmentUpdateComponent } from './appointment/appointment-update.com
 import { AppointmentListComponent } from './appointment/appointment-list.component';
 import { TicketComponent } from './appointment/ticket.component'
 import { TicketInvoiceComponent } from './invoice/ticket-invoice.component';
+import { EmployeeListComponent } from './employee/employee-list.component'
+import { SubsidiaryListComponent } from './subsidiary/subsidiary-list.component'
+import { ProductListComponent } from './product/product-list.component';
+import { ServiceListComponent } from './service/service-list.component';
+import { CompanyListComponent } from './company/company-list.component';
+import { InventoryReportComponent } from './reports/inventory/inventory-report.component';
+import { EntryCreateComponent } from './entry/entry-create.component';
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -79,7 +86,14 @@ import { ToastrModule } from 'ngx-toastr';
     ClientUpdateComponent,
     ClientListComponent,
     TicketComponent,
-    TicketInvoiceComponent
+    TicketInvoiceComponent,
+    EmployeeListComponent,
+    SubsidiaryListComponent,
+    ProductListComponent,
+    ServiceListComponent,
+    CompanyListComponent,
+    InventoryReportComponent,
+    EntryCreateComponent
   ]
 })
 export class PagesModule { }

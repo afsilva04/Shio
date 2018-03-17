@@ -67,7 +67,7 @@ export class ClientListComponent{
 				title: 'Telefono',
 				type: 'string'
 			},			
-		  city: {
+		  cityTxt: {
 			title: 'Ciudad',
 			type: 'string'
 		  }

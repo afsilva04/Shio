@@ -18,7 +18,13 @@ import { ClientUpdateComponent } from './client/client-update.component';
 import { ClientListComponent } from './client/client-list.component';
 import { TicketComponent } from './appointment/ticket.component'
 import { TicketInvoiceComponent } from './invoice/ticket-invoice.component';
-
+import { EmployeeListComponent } from './employee/employee-list.component'
+import { SubsidiaryListComponent } from './subsidiary/subsidiary-list.component'
+import { ProductListComponent } from './product/product-list.component';
+import { ServiceListComponent } from './service/service-list.component';
+import { CompanyListComponent } from './company/company-list.component';
+import { InventoryReportComponent } from './reports/inventory/inventory-report.component';
+import { EntryCreateComponent } from './entry/entry-create.component';
 
 import { AuthGuard } from '../auth.guard';
 
@@ -45,7 +51,15 @@ export const routes: Routes = [
             { path: 'appointment-update/:id', component: AppointmentUpdateComponent },            
             { path: 'appointment-list', component: AppointmentListComponent },
             { path: 'ticket/:id', component: TicketComponent },
-            { path: 'ticket-invoice/:id', component: TicketInvoiceComponent }
+            { path: 'ticket-invoice/:id', component: TicketInvoiceComponent },
+            { path: 'employee-list', component: EmployeeListComponent },   
+            { path: 'subsidiary-list', component: SubsidiaryListComponent } ,  
+            { path: 'product-list', component: ProductListComponent },
+            { path: 'service-list', component: ServiceListComponent },
+            { path: 'company-list', component: CompanyListComponent },
+            { path: 'report-inventory', component: InventoryReportComponent },
+            { path: 'entry-create', component: EntryCreateComponent }                                  
+            
        ]
     }
 ];

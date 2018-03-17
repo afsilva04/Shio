@@ -52,8 +52,8 @@
                                                 <tr>
                                                     <td><strong>Item</strong></td>
                                                     <td class="text-center"><strong>Cantidad</strong></td>
-                                                    <td class="text-right"><strong>Precio Unitario</strong></td>
-                                                    <td class="text-right"><strong>Adicional</strong></td>
+                                                    <td class="text-center"><strong>Precio Unitario</strong></td>
+                                                    <!--td class="text-right"><strong>Adicional</strong></td-->
                                                     <td class="text-right"><strong>Total</strong></td>
                                                 </tr>
                                             </thead>
@@ -61,29 +61,29 @@
                                                 <tr *ngFor="let item of invoice.transactionItems">
                                                     <td>{{item.productId? item.productName : item.serviceName}}</td>
                                                     <td class="text-center">{{item.quantity}}</td>
-                                                    <td class="text-right">{{item.price}}</td>
-                                                    <td class="text-right">{{item.aditional}}</td>
+                                                    <td class="text-center">{{item.price}}</td>
+                                                    <!--td class="text-right">{{item.aditional}}</td-->
                                                     <td class="text-right">{{item.quantity * item.price + item.aditional}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Subtotal</strong></td>
                                                     <td class="text-center"></td>
                                                     <td class="text-center"></td>
-                                                    <td class="text-center"></td>
+                                                    <!--td class="text-center"></td-->
                                                     <td class="text-right">{{invoice.subtotal}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>IVA</strong></td>
                                                     <td class="text-center"></td>
                                                     <td class="text-center"></td>
-                                                    <td class="text-center"></td>
+                                                    <!--td class="text-center"></td-->
                                                     <td class="text-right">{{invoice.tax}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><strong>Total</strong></td>
+                                                    <td><strong>TOTAL</strong></td>
                                                     <td class="text-center"></td>
                                                     <td class="text-center"></td>
-                                                    <td class="text-center"></td>
+                                                    <!--td class="text-center"></td-->
                                                     <td class="text-right">{{invoice.total}}</td>
                                                 </tr>
                                             </tbody>
@@ -125,14 +125,45 @@
         </div>    
     </div>
 
+    <!-- LISTA METODOS DE PAGO -->
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <div widget class="card border-0 box-shadow">
+                <div class="card-block widget-body">  
+                    <form class="row form-inline">  
+                        <div class="form-group col-md-12 col-lg-12">
+                            <label>Metodo de pago </label>
+                            <!--input type="text" #type="ngModel" [(ngModel)]="paymentMethod.type" name="type" class="form-control"-->
+                            <select class="form-control custom-select" type="text" #type="ngModel" name="type" 
+                            [(ngModel)]="invoiceSat.paymentMethod">
+                                <option value="01">Efectivo</option>
+                                <option value="02">Cheque nominativo</option>
+                                <option value="03">Transferencia Electronica de fondos</option>
+                                <option value="04">Tarjeta de Crédito</option>
+                                <option value="05">Monedero Electrónico</option>
+                                <option value="06">Dinero Electrónico</option>
+                                <option value="08">Vales de Despensa</option>
+                                <option value="28">Tarjeta de Debito</option>
+                                <option value="29">Tarjeta de Crédito</option>
+                                <option value="99">Otros</option>
+                                <option value="NA">No Aplica</option>
+                            </select>                          
+                        </div>
+                    </form>              
+                </div>
+            </div>
+        </div>    
+    </div>
+
 </div>
 
+
 <!-- BOTONES -->
-<br>
+<!--br>
 <div class="col-12">
     <button class="btn btn-primary" (click)="addPaymentMethodModal(modalPaymentMethod)">Agregar Metodo de Pago</button> 
-    <!--button class="btn btn-success" (click)="createInvoice()">Crear Factura</button-->
-</div>
+</div-->
 
 <!--TABLA METODOS DE PAGO-->
 <div class="col-12" *ngIf="paymentMethods[0] != null">

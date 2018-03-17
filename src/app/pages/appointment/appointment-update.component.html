@@ -85,6 +85,7 @@
 <div class="col-12">
     <button class="btn btn-primary" (click)="createItemModal(modalService)">Agregar Servicio</button>
     <a class="btn btn-success" [routerLink]="['../../ticket', appointment.id]" target="_blank">Ticket</a>
+    <button class="btn btn-info" (click)="createTransaction()">Crear Salida</button>
 </div>
 
 <!--MODAL SERVICIO-->
@@ -102,9 +103,9 @@
                         <label>Servicio</label>                        
                         <select class="form-control custom-select" type="text" #service="ngModel" name="service" 
                         [(ngModel)]="appointmentItem.serviceId">
-                            <option value="0" selected></option>
-                            <option value="1">Corte</option>
-                            <option value="2">Depilación</option>
+                            <option *ngFor="let service of services" [value]="service.id">
+                                {{service.name}}
+                            </option>
                         </select>                         
                     </div>   
                     <div class="form-group col-md-12 col-lg-12">
@@ -116,7 +117,18 @@
                             <option value="2">Confirmada</option>
                             <option value="3">Iniciada</option>
                         </select> 
-                    </div>                       
+                    </div>   
+                    
+                    <div class="form-group col-md-12 col-lg-12">
+                        <label>Empleado</label>                        
+                        <select class="form-control custom-select" type="text" #employee="ngModel" name="employee" 
+                        [(ngModel)]="appointmentItem.employeeId">
+                            <option *ngFor="let employee of employees" [value]="employee.id">
+                                {{employee.name}}
+                            </option>
+                        </select>                         
+                    </div>  
+
                     <br>
                     <div class="row">
                         <div class="form-group col-12">
@@ -145,6 +157,7 @@
                         <th>HORA</th>
                         <th>SERVICIO</th>
                         <th>ESTADO</th>
+                        <th>EMPLEADO</th>
                         <th>ACCIONES</th>
                     </tr>
                 </thead>
@@ -153,6 +166,7 @@
                         <td>{{item.time}}</td>
                         <td>{{item.serviceName}}</td>
                         <td>{{item.status}}</td>
+                        <td>{{item.employeeName}}</td>
                         <td align="center">
                             <a (click)="updateItemModal(i, modalService)" href="javascript:void(0)">
                                 <i class="fa fa-pencil"></i>

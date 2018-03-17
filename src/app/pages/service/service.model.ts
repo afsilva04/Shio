@@ -7,6 +7,8 @@ export class Service {
         public commission,
         public active,
         public price,
-        public time
+        public time,
+        public key,
+        public unit
     ) { }
 }

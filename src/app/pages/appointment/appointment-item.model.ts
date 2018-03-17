@@ -4,6 +4,8 @@ export class AppointmentItem {
                 public status: string,
                 public serviceId: number,
                 public serviceName: string,
+                private employeeId: number,
+                private employeeName: string,
                 public appointmentId: number
                 ) { }
 } 

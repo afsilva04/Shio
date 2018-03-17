@@ -6,6 +6,8 @@ export class Product {
         public codbar: string,
         public commission,
         public active,
-        public price
+        public price,
+        public key,
+        public unit
     ) { }
 }

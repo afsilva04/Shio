@@ -9,11 +9,15 @@ import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { error } from 'util';
 import { Client } from 'app/pages/client/client.model';
 import { ClientService } from 'app/pages/client/client.service';
+import { ServiceService } from 'app/pages/service/service.service';
+import { Service } from 'app/pages/service/service.model';
+import { EmployeeService } from 'app/pages/employee/employee.service';
+import { Employee } from 'app/pages/employee/employee.model';
 
 @Component({
 	selector: 'appointment-update',
 	templateUrl: './appointment-update.component.html',
-	providers: [AppointmentService, ClientService]
+	providers: [AppointmentService, ClientService, ServiceService, EmployeeService]
 	})
 export class AppointmentUpdateComponent{
 	public title:string;
@@ -27,13 +31,17 @@ export class AppointmentUpdateComponent{
 	public dateStruct:NgbDateStruct;
 	public timeStruct:NgbTimeStruct;
 	public clients: Client[];	
+	public services: Service[];
+	public employees: Employee[];
 
 	constructor(
 		private modalService:NgbModal,
 		private _appointmentService: AppointmentService,
 		private _route:ActivatedRoute,
 		private _router:Router,
-		private _clientService: ClientService,				
+		private _clientService: ClientService,		
+		private _serviceService: ServiceService,	
+		private _employeeService: EmployeeService,	
 		private ngbDateParserFormatter: NgbDateParserFormatter
 	){
 		this.title = "Modificar Cita";
@@ -41,10 +49,12 @@ export class AppointmentUpdateComponent{
 		this.mode = 'update';
 		this.appointment = new Appointment(0, '', '', '', 0, '', 0, '');
 		//this.appointment = new Appointment(0, '20180909', 'not', '1', 1, 1);
-		this.appointmentItem = new AppointmentItem(0, '', '', 0, '', 0);
-		this.appointmentItem1 = new AppointmentItem(1, '10:00', 'Agendada', 1, '', 1);
+		this.appointmentItem = new AppointmentItem(0, '', '', 0, '', 0, '', 0);
+		this.appointmentItem1 = new AppointmentItem(1, '10:00', 'Agendada', 1, '', 0, '', 1);
 		this.appointmentItems = [this.appointmentItem1];
 		this.clients = [];		
+		this.services = [];
+		this.employees = [];
 	}
 
 	ngOnInit(){
@@ -61,6 +71,18 @@ export class AppointmentUpdateComponent{
 
 		this.getAppointment();
 		this.getAppointmentItems();
+
+		this._serviceService.getServices().subscribe(
+			response => {
+				this.services = response;
+			}
+		);
+
+		this._employeeService.getAllEmployees().subscribe(
+			response => {
+				this.employees = response;
+			}
+		);
 
 	}
 
@@ -135,20 +157,16 @@ export class AppointmentUpdateComponent{
 	}
 
 	public createItemModal(modal){
-		let itemToCreate = new AppointmentItem(0, '', '', 0, '', 0);
+		let itemToCreate = new AppointmentItem(0, '', '', 0, '', 0, '', 0);
+		this.timeStruct = null;
 		this.appointmentItem = itemToCreate;
 		console.log(itemToCreate);
 		this.modalServiceRef = this.modalService.open(modal);
 	}
 
 	public updateItemModal(index, modal){
-		console.log(index);
-		let itemIndex = this.appointmentItems[index];
-		let itemToUpdate = new AppointmentItem(itemIndex.id, itemIndex.time, itemIndex.status, 
-			itemIndex.serviceId, itemIndex.serviceName, itemIndex.appointmentId);
-
-		this.appointmentItem = itemToUpdate;
-		console.log(this.appointmentItem);
+		this.appointmentItem = this.appointmentItems[index]; 
+		this.timeStruct = null;
 		this.mode = 'update';
 		//this.itemsTitle = 'Modificar Item';
 		this.modalServiceRef = this.modalService.open(modal);
@@ -168,6 +186,18 @@ export class AppointmentUpdateComponent{
 			}
 		);
 	}	
+
+	public createTransaction(){
+		this._appointmentService.createTransaction(this.appointment.id).subscribe(
+			response => {
+				this._router.navigate(['/pages/transaction-out-update/', response.id]);
+			},
+			error => {
+				console.log('error serv');
+				console.log(error);
+			}
+		);
+	}
 
 // ------------------- SERVICIOS
 

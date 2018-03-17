@@ -8,6 +8,8 @@ export class EntsalItem {
 				public productName: string,
 				public serviceId: number,
 				public serviceName: string,
+				public employeeId: number,
+                public employeeName: string,
 				public transactionId: number
                 ) { }
 

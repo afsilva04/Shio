@@ -9,11 +9,12 @@ import { TransactionService } from '../transaction/transaction.service';
 import { InvoiceService } from './invoice.service';
 import { Invoice, InvoiceSat, InvoiceSatUpdate } from 'app/pages/invoice/invoice.model';
 import { concat } from 'rxjs/observable/concat';
+import { InventoryService } from 'app/pages/reports/inventory/inventory.services';
 
 @Component({
 	selector: 'simulate-invoice',
     templateUrl: './simulate-invoice.component.html',
-    providers: [TransactionService, InvoiceService]
+    providers: [TransactionService, InvoiceService, InventoryService]
 	})
 export class SimulateInvoiceComponent{
     public paymentMethodTitle:string;
@@ -41,7 +42,8 @@ export class SimulateInvoiceComponent{
         private _route: ActivatedRoute,
         private _router: Router,
         private _transactionService: TransactionService,
-        private _invoiceService: InvoiceService
+        private _invoiceService: InvoiceService,
+        private _inventoryService: InventoryService
     ){
         this.paymentMethodTitle = 'Agregar Medoto de Pago';
         this.mode = 'add';
@@ -150,8 +152,8 @@ export class SimulateInvoiceComponent{
     public createInvoice(){
 
         this.invoiceSat.transactionId = this.id;
-        this.invoiceSat.paymentMethod = '99';
-        
+        //this.invoiceSat.paymentMethod = '99';
+
         this._invoiceService.createInvoice(this.invoiceSat).subscribe(
             response => {
                 this.invoiceSatUpdate.transaction = this.id;
@@ -160,8 +162,14 @@ export class SimulateInvoiceComponent{
 
                 this._invoiceService.updateTransaction(this.invoiceSatUpdate).subscribe(
                     response => {
-                        this._router.navigate(['/pages/transaction-out-update/' + this.id]);
-                        window.open(this.invoiceSatUpdate.pdf, "_blank");                    }
+                        this._inventoryService.substractInventoryByTransaction(this.id).subscribe(
+                            response => {
+                                console.log('inventario ok');
+                            }
+                        );              
+                        this._router.navigate(['/pages/transaction-out-update/' + this.id]);                        
+                        window.open(this.invoiceSatUpdate.pdf, "_blank");
+                    }
                 );
             }
         );

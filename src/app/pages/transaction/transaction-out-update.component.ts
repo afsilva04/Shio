@@ -14,11 +14,13 @@ import { Service } from 'app/pages/service/service.model';
 import { ServiceService } from 'app/pages/service/service.service';
 import { Client } from 'app/pages/client/client.model';
 import { ClientService } from 'app/pages/client/client.service';
+import { EmployeeService } from 'app/pages/employee/employee.service';
+import { Employee } from 'app/pages/employee/employee.model';
 
 @Component({
 	selector: 'transaction-out-update',
 	templateUrl: './transaction-out-update.component.html',
-	providers: [TransactionService, ProductService, ServiceService, ClientService]
+	providers: [TransactionService, ProductService, ServiceService, ClientService, EmployeeService]
 	})
 export class TransactionOutUpdateComponent{
     public id:number;
@@ -38,6 +40,7 @@ export class TransactionOutUpdateComponent{
 	public products:Product[];
 	public services:Service[];
 	public clients: Client[];
+	public employees: Employee[];
 
 	constructor(
         private modalService:NgbModal,
@@ -47,11 +50,12 @@ export class TransactionOutUpdateComponent{
 		private _productService: ProductService,
 		private _serviceService: ServiceService,
 		private _clientService: ClientService,
+		private _employeeService: EmployeeService,
 		private ngbDateParserFormatter: NgbDateParserFormatter
 		){    
             this.title = 'Modificar Salida';
             this.header = new EntsalHeader(0,'','','',false,false,'',0,'',0,'');
-            this.item = new EntsalItem(null, '', null, null, null, null, '', null, '', null);
+            this.item = new EntsalItem(null, '', null, null, null, null, '', null, '', null, '', null);
             this.items = []; 
             this.coupon = new EntsalCoupon('','','','','','','','','');
             this.coupons = [];
@@ -62,6 +66,7 @@ export class TransactionOutUpdateComponent{
 			this.products = [];
 			this.services = [];
 			this.clients = [];
+			this.employees = [];
 	}
 
     ngOnInit(){
@@ -109,6 +114,12 @@ export class TransactionOutUpdateComponent{
 			}
 		);
 
+		this._employeeService.getAllEmployees().subscribe(
+			response => {
+				this.employees = response;
+			}
+		);
+
     }
 
 // ------------------- CABECERA
@@ -134,7 +145,20 @@ export class TransactionOutUpdateComponent{
 
 // ------------------- ITEMS
 	public addItemModal(modal){
-		this.item.clean();
+		//this.item.clean();
+		this.item.id = null;
+		this.item.type = '';
+		this.item.quantity = null;
+		this.item.price = null;
+		this.item.aditional = null;
+		this.item.productId = null;
+		this.item.productName = '';
+		this.item.serviceId = null;
+		this.item.serviceName = '';
+		this.item.employeeId = 0;
+		this.item.employeeName = '';
+		this.item.transactionId = null;
+
 		this.modeItem = 'add';
 		this.itemsTitle = 'Agregar Item';
 		this.modalItemRef = this.modalService.open(modal);
@@ -165,14 +189,6 @@ export class TransactionOutUpdateComponent{
 
 	public updateItemModal(index, modal){
 		this.item = this.items[index];
-
-		/*let itemIndex = this.items[index];
-		let itemToUpdate = new EntsalItem(itemIndex.id, itemIndex.type, 
-			itemIndex.quantity, itemIndex.price, itemIndex.aditional, 
-			itemIndex.productId, itemIndex.productName, itemIndex.serviceId, 
-			itemIndex.serviceName, itemIndex.transactionId);
-
-		this.item = itemToUpdate;*/
 		this.modeItem = 'update';
 		this.itemsTitle = 'Modificar Item';
 		this.modalItemRef = this.modalService.open(modal);

@@ -60,4 +60,9 @@ export class AppointmentService{
         return this._http.delete(this.url + 'appointment-items/' + id);
     }
 
+    createTransaction(id){
+        let headers = new Headers({'Content-Type':'application/json'});
+        return this._http.post(this.url + 'appointments/transaction/' + id, null, {headers: headers}).map(res => res.json());
+    }
+
 }
