@@ -39,8 +39,8 @@ export class AppointmentCreateComponent{
 		this.mode = 'add';
 		//this.appointment = new Appointment(0, '', '', '', 0, 0);
 		this.appointment = new Appointment(0, '', '', '', 0, '', 0, '');
-		this.appointmentItem = new AppointmentItem(0, '', '', 0, '', 0);
-		this.appointmentItem1 = new AppointmentItem(1, '10:00', 'Agendada', 1, '', 1);
+		this.appointmentItem = new AppointmentItem(0, '', '', 0, '', 0, '', 0);
+		this.appointmentItem1 = new AppointmentItem(1, '10:00', 'Agendada', 1, '', 0, '', 1);
 		this.appointmentItems = [this.appointmentItem1];
 		this.clients = [];
 	}

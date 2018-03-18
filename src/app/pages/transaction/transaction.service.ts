@@ -65,4 +65,8 @@ export class TransactionService{
         return this._http.post(this.url + 'transactions/coupon/' + id, null, {headers: headers}).map(res => res.json());
     }
 
+    getActiveCoupons(){
+        return this._http.get(this.url + 'transaction-coupons/active').map(res => res.json());        
+    }
+
 }

@@ -29,6 +29,7 @@ export class TransactionOutUpdateComponent{
 	public items:EntsalItem[];
 	public coupon:EntsalCoupon;
 	public coupons:EntsalCoupon[];
+	public activeCoupons:EntsalCoupon[];	
 	public modeItem:string;
     public modeCoupon:string;
     public title:string;
@@ -57,12 +58,13 @@ export class TransactionOutUpdateComponent{
             this.header = new EntsalHeader(0,'','','',false,false,'',0,'',0,'');
             this.item = new EntsalItem(null, '', null, null, null, null, null, null, null, '', null, '', null, '', null);
             this.items = []; 
-            this.coupon = new EntsalCoupon('','','','','','','','','');
-            this.coupons = [];
+            this.coupon = new EntsalCoupon('','', 0);
+			this.coupons = [];
+			this.activeCoupons = [];
             this.modeItem = 'add';
             this.modeCoupon = 'add';
             this.itemsTitle = 'Agregar Item';
-			this.couponsTitle = 'Agregar Vale';
+			this.couponsTitle = 'Agregar Cupon';
 			this.products = [];
 			this.services = [];
 			this.clients = [];
@@ -117,6 +119,12 @@ export class TransactionOutUpdateComponent{
 		this._employeeService.getAllEmployees().subscribe(
 			response => {
 				this.employees = response;
+			}
+		);
+
+		this._transactionService.getActiveCoupons().subscribe(
+			response => {
+				this.activeCoupons = response;
 			}
 		);
 
@@ -246,11 +254,11 @@ export class TransactionOutUpdateComponent{
 	}
 
 	public addCoupon(){
-		let couponToAdd = new EntsalCoupon('', this.coupon.code, this.coupon.type, 
+		/*let couponToAdd = new EntsalCoupon('', this.coupon.code, this.coupon.type, 
 			this.coupon.concept, this.coupon.price, this.coupon.quantity, 
 			this.coupon.date, this.coupon.dateUsed, this.coupon.subsidiary);
 
-		this.coupons.push(couponToAdd);
+		this.coupons.push(couponToAdd);*/
 		this.coupon.clean();
 		this.modalCouponRef.close();
 		console.log(this.coupons);
@@ -258,11 +266,11 @@ export class TransactionOutUpdateComponent{
 
 	public updateCouponModal(index, modal){
 		let couponIndex = this.coupons[index];
-		let couponToUpdate = new EntsalCoupon(couponIndex.id, couponIndex.code, couponIndex.type, 
+		/*let couponToUpdate = new EntsalCoupon(couponIndex.id, couponIndex.code, couponIndex.type, 
 			couponIndex.concept, couponIndex.price, couponIndex.quantity, 
 			couponIndex.date, couponIndex.dateUsed, couponIndex.subsidiary);
 
-		this.coupon = couponToUpdate;
+		this.coupon = couponToUpdate;*/
 		this.modeCoupon = 'update';
 		this.couponsTitle = 'Modificar Vale';
 

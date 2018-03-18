@@ -46,8 +46,8 @@ export class TransactionOutCreateComponent{
 		this.mode = 'add';
 		this.modeCoupon = 'add';
 		this.itemsTitle = 'Agregar Item';
-		this.couponsTitle = 'Agregar Vale';
-		this.coupon = new EntsalCoupon('','','','','','','','','');
+		this.couponsTitle = 'Agregar Cupon';
+		this.coupon = new EntsalCoupon('','', 0);
 		this.coupons = [];	
 		this.clients = [];
 	}
@@ -59,6 +59,7 @@ export class TransactionOutCreateComponent{
 				console.log(this.clients);
 			}
 		);
+
 	}
 
 // ------------------- CABECERA
@@ -120,11 +121,11 @@ export class TransactionOutCreateComponent{
 	}
 
 	public addCoupon(){
-		let couponToAdd = new EntsalCoupon('', this.coupon.code, this.coupon.type, 
+		/*let couponToAdd = new EntsalCoupon('', this.coupon.code, this.coupon.type, 
 			this.coupon.concept, this.coupon.price, this.coupon.quantity, 
-			this.coupon.date, this.coupon.dateUsed, this.coupon.subsidiary);
+			this.coupon.date, this.coupon.dateUsed, this.coupon.subsidiary);*/
 
-		this.coupons.push(couponToAdd);
+		//this.coupons.push(couponToAdd);
 		this.coupon.clean();
 		this.modalCouponRef.close();
 		console.log(this.coupons);
@@ -132,11 +133,11 @@ export class TransactionOutCreateComponent{
 
 	public updateCouponModal(index, modal){
 		let couponIndex = this.coupons[index];
-		let couponToUpdate = new EntsalCoupon(couponIndex.id, couponIndex.code, couponIndex.type, 
+		/*let couponToUpdate = new EntsalCoupon(couponIndex.id, couponIndex.code, couponIndex.type, 
 			couponIndex.concept, couponIndex.price, couponIndex.quantity, 
-			couponIndex.date, couponIndex.dateUsed, couponIndex.subsidiary);
+			couponIndex.date, couponIndex.dateUsed, couponIndex.subsidiary);*/
 
-		this.coupon = couponToUpdate;
+		//this.coupon = couponToUpdate;
 		this.modeCoupon = 'update';
 		this.couponsTitle = 'Modificar Vale';
 
