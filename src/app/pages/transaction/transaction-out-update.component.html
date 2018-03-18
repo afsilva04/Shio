@@ -74,7 +74,7 @@
                         [(ngModel)]="header.reasonId">
                             <option value="0" selected></option>
                             <option value="1">Venta</option>
-                            <option value="2">Cortesia/Promocion</option>
+                            <option value="2">Cortesia/Promocion/Cupon</option>
                             <option value="3">Vencimiento</option>
                             <option value="2">Costo de sucursal</option>
                             <option value="3">Venta anticipada</option>
@@ -223,7 +223,8 @@
                         <th>PRECIO</th>
                         <th>EMPLEADO</th>
                         <!--th>ADICIONAL</th-->
-                        <!--th>ANTICIPADO</th-->
+                        <th>ANTICIPADO</th>
+                        <th>CUPON</th>
                         <th>ACCIONES</th>
                     </tr>
                 </thead>
@@ -235,7 +236,8 @@
                         <td>{{item.price}}</td>
                         <td>{{item.employeeName}}</td>
                         <!--td>{{item.aditional}}</td-->
-                        <!--td align="center"><input type="checkbox" ng-checked="item.anticipated == true" name="anticipated" disabled/></td-->
+                        <td align="center">{{item.anticipated}}<!--input type="checkbox" ng-checked="item.anticipated" name="anticipated"/--></td>
+                        <td>{{item.coupon}}</td>                        
                         <td align="center">
                         	<!--input type="button" (click)="updateItemModal(i, modalItem)" class="btn btn-primary" value="E" /-->
                             <!--input type="button" (click)="deleteItem(i)" class="btn btn-danger" value="B" /-->
@@ -366,13 +368,13 @@
                         <label>Costo Adicional</label>
                         <input type="text" #aditional="ngModel" name="aditional" [(ngModel)]="item.aditional" name="aditional" class="form-control">
                     </div-->                       
-                    <!--div class="form-group col-md-12 col-lg-12">
+                    <div class="form-group col-md-12 col-lg-12">
                         <label class="custom-control custom-checkbox">
-                            <input class="custom-control-input checkbox-primary" type="checkbox" #anticipated="ngModel" name="anticipated" [(ngModel)]="item.anticipated" name="anticipated">
+                            <input class="custom-control-input checkbox-primary" type="checkbox" #anticipated="ngModel" name="anticipated" [(ngModel)]="item.anticipated">
                             <span class="custom-control-indicator"></span>
                             <span class="custom-control-description">Anticipado</span>
                         </label>
-                    </div--> 
+                    </div> 
                     <br>
                     <div class="row">
                         <div class="form-group col-12">

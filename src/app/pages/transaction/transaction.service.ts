@@ -60,4 +60,9 @@ export class TransactionService{
         return this._http.delete(this.url + 'transaction-items/' + id);
     }
 
+    generateItemCoupons(id){
+        let headers = new Headers({'Content-Type':'application/json'});
+        return this._http.post(this.url + 'transactions/coupon/' + id, null, {headers: headers}).map(res => res.json());
+    }
+
 }

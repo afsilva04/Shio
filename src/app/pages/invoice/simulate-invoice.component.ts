@@ -166,9 +166,15 @@ export class SimulateInvoiceComponent{
                             response => {
                                 console.log('inventario ok');
                             }
-                        );              
-                        this._router.navigate(['/pages/transaction-out-update/' + this.id]);                        
-                        window.open(this.invoiceSatUpdate.pdf, "_blank");
+                        );  
+                        
+                        this._transactionService.generateItemCoupons(this.id).subscribe(
+                            response => {
+                                this._router.navigate(['/pages/transaction-out-update/' + this.id]);                        
+                                window.open(this.invoiceSatUpdate.pdf, "_blank");
+                            }
+                        );
+
                     }
                 );
             }

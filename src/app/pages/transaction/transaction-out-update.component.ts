@@ -55,7 +55,7 @@ export class TransactionOutUpdateComponent{
 		){    
             this.title = 'Modificar Salida';
             this.header = new EntsalHeader(0,'','','',false,false,'',0,'',0,'');
-            this.item = new EntsalItem(null, '', null, null, null, null, '', null, '', null, '', null);
+            this.item = new EntsalItem(null, '', null, null, null, null, null, null, null, '', null, '', null, '', null);
             this.items = []; 
             this.coupon = new EntsalCoupon('','','','','','','','','');
             this.coupons = [];

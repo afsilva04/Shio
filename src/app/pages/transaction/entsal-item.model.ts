@@ -3,7 +3,10 @@ export class EntsalItem {
                 public type: string,
                 public quantity: number,
                 public price: number,
-                public aditional: number,
+				public aditional: number,
+				public anticipated: boolean,
+				public coupon: string,
+				public dateused: string,
 				public productId: number,
 				public productName: string,
 				public serviceId: number,
@@ -19,6 +22,9 @@ export class EntsalItem {
 		this.quantity = null;
 		this.price = null;
 		this.aditional = null;
+		this.anticipated = null;
+		this.coupon = null;
+		this.dateused = null;
 		this.productId = null;
 		this.productName = '';
 		this.serviceId = null;
