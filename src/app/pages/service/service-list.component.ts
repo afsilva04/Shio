@@ -32,6 +32,10 @@ export class ServiceListComponent{
 			type: 'string',
 			filter: false
 		  },
+		  price: {
+			title: 'Precio',
+			type: 'string'
+		  },
 		  commission: {
 			title: 'Comision(%)',
 			type: 'string'

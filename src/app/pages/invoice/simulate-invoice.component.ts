@@ -168,8 +168,16 @@ export class SimulateInvoiceComponent{
                             }
                         );  
                         
-                        this._transactionService.generateItemCoupons(this.id).subscribe(
+                        /*this._transactionService.generateItemCoupons(this.id).subscribe(
                             response => {
+                                this._router.navigate(['/pages/transaction-out-update/' + this.id]);                        
+                                window.open(this.invoiceSatUpdate.pdf, "_blank");
+                            }
+                        );*/
+
+                        this._transactionService.generateCoupons(this.id).subscribe(
+                            response => {
+                                console.log(response);
                                 this._router.navigate(['/pages/transaction-out-update/' + this.id]);                        
                                 window.open(this.invoiceSatUpdate.pdf, "_blank");
                             }

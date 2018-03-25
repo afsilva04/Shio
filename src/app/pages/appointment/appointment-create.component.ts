@@ -56,7 +56,7 @@ export class AppointmentCreateComponent{
 
 	public createAppointment(){
 		this.appointment.date = this.ngbDateParserFormatter.format(this.dateStruct);
-
+		console.log(this.appointment);
 		this._appointmentService.createAppointment(this.appointment).subscribe(
 			response => {
 				//this.showMessage('success', 'Creación exitosa', 'Cita ' + this.appointment.date + ' creada correctamente');
@@ -66,11 +66,11 @@ export class AppointmentCreateComponent{
 			error => {
 				let body = error.json();
 				console.log(body);
-				/*for(let e of body){
-					this.showMessage('error', 'Error', e);
-				}*/
+				//for(let e of body){
+				//	this.showMessage('error', 'Error', e);
+				//}
 			}
-		)
+		);
 	}
 
 	public onChangeDate(){

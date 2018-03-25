@@ -16,20 +16,23 @@ import { Client } from 'app/pages/client/client.model';
 import { ClientService } from 'app/pages/client/client.service';
 import { EmployeeService } from 'app/pages/employee/employee.service';
 import { Employee } from 'app/pages/employee/employee.model';
+import { Coupon } from 'app/pages/transaction/coupon.model';
+import { InventoryService } from 'app/pages/reports/inventory/inventory.services';
 
 @Component({
 	selector: 'transaction-out-update',
 	templateUrl: './transaction-out-update.component.html',
-	providers: [TransactionService, ProductService, ServiceService, ClientService, EmployeeService]
+	providers: [TransactionService, ProductService, ServiceService, ClientService, EmployeeService, InventoryService]
 	})
 export class TransactionOutUpdateComponent{
     public id:number;
     public header:EntsalHeader;
     public item:EntsalItem;
 	public items:EntsalItem[];
-	public coupon:EntsalCoupon;
+	public coupon1:EntsalCoupon;
 	public coupons:EntsalCoupon[];
 	public activeCoupons:EntsalCoupon[];	
+	public validCoupons: Coupon[];
 	public modeItem:string;
     public modeCoupon:string;
     public title:string;
@@ -52,13 +55,14 @@ export class TransactionOutUpdateComponent{
 		private _serviceService: ServiceService,
 		private _clientService: ClientService,
 		private _employeeService: EmployeeService,
+		private _inventoryService: InventoryService,
 		private ngbDateParserFormatter: NgbDateParserFormatter
 		){    
             this.title = 'Modificar Salida';
             this.header = new EntsalHeader(0,'','','',false,false,'',0,'',0,'');
             this.item = new EntsalItem(null, '', null, null, null, null, null, null, null, '', null, '', null, '', null);
             this.items = []; 
-            this.coupon = new EntsalCoupon('','', 0);
+            this.coupon1 = new EntsalCoupon('','', 0);
 			this.coupons = [];
 			this.activeCoupons = [];
             this.modeItem = 'add';
@@ -69,6 +73,7 @@ export class TransactionOutUpdateComponent{
 			this.services = [];
 			this.clients = [];
 			this.employees = [];
+			this.validCoupons = [];
 	}
 
     ngOnInit(){
@@ -91,6 +96,15 @@ export class TransactionOutUpdateComponent{
 		this._transactionService.getTransactionItems(this.id).subscribe(
 			response => {
 				this.items = response;
+			},
+			error => {
+				console.log(error.JSON());
+			}
+		);
+
+		this._transactionService.getTransactionCoupons(this.id).subscribe(
+			response => {
+				this.coupons = response;
 			},
 			error => {
 				console.log(error.JSON());
@@ -122,9 +136,15 @@ export class TransactionOutUpdateComponent{
 			}
 		);
 
-		this._transactionService.getActiveCoupons().subscribe(
+		/*this._transactionService.getActiveCoupons().subscribe(
 			response => {
 				this.activeCoupons = response;
+			}
+		);*/
+
+		this._transactionService.getValidCoupons().subscribe(
+			response => {
+				this.validCoupons = response;
 			}
 		);
 
@@ -247,21 +267,33 @@ export class TransactionOutUpdateComponent{
 		//this.items.splice(index,1);
 	}	
 
-// ------------------- VALES
+// ------------------- COUPONS
 	public addCouponModal(modal){
-		this.coupon.clean();
-		this.modalCouponRef = this.modalService.open(modal);
+		this.coupon1.clean();
+		this.modalCouponRef = this.modalService.open(modal);		
 	}
 
 	public addCoupon(){
-		/*let couponToAdd = new EntsalCoupon('', this.coupon.code, this.coupon.type, 
-			this.coupon.concept, this.coupon.price, this.coupon.quantity, 
-			this.coupon.date, this.coupon.dateUsed, this.coupon.subsidiary);
+		this.coupon1.transactionId = this.id;
+		console.log(this.coupon1);
+		console.log(this.activeCoupons);
+		this._transactionService.createTransactionCoupon(this.coupon1).subscribe(
+			response => {
+				this._transactionService.getTransactionCoupons(this.id).subscribe(
+					response => {
+						this.coupons = response;
+					},
+					error => {
+						console.log(error.JSON());
+					}
+				);
+			},
+			error => {
+				console.log(error.JSON());
+			}
+		);
 
-		this.coupons.push(couponToAdd);*/
-		this.coupon.clean();
 		this.modalCouponRef.close();
-		console.log(this.coupons);
 	}
 
 	public updateCouponModal(index, modal){
@@ -280,14 +312,14 @@ export class TransactionOutUpdateComponent{
 	public updateCoupon(id){
 		//Llamar servicio de modificación por id
 		//Si e pudo modificar -> Actualizar lista de items
-		this.coupon.clean();		
+		this.coupon1.clean();		
 		this.modeCoupon = 'add';
 		this.couponsTitle = 'Agregar Vale';
 		this.modalCouponRef.close();
 	}		
 
 	public cancelCouponUpdate(){
-		this.coupon.clean();	
+		this.coupon1.clean();	
 		this.modeCoupon = 'add';		
 		this.couponsTitle = 'Agregar Vale';
 		this.modalCouponRef.close();
@@ -312,6 +344,30 @@ export class TransactionOutUpdateComponent{
 
 	public printInvoice(){
 		window.open(this.header.invoicePdf, "_blank");     
+	}
+
+
+	confirmTransactionAnticipated(){
+		this._transactionService.substractByTransaction(this.id).subscribe(
+			response => {
+				this._inventoryService.substractInventoryByTransaction(this.id).subscribe(
+					response => {
+						this._transactionService.confirmTransaction(this.id).subscribe(
+							response => {
+								this._transactionService.getTransaction(this.id).subscribe(
+									response => {
+										this.header = response;
+									}
+								);
+							}
+						);
+					}
+				);
+			},
+			error => {
+				console.log('error restar cupon');
+			}
+		);
 	}
 
 }

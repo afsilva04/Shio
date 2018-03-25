@@ -49,13 +49,13 @@ export class InventoryReportComponent{
       };
 
       constructor(
-          private _companyService: InventoryService
+          private _inventoryService: InventoryService
       ) { }
       
       ngOnInit(){
           this.title = 'Reporte de Inventario';
 
-          this._companyService.getInventory().subscribe(
+          this._inventoryService.getInventory().subscribe(
               response => {
                   this.inventories = response;
               }

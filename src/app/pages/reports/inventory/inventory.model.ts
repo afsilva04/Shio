@@ -1,10 +1,10 @@
 export class Inventory {
     constructor(
         public id: number,
-        private quantity: number,
-        private productId: number,
-        private productName: string,
-        private subsidiaryId: number,
-        private subsidiaryName: string
+        public quantity: number,
+        public productId: number,
+        public productName: string,
+        public subsidiaryId: number,
+        public subsidiaryName: string
     ) { }
 }

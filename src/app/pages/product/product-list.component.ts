@@ -28,14 +28,18 @@ export class ProductListComponent{
 		noDataMessage: 'No data found',
 		columns: {     
 		  name: {
-			title: 'Nombre',
-			type: 'string',
-			filter: false
+				title: 'Nombre',
+				type: 'string',
+				filter: false
 		  },
 		  description: {
-			title: 'Descripcion',
-			type: 'string'
-		  }
+				title: 'Descripcion',
+				type: 'string'
+			},
+			price: {
+				title: 'Precio',
+				type: 'string'
+			},
 		},
 		pager: {
 		  display: true,

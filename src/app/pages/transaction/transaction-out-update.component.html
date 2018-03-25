@@ -1,6 +1,10 @@
 <h3>{{title}}</h3>
 <hr/>
 
+<!--BUTTONS-->
+<button class="btn btn-success btn-block" *ngIf="header.reasonId == 2" (click)="confirmTransactionAnticipated()">Confirmar Salida</button>
+<br> 
+
 <!--BOTONES-->
 <!--form #formCreateOut="ngForm" (ngSubmit)="onSubmit()" class="form-group col-md-12 col-lg-12">
 	<br>
@@ -223,7 +227,7 @@
                         <th>PRECIO</th>
                         <th>EMPLEADO</th>
                         <!--th>ADICIONAL</th-->
-                        <th>ANTICIPADO</th>
+                        <th *ngIf="header.reasonId == 1">ANTICIPADO</th>
                         <th>CUPON</th>
                         <th>ACCIONES</th>
                     </tr>
@@ -236,7 +240,7 @@
                         <td>{{item.price}}</td>
                         <td>{{item.employeeName}}</td>
                         <!--td>{{item.aditional}}</td-->
-                        <td align="center">{{item.anticipated}}<!--input type="checkbox" ng-checked="item.anticipated" name="anticipated"/--></td>
+                        <td align="center" *ngIf="header.reasonId == 1">{{item.anticipated}}<!--input type="checkbox" ng-checked="item.anticipated" name="anticipated"/--></td>
                         <td>{{item.coupon}}</td>                        
                         <td align="center">
                         	<!--input type="button" (click)="updateItemModal(i, modalItem)" class="btn btn-primary" value="E" /-->
@@ -256,8 +260,8 @@
 </div>
 
 <!--TABLA VALES-->
-<div class="" *ngIf="coupons[0] != null">
-    <h3>Vales</h3>
+<!--div class="" *ngIf="coupons[0] != null">
+    <h3>Cupones</h3>
     <div widget class="card border-0 box-shadow">
         <div class="card-block pt-0 widget-body table-responsive">
             <br>        
@@ -265,12 +269,8 @@
                 <thead>
                     <tr>
                         <th>CÓDIGO</th>
-                        <th>TIPO</th>
                         <th>CONCEPTO</th>
-                        <th>PRECIO</th>
-                        <th>CANTIDAD</th>
-                        <th>FECHA</th>
-                        <th>FECHA USADA</th>
+                        <th>EMPLEADO</th>
                         <th>ACCIONES</th>
                     </tr>
                 </thead>
@@ -279,30 +279,26 @@
                         <td>{{coupon.code}}</td>
                         <td>{{coupon.type}}</td>
                         <td>{{coupon.concept}}</td>
-                        <td>{{coupon.price}}</td>
-                        <td>{{coupon.quantity}}</td>
-                        <td>{{coupon.date}}</td>
-                        <td>{{coupon.dateUsed}}</td>
                         <td align="center">
-                            <!--a [routerLink]="['/pages/user-update', item.id]">
-                            <a href="javascript:void(0)" ng-click="addItemForm()">
+                            <a (click)="updateCouponModal(i, modalItem)" href="javascript:void(0)">
                                 <i class="fa fa-pencil"></i>
-                            </a-->
-                            <input type="button" (click)="updateCouponModal(i, modalCoupon)" class="btn btn-primary" value="E" />
-                            <input type="button" (click)="deleteCoupon(i)" class="btn btn-danger" value="B" />
+                            </a>
+                            <a (click)="deleteCoupon(i)" href="javascript:void(0)">
+                                <i class="fa fa-trash-o text-danger"></i>
+                            </a>                              
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-</div>
+</div-->
 
 <!--BUTTONS-->
 <br>
 <button class="btn btn-primary" *ngIf="!header.invoice" (click)="addItemModal(modalItem)">Agregar Item</button>
-<button class="btn btn-primary" *ngIf="!header.invoice" (click)="addCouponModal(modalCoupon)">Agregar Cupon</button>
-<button class="btn btn-info" *ngIf="!header.invoice" (click)="simulateInvoice()" 
+<!--button class="btn btn-primary" *ngIf="!header.invoice" (click)="addCouponModal(modalCoupon)">Agregar Cupon</button-->
+<button class="btn btn-info" *ngIf="!header.invoice && header.reasonId == 1"  (click)="simulateInvoice()" 
     [routerLink]="['/pages/simulate-invoice', header.id, header.subsidiaryId]">Simular Factura</button>
 
 <button class="btn btn-danger" *ngIf="header.invoice" (click)="cancelInvoice()">Cancelar Factura</button>
@@ -317,11 +313,17 @@
     </div>
     <div class="modal-body">
                 <form #formCreateItem="ngForm" class="form-horizontal">
-                    <!--div class="form-group col-md-12 col-lg-12">
-                        <label>Tipo</label>
-                        <input type="text" #type="ngModel" name="client" [(ngModel)]="item.type" name="type" class="form-control">
-                    </div-->
                     <div class="form-group col-md-12 col-lg-12">
+                        <label>Tipo</label>
+                        <select class="form-control custom-select" type="text" name="type" #subsidiary="ngModel" 
+                        [(ngModel)]="item.type">
+                            <option value="0" selected></option>
+                            <option value="1">Producto</option>
+                            <option value="2">Servicio</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-12 col-lg-12" *ngIf="item.type == 1">
                         <label>Producto</label>
                         <select class="form-control custom-select" type="text" #product="ngModel" name="product" [(ngModel)]="item.productId">
                             <option *ngFor="let product of products" [value]="product.id">
@@ -333,7 +335,7 @@
                         <label>Producto</label>
                         <input type="text" #product="ngModel" name="product" [(ngModel)]="item.productId" name="product" class="form-control">
                     </div--> 
-                    <div class="form-group col-md-12 col-lg-12">
+                    <div class="form-group col-md-12 col-lg-12" *ngIf="item.type == 2">
                         <label>Servicio</label>
                         <select class="form-control custom-select" type="text" #service="ngModel" name="service" [(ngModel)]="item.serviceId">
                             <option *ngFor="let service of services" [value]="service.id">
@@ -349,6 +351,7 @@
                         <label>Cantidad</label>
                         <input type="text" #quantity="ngModel" name="quantity" [(ngModel)]="item.quantity" name="quantity" class="form-control">
                     </div>   
+                    
                     <div class="form-group col-md-12 col-lg-12">
                         <label>Precio Unitario</label>
                         <input type="text" #price="ngModel" name="price" [(ngModel)]="item.price" name="price" class="form-control">
@@ -364,11 +367,21 @@
                         </select>                         
                     </div>  
 
+                    <div class="form-group col-md-12 col-lg-12" *ngIf="header.reasonId == 2">
+                        <label>Cupon</label>
+                        <select class="form-control custom-select" type="text" #coupon="ngModel" name="coupon" 
+                        [(ngModel)]="item.coupon">
+                            <option *ngFor="let c of validCoupons" [value]="c.code">
+                                {{c.code}}
+                            </option>
+                        </select>                        
+                    </div>
+
                     <!--div class="form-group col-md-12 col-lg-12">
                         <label>Costo Adicional</label>
                         <input type="text" #aditional="ngModel" name="aditional" [(ngModel)]="item.aditional" name="aditional" class="form-control">
                     </div-->                       
-                    <div class="form-group col-md-12 col-lg-12">
+                    <div class="form-group col-md-12 col-lg-12" *ngIf="header.reasonId == 1">
                         <label class="custom-control custom-checkbox">
                             <input class="custom-control-input checkbox-primary" type="checkbox" #anticipated="ngModel" name="anticipated" [(ngModel)]="item.anticipated">
                             <span class="custom-control-indicator"></span>
@@ -391,7 +404,7 @@
 
 
 <!-- MODAL WINDOW TO CREATE AND UPDATE COUPONS -->
-<ng-template #modalCoupon>
+<!--ng-template #modalCoupon>
     <div class="modal-header">
         {{couponsTitle}}
     </div>
@@ -400,57 +413,24 @@
 
             <div class="form-group col-md-12 col-lg-12">
                 <label>Cupon</label>
-                <select class="form-control custom-select" type="text" #coupon="ngModel" name="coupon" [(ngModel)]="coupon.id">
-                    <option *ngFor="let coupon of activeCoupons" [value]="coupon.id">
-                        {{coupon.code}}
+                <select class="form-control custom-select" type="text" #coupon="ngModel" name="coupon" 
+                [(ngModel)]="coupon1.code">
+                    <option *ngFor="let c of validCoupons" [value]="c.code">
+                        {{c.code}}
                     </option>
                 </select>                        
             </div>
-
-            <!--div class="form-group col-md-12 col-lg-12">
-                <label>Código</label>
-                <input type="text" #code="ngModel" name="client" [(ngModel)]="coupon.code" name="code" class="form-control" disabled>
-            </div>
-            <div class="form-group col-md-12 col-lg-12">
-                <label>Tipo</label>
-                <select class="form-control custom-select" type="text" #type="ngModel" name="client" [(ngModel)]="coupon.type" name="type" >
-                    <option selected>Escoja un tipo de vale</option>
-                    <option value="1">Dinero</option>
-                    <option value="2">Producto</option>
-                    <option value="3">Servicio</option>
-                </select>                        
-            </div>
-            <div class="form-group col-md-12 col-lg-12" *ngIf="coupon.type == 2 || coupon.type == 3">
-                <label>Producto/Servicio</label>
-                <input type="text" #concept="ngModel" name="concept" [(ngModel)]="coupon.concept" name="concept" class="form-control">
-            </div>                     
-            <div class="form-group col-md-12 col-lg-12" *ngIf="coupon.type == 1">
-                <label>Precio</label>
-                <input type="text" #price="ngModel" name="price" [(ngModel)]="coupon.price" name="price" class="form-control">
-            </div>                     
-            <div class="form-group col-md-12 col-lg-12">
-                <label>Cantidad</label>
-                <input type="text" #quantity="ngModel" name="quantity" [(ngModel)]="coupon.quantity" name="quantity" class="form-control">
-            </div>                        
-            <div class="form-group col-md-12 col-lg-12">
-                <label>Fecha</label>
-                <input type="text" #date="ngModel" name="date" [(ngModel)]="coupon.date" name="date" class="form-control">
-            </div>  
-            <div class="form-group col-md-12 col-lg-12">
-                <label>Fecha Uso</label>
-                <input type="text" #dateUsed="ngModel" name="dateUsed" [(ngModel)]="coupon.dateUsed" name="dateUsed" class="form-control">
-            </div-->                                                               
+                                                              
             <br>
             <div class="row">
                 <div class="form-group col-12">
-                    <button type="button" *ngIf="modeCoupon == 'add'" (click)="addCoupon()" class="btn btn-primary btn-block">Agregar Vale</button> 
+                    <button type="button" *ngIf="modeCoupon == 'add'" (click)="addCoupon()" class="btn btn-primary btn-block">Agregar Cupon</button> 
                 </div> 
                 <div class="form-group col-12">
-                    <button type="button" *ngIf="modeCoupon == 'update'" (click)="updateCoupon(coupon.id)" class="btn btn-info btn-block">Modificar Vale</button>
-                    <button type="button" *ngIf="modeCoupon == 'update'" (click)="cancelCouponUpdate()" class="btn btn-danger btn-block">Cancelar Modificación</button>
+                    <button type="button" *ngIf="modeCoupon == 'update'" (click)="updateCoupon(coupon.id)" class="btn btn-info btn-block">Modificar Cupon</button>
                 </div>
             </div>
 
         </form>         
     </div>
-</ng-template>
+</ng-template-->

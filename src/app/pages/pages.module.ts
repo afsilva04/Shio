@@ -44,6 +44,7 @@ import { InventoryReportComponent } from './reports/inventory/inventory-report.c
 import { EntryCreateComponent } from './entry/entry-create.component';
 import { EntryListComponent } from './entry/entry-list.component';
 import { EntryUpdateComponent } from './entry/entry-update.component';
+import { SalesReportComponent } from './reports/sales/sales-report.component';
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -97,7 +98,8 @@ import { ToastrModule } from 'ngx-toastr';
     InventoryReportComponent,
     EntryCreateComponent,
     EntryListComponent,
-    EntryUpdateComponent
+    EntryUpdateComponent,
+    SalesReportComponent
   ]
 })
 export class PagesModule { }

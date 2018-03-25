@@ -69,4 +69,34 @@ export class TransactionService{
         return this._http.get(this.url + 'transaction-coupons/active').map(res => res.json());        
     }
 
+    createTransactionCoupon(coupon){
+        let params = JSON.stringify(coupon);
+        let headers = new Headers({'Content-Type':'application/json'});
+
+        return this._http.post(this.url + 'transaction-coupons', params, {headers: headers}).map(res => res.json());
+    }
+
+    getTransactionCoupons(transaction){
+        return this._http.get(this.url + 'transaction-coupons/' + transaction).map(res => res.json());        
+    }
+
+    generateCoupons(id){
+        let headers = new Headers({'Content-Type':'application/json'});
+        return this._http.post(this.url + 'coupons/generate/' + id, null, {headers: headers});
+    }
+
+    getValidCoupons(){
+        return this._http.get(this.url + 'coupons/available').map(res => res.json());                
+    }
+
+    substractByTransaction(transaction){
+        let headers = new Headers({'Content-Type':'application/json'});
+        return this._http.post(this.url + 'coupons/substract/' + transaction, null, {headers: headers});
+    }
+
+    confirmTransaction(transaction){
+        let headers = new Headers({'Content-Type':'application/json'});
+        return this._http.post(this.url + 'transactions/confirm/' + transaction, null, {headers: headers}).map(res => res.json());
+    }
+
 }

@@ -25,17 +25,17 @@ export const verticalMenuItems = [
     //USUARIOS
     new Menu (200, 'Usuarios', null, null, 'users', null, true, 0),
     new Menu (201, 'Ver Usuarios', '/pages/user-list', null, 'users', null, false, 200),
-    new Menu (202, 'Crear Usuario', '/pages/user-create', null, 'user-plus', null, false, 200),
+    //new Menu (202, 'Crear Usuario', '/pages/user-create', null, 'user-plus', null, false, 200),
 
     //EMPLEADOS
     new Menu (203, 'Empleados', null, null, 'address-card', null, true, 0),
     new Menu (204, 'Ver Empleados', '/pages/employee-list', null, 'users', null, false, 203),
-    new Menu (205, 'Crear Empleado', '/pages/employee-create', null, 'user-plus', null, false, 203),    
+    //new Menu (205, 'Crear Empleado', '/pages/employee-create', null, 'user-plus', null, false, 203),    
 
     //CLIENTES
     new Menu (206, 'Clientes', null, null, 'handshake-o', null, true, 0),
     new Menu (207, 'Ver Clientes', '/pages/client-list', null, 'users', null, false, 206),
-    new Menu (208, 'Crear Cliente', '/pages/client-create', null, 'user-plus', null, false, 206),
+    //new Menu (208, 'Crear Cliente', '/pages/client-create', null, 'user-plus', null, false, 206),
 
     //CITAS
     new Menu (209, 'Citas', null, null, 'calendar', null, true, 0),
@@ -54,28 +54,29 @@ export const verticalMenuItems = [
 
     //REPORTES
     new Menu (227, 'Reportes', null, null, 'line-chart', null, true, 0),
+    new Menu (233, 'Ventas', '/pages/report-sales', null, 'credit-card', null, false, 227),
     new Menu (228, 'Inventario', '/pages/report-inventory', null, 'list-ul', null, false, 227),
-    new Menu (229, 'Citas', '/pages/report-appointments', null, 'list-ul', null, false, 227),    
+    //new Menu (229, 'Citas', '/pages/report-appointments', null, 'calendar-check-o', null, false, 227),    
 
     //SUCURSALES
     new Menu (212, 'Sucursales', null, null, 'briefcase', null, true, 0),
     new Menu (213, 'Ver Sucurales', '/pages/subsidiary-list', null, 'list-ul', null, false, 212),
-    new Menu (214, 'Crear Sucursal', '/pages/subsidiary-create', null, 'plus', null, false, 212),
+    //new Menu (214, 'Crear Sucursal', '/pages/subsidiary-create', null, 'plus', null, false, 212),
 
     //EMPRESAS
     new Menu (215, 'Empresas', null, null, 'building-o', null, true, 0),
     new Menu (216, 'Ver Empresas', '/pages/company-list', null, 'list-ul', null, false, 215),
-    new Menu (217, 'Crear Empresas', '/pages/company-create', null, 'plus', null, false, 215),
+    //new Menu (217, 'Crear Empresas', '/pages/company-create', null, 'plus', null, false, 215),
 
     //SERVICIOS
     new Menu (218, 'Servicios', null, null, 'thumbs-up', null, true, 0),
     new Menu (219, 'Ver Servicios', '/pages/service-list', null, 'list-ul', null, false, 218),
-    new Menu (220, 'Crear Servicio', '/pages/service-create', null, 'plus', null, false, 218),
+    //new Menu (220, 'Crear Servicio', '/pages/service-create', null, 'plus', null, false, 218),
 
     //PRODUCTOS
     new Menu (221, 'Productos', null, null, 'dropbox', null, true, 0),
     new Menu (222, 'Ver Productos', '/pages/product-list', null, 'list-ul', null, false, 221),
-    new Menu (223, 'Crear Producto', '/pages/product-create', null, 'plus', null, false, 221)   
+    //new Menu (223, 'Crear Producto', '/pages/product-create', null, 'plus', null, false, 221)   
 
 
 

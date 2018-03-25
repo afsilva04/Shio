@@ -27,6 +27,7 @@ import { InventoryReportComponent } from './reports/inventory/inventory-report.c
 import { EntryCreateComponent } from './entry/entry-create.component';
 import { EntryListComponent } from './entry/entry-list.component';
 import { EntryUpdateComponent } from './entry/entry-update.component';
+import { SalesReportComponent } from './reports/sales/sales-report.component';
 
 
 import { AuthGuard } from '../auth.guard';
@@ -63,7 +64,8 @@ export const routes: Routes = [
             { path: 'report-inventory', component: InventoryReportComponent },
             { path: 'entry-create', component: EntryCreateComponent },        
             { path: 'entry-list', component: EntryListComponent },
-            { path: 'entry-update/:id', component: EntryUpdateComponent }            
+            { path: 'entry-update/:id', component: EntryUpdateComponent },
+            { path: 'report-sales', component: SalesReportComponent }           
             
             
        ]
