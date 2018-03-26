@@ -79,11 +79,11 @@ export class SalesReportComponent{
       ngOnInit(){
           this.title = 'Reporte de Ventas';
 
-          /*this._salesService.getInventory().subscribe(
+          this._salesService.getSalesReport().subscribe(
               response => {
-                  this.inventories = response;
+                  this.sales = response;
               }
-          );*/
+          );
 
       }
 

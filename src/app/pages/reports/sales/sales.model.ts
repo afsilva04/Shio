@@ -1,6 +1,6 @@
 export class Sale {
     constructor(
-        public date: number,
+        public date: string,
         public productId: number,
         public productName: string,
         public serviceId: number,

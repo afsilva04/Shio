@@ -12,6 +12,8 @@ export class SalesService{
         this.url = Global.url;
     }
 
-
+    getSalesReport(){
+        return this._http.get(this.url + 'reports/sales').map(res => res.json());
+    }
 
 }
