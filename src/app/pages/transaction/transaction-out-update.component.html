@@ -107,12 +107,21 @@
                     </div-->
 
                     <div class="form-group col-md-12 col-lg-6">
-                        <label>Cliente*</label>
+                        <!--label>Cliente*</label>
                         <select class="form-control custom-select" type="text" #client="ngModel" name="client" [(ngModel)]="header.clientId">
                             <option *ngFor="let client of clients" [value]="client.id">
                                 {{client.name}}
                             </option>
-                        </select>                        
+                        </select-->   
+                        
+                        <label>Cliente*</label>
+                        <ng-select [items]="clients"
+                            bindLabel="searchText"
+                            bindValue="id"
+                            #client="ngModel" name="client" [(ngModel)]="header.clientId"
+                            notFoundText="No se encontraron clientes">
+                        </ng-select>  
+
                     </div>
 
 					<!--div class="form-group col-md-12 col-lg-6">
@@ -324,24 +333,40 @@
                     </div>
 
                     <div class="form-group col-md-12 col-lg-12" *ngIf="item.type == 1">
-                        <label>Producto</label>
+                        <!--label>Producto</label>
                         <select class="form-control custom-select" type="text" #product="ngModel" name="product" [(ngModel)]="item.productId">
                             <option *ngFor="let product of products" [value]="product.id">
                                 {{product.name}}
                             </option>
-                        </select>                        
+                        </select-->     
+                        
+                        <label>Producto</label>
+                        <ng-select [items]="products"
+                            bindLabel="name"
+                            bindValue="id"
+                            #product="ngModel" name="product" [(ngModel)]="item.productId"
+                            notFoundText="No se encontraron productos">
+                        </ng-select> 
                     </div>
                     <!--div class="form-group col-md-12 col-lg-12">
                         <label>Producto</label>
                         <input type="text" #product="ngModel" name="product" [(ngModel)]="item.productId" name="product" class="form-control">
                     </div--> 
                     <div class="form-group col-md-12 col-lg-12" *ngIf="item.type == 2">
-                        <label>Servicio</label>
+                        <!--label>Servicio</label>
                         <select class="form-control custom-select" type="text" #service="ngModel" name="service" [(ngModel)]="item.serviceId">
                             <option *ngFor="let service of services" [value]="service.id">
                                 {{service.name}}
                             </option>
-                        </select>                        
+                        </select-->      
+                        
+                        <label>Servicio</label>
+                        <ng-select [items]="services"
+                            bindLabel="name"
+                            bindValue="id"
+                            #service="ngModel" name="service" [(ngModel)]="item.serviceId"
+                            notFoundText="No se encontraron servicios">
+                        </ng-select> 
                     </div>
                     <!--div class="form-group col-md-12 col-lg-12">
                         <label>Servicio</label>

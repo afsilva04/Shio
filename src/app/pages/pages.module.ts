@@ -51,6 +51,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ToastrModule } from 'ngx-toastr';
 
+import { NgSelectModule } from '@ng-select/ng-select/ng-select';
+
 
 @NgModule({
   imports: [
@@ -61,7 +63,8 @@ import { ToastrModule } from 'ngx-toastr';
     Ng2SmartTableModule,
     NgbModule.forRoot(),
     NgxChartsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgSelectModule
   ],
   declarations: [
     PagesComponent,

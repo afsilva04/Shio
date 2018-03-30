@@ -103,12 +103,21 @@
                     </div-->
 
                     <div class="form-group col-md-12 col-lg-6">
-                        <label>Cliente*</label>
+                        <!--label>Cliente*</label>
                         <select class="form-control custom-select" type="text" #client="ngModel" name="client" [(ngModel)]="header.clientId">
                             <option *ngFor="let client of clients" [value]="client.id">
                                 {{client.name}}
                             </option>
-                        </select>                        
+                        </select-->   
+                        
+                        <label>Cliente*</label>
+                        <ng-select [items]="clients"
+                            bindLabel="searchText"
+                            bindValue="id"
+                            #client="ngModel" name="client" [(ngModel)]="header.clientId"
+                            notFoundText="No se encontraron clientes">
+                        </ng-select>  
+
                     </div>
 
 					<!--div class="form-group col-md-12 col-lg-6">

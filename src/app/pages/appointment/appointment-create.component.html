@@ -1,6 +1,17 @@
 <h3>{{title}}</h3>
 <hr/>
 
+<!--label>City</label>
+<ng-select [items]="cities"
+           bindLabel="name"
+           bindValue="id"
+           placeholder="Select city"
+           [(ngModel)]="selectedCityId">
+</ng-select>
+<p>
+    Selected city ID: {{selectedCityId}}
+</p-->
+
 <div class="row">
 	<div class="col-12 mb-4">
 		<div widget class="card border-0 box-shadow">
@@ -10,14 +21,24 @@
 
 					<div class="row">
 
-                        <div class="form-group col-md-12 col-lg-6">
+                        <!--div class="form-group col-md-12 col-lg-6">
                             <label>Cliente*</label>
                             <select class="form-control custom-select" type="text" #client="ngModel" name="client" [(ngModel)]="appointment.clientId">
                                 <option *ngFor="let client of clients" [value]="client.id">
                                     {{client.name}}
                                 </option>
                             </select>                        
-                        </div>
+                        </div-->
+
+                        <div class="form-group col-md-12 col-lg-6">
+                            <label>Cliente*</label>
+                            <ng-select [items]="clients"
+                                bindLabel="searchText"
+                                bindValue="id"
+                                #client="ngModel" name="client" [(ngModel)]="appointment.clientId"
+                                notFoundText="No se encontraron clientes">
+                            </ng-select>
+                        </div>                            
                         
                         <div class="form-group col-md-12 col-lg-6">
                             <label>
