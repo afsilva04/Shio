@@ -51,13 +51,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ToastrModule } from 'ngx-toastr';
 
-import { NgSelectModule } from '@ng-select/ng-select/ng-select';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
+    PerfectScrollbarModule,//.forRoot(PERFECT_SCROLLBAR_CONFIG),
     routing,
     FormsModule,
     Ng2SmartTableModule,
