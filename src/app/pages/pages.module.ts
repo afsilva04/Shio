@@ -45,6 +45,11 @@ import { EntryCreateComponent } from './entry/entry-create.component';
 import { EntryListComponent } from './entry/entry-list.component';
 import { EntryUpdateComponent } from './entry/entry-update.component';
 import { SalesReportComponent } from './reports/sales/sales-report.component';
+import { AppointmentsReportComponent } from './reports/appointments/appointments-report.component';
+import { AppointmentsInProgressReportComponent } from './reports/appointments-in-progress/appointments-in-progress.component';
+import { CloseReportComponent } from './reports/close/close-report.component';
+import { DayReportComponent } from './reports/day/day-report.component';
+import { CouponsReportComponent } from './reports/coupons/coupons-report.component';
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -102,7 +107,12 @@ import { NgSelectModule } from '@ng-select/ng-select';
     EntryCreateComponent,
     EntryListComponent,
     EntryUpdateComponent,
-    SalesReportComponent
+    SalesReportComponent,
+    AppointmentsReportComponent,
+    AppointmentsInProgressReportComponent,
+    CloseReportComponent,
+    DayReportComponent,
+    CouponsReportComponent
   ]
 })
 export class PagesModule { }

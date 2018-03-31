@@ -28,7 +28,11 @@ import { EntryCreateComponent } from './entry/entry-create.component';
 import { EntryListComponent } from './entry/entry-list.component';
 import { EntryUpdateComponent } from './entry/entry-update.component';
 import { SalesReportComponent } from './reports/sales/sales-report.component';
-
+import { AppointmentsReportComponent } from './reports/appointments/appointments-report.component';
+import { AppointmentsInProgressReportComponent } from './reports/appointments-in-progress/appointments-in-progress.component';
+import { CloseReportComponent } from './reports/close/close-report.component';
+import { DayReportComponent } from './reports/day/day-report.component';
+import { CouponsReportComponent } from './reports/coupons/coupons-report.component';
 
 import { AuthGuard } from '../auth.guard';
 
@@ -65,7 +69,12 @@ export const routes: Routes = [
             { path: 'entry-create', component: EntryCreateComponent },        
             { path: 'entry-list', component: EntryListComponent },
             { path: 'entry-update/:id', component: EntryUpdateComponent },
-            { path: 'report-sales', component: SalesReportComponent }           
+            { path: 'report-sales', component: SalesReportComponent },           
+            { path: 'report-appointments', component: AppointmentsReportComponent },           
+            { path: 'report-appointments-in-progress', component: AppointmentsInProgressReportComponent },                      
+            { path: 'report-close', component: CloseReportComponent },
+            { path: 'report-day', component: DayReportComponent },
+            { path: 'report-coupons', component: CouponsReportComponent }                                  
             
             
        ]

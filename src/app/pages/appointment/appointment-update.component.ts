@@ -13,6 +13,8 @@ import { ServiceService } from 'app/pages/service/service.service';
 import { Service } from 'app/pages/service/service.model';
 import { EmployeeService } from 'app/pages/employee/employee.service';
 import { Employee } from 'app/pages/employee/employee.model';
+import { Observable } from "rxjs";
+
 
 @Component({
 	selector: 'appointment-update',
@@ -158,18 +160,33 @@ export class AppointmentUpdateComponent{
 
 	public createItemModal(modal){
 		let itemToCreate = new AppointmentItem(0, '', '', 0, '', 0, '', 0);
-		this.timeStruct = null;
+		this.timeStruct = {	"hour": 9,	"minute": 0, "second": 0 };
 		this.appointmentItem = itemToCreate;
 		console.log(itemToCreate);
 		this.modalServiceRef = this.modalService.open(modal);
+
 	}
 
 	public updateItemModal(index, modal){
 		this.appointmentItem = this.appointmentItems[index]; 
-		this.timeStruct = null;
+		//this.timeStruct = null;
+		this.timeStruct = this.parseStringToTime(this.appointmentItem.time);
+
+		/*this.timeStruct = {
+			"hour": 15,
+			"minute": 20,
+			"second": 0
+		}*/
+
 		this.mode = 'update';
 		//this.itemsTitle = 'Modificar Item';
 		this.modalServiceRef = this.modalService.open(modal);
+	}
+
+	public parseStringToTime(time:string) : NgbTimeStruct
+	{
+		let arr = time.split(":");
+		return { "hour": +arr[0], "minute": +arr[1], "second": 0 };
 	}
 
 	public deleteItem(index){

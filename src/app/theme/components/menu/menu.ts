@@ -22,20 +22,15 @@ export const verticalMenuItems = [
     new Menu (144, 'Level 5', null, null, 'folder-o', null, false, 143),
     */
 
-    //USUARIOS
-    new Menu (200, 'Usuarios', null, null, 'users', null, true, 0),
-    new Menu (201, 'Ver Usuarios', '/pages/user-list', null, 'users', null, false, 200),
-    //new Menu (202, 'Crear Usuario', '/pages/user-create', null, 'user-plus', null, false, 200),
-
-    //EMPLEADOS
-    new Menu (203, 'Empleados', null, null, 'address-card', null, true, 0),
-    new Menu (204, 'Ver Empleados', '/pages/employee-list', null, 'users', null, false, 203),
-    //new Menu (205, 'Crear Empleado', '/pages/employee-create', null, 'user-plus', null, false, 203),    
-
-    //CLIENTES
-    new Menu (206, 'Clientes', null, null, 'handshake-o', null, true, 0),
-    new Menu (207, 'Ver Clientes', '/pages/client-list', null, 'users', null, false, 206),
-    //new Menu (208, 'Crear Cliente', '/pages/client-create', null, 'user-plus', null, false, 206),
+    //REPORTES
+    new Menu (227, 'Reportes', null, null, 'line-chart', null, true, 0),
+    new Menu (233, 'Ventas', '/pages/report-sales', null, 'credit-card', null, false, 227),
+    new Menu (228, 'Inventario', '/pages/report-inventory', null, 'list-ul', null, false, 227),
+    new Menu (229, 'Citas', '/pages/report-appointments', null, 'calendar-check-o', null, false, 227),    
+    new Menu (234, 'Citas en curso', '/pages/report-appointments-in-progress', null, 'clock-o', null, false, 227),  
+    new Menu (235, 'Cierre', '/pages/report-close', null, 'check', null, false, 227),    
+    new Menu (236, 'Dia', '/pages/report-day', null, 'calendar-times-o', null, false, 227),    
+    new Menu (237, 'Ventas anticipadas', '/pages/report-coupons', null, 'undo', null, false, 227),   
 
     //CITAS
     new Menu (209, 'Citas', null, null, 'calendar', null, true, 0),
@@ -50,13 +45,22 @@ export const verticalMenuItems = [
     //SALIDAS
     new Menu (224, 'Salidas', null, null, 'shopping-cart', null, true, 0),
     new Menu (225, 'Ver Salidas', '/pages/transaction-list', null, 'list-ul', null, false, 224),
-    new Menu (226, 'Crear Salida', '/pages/transaction-out-create', null, 'plus', null, false, 224),
+    new Menu (226, 'Crear Salida', '/pages/transaction-out-create', null, 'plus', null, false, 224), 
 
-    //REPORTES
-    new Menu (227, 'Reportes', null, null, 'line-chart', null, true, 0),
-    new Menu (233, 'Ventas', '/pages/report-sales', null, 'credit-card', null, false, 227),
-    new Menu (228, 'Inventario', '/pages/report-inventory', null, 'list-ul', null, false, 227),
-    //new Menu (229, 'Citas', '/pages/report-appointments', null, 'calendar-check-o', null, false, 227),    
+    //USUARIOS
+    new Menu (200, 'Usuarios', null, null, 'users', null, true, 0),
+    new Menu (201, 'Ver Usuarios', '/pages/user-list', null, 'users', null, false, 200),
+    //new Menu (202, 'Crear Usuario', '/pages/user-create', null, 'user-plus', null, false, 200),
+
+    //EMPLEADOS
+    new Menu (203, 'Empleados', null, null, 'address-card', null, true, 0),
+    new Menu (204, 'Ver Empleados', '/pages/employee-list', null, 'users', null, false, 203),
+    //new Menu (205, 'Crear Empleado', '/pages/employee-create', null, 'user-plus', null, false, 203),    
+
+    //CLIENTES
+    new Menu (206, 'Clientes', null, null, 'handshake-o', null, true, 0),
+    new Menu (207, 'Ver Clientes', '/pages/client-list', null, 'users', null, false, 206),
+    //new Menu (208, 'Crear Cliente', '/pages/client-create', null, 'user-plus', null, false, 206),
 
     //SUCURSALES
     new Menu (212, 'Sucursales', null, null, 'briefcase', null, true, 0),

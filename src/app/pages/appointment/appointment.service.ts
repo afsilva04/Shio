@@ -28,6 +28,10 @@ export class AppointmentService{
         return this._http.get(this.url + 'appointment-items/' + id).map(res => res.json());
     }
 
+    getAllAppointmentItems(){
+        return this._http.get(this.url + 'appointment-items/').map(res => res.json());        
+    }
+
     createAppointment(appointment: Appointment){
         let params = JSON.stringify(appointment);
         let headers = new Headers({'Content-Type':'application/json'});
