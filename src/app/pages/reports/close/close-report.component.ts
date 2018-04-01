@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { AppointmentItem } from 'app/pages/appointment/appointment-item.model';
-import { AppointmentService } from 'app/pages/appointment/appointment.service';
+import { ReportService } from 'app/pages/reports/reports.services';
+import { Close } from 'app/pages/reports/close/close.model';
 
 @Component({
     selector: 'close-report',
     templateUrl: './close-report.component.html',
-    providers: [AppointmentService]
+    providers: [ReportService]
 })
 export class CloseReportComponent{
     public title: string;
-    public appointments: AppointmentItem[];
+    public closeItems: Close[];
     public settings = {
 		selectMode: 'single',
 		hideHeader: false,
@@ -81,15 +82,15 @@ export class CloseReportComponent{
       };
 
       constructor(
-          private _appointmentService: AppointmentService
+          private _reportService: ReportService
       ) { }
       
       ngOnInit(){
           this.title = 'Reporte de cierre';
 
-          this._appointmentService.getAllAppointmentItems().subscribe(
+          this._reportService.getCloseReport().subscribe(
               response => {
-                  this.appointments = response;
+                  this.closeItems = response;
               }
           );
 

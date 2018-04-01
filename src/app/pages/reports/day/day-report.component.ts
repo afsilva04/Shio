@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { AppointmentItem } from 'app/pages/appointment/appointment-item.model';
-import { AppointmentService } from 'app/pages/appointment/appointment.service';
+import { ReportService } from 'app/pages/reports/reports.services';
+import { Day } from 'app/pages/reports/day/day.model';
+
 
 @Component({
     selector: 'day-report',
     templateUrl: './day-report.component.html',
-    providers: [AppointmentService]
+    providers: [ReportService]
 })
 export class DayReportComponent{
     public title: string;
-    public appointments: AppointmentItem[];
+    public days: Day[];
     public settings = {
 		selectMode: 'single',
 		hideHeader: false,
@@ -65,15 +67,15 @@ export class DayReportComponent{
       };
 
       constructor(
-          private _appointmentService: AppointmentService
+          private _reportService: ReportService
       ) { }
       
       ngOnInit(){
           this.title = 'Reporte del dia';
 
-          this._appointmentService.getAllAppointmentItems().subscribe(
+          this._reportService.getDayReport().subscribe(
               response => {
-                  this.appointments = response;
+                  this.days = response;
               }
           );
 

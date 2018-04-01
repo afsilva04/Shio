@@ -55,7 +55,8 @@ export class AppointmentCreateComponent{
 	}
 
 	public createAppointment(){
-		this.appointment.date = this.ngbDateParserFormatter.format(this.dateStruct);
+		let d = this.ngbDateParserFormatter.format(this.dateStruct);
+		this.appointment.date = new Date(d).toISOString();
 		console.log(this.appointment);
 		this._appointmentService.createAppointment(this.appointment).subscribe(
 			response => {

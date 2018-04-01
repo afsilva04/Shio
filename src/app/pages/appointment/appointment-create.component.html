@@ -45,7 +45,9 @@
                                 Fecha*
                             </label>
                             <div class="input-group">
-                                <input class="form-control" placeholder="aaaa-mm-dd" name="date" [displayMonths]="'1'" [navigation]="'select'" ngbDatepicker #date="ngbDatepicker" [(ngModel)]="dateStruct" (ngModelChange)="onChangeDate()">
+                                <input class="form-control" placeholder="aaaa-mm-dd" name="date" 
+                                [displayMonths]="'1'" [navigation]="'select'" ngbDatepicker #date="ngbDatepicker" 
+                                [(ngModel)]="dateStruct" (ngModelChange)="onChangeDate()">
                                 <div class="input-group-addon" (click)="date.toggle()">
                                     <i class="fa fa-calendar"></i>
                                 </div>

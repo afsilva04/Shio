@@ -115,7 +115,8 @@ export class AppointmentUpdateComponent{
 	}
 
 	updateAppointment(){
-		this.appointment.date = this.ngbDateParserFormatter.format(this.dateStruct);
+		let d = this.ngbDateParserFormatter.format(this.dateStruct);
+		this.appointment.date = new Date(d).toISOString();
 		console.log(this.appointment);
 
 		this._appointmentService.updateAppointment(this.appointment).subscribe(
@@ -136,7 +137,13 @@ export class AppointmentUpdateComponent{
 
 	createAppointmentItem(){
 		this.appointmentItem.appointmentId = this.appointment.id;
-		this.appointmentItem.time = this.timeStruct.hour + ':' + this.timeStruct.minute;
+		
+		let dateStr = this.ngbDateParserFormatter.format(this.dateStruct);
+		let date = new Date(dateStr);
+		date.setHours(this.timeStruct.hour);
+		date.setMinutes(this.timeStruct.minute);
+		this.appointmentItem.time = date.toISOString();
+		
 		console.log(this.appointmentItem);
 		//console.log(this.appointmentItem.id);
 	
@@ -164,28 +171,19 @@ export class AppointmentUpdateComponent{
 		this.appointmentItem = itemToCreate;
 		console.log(itemToCreate);
 		this.modalServiceRef = this.modalService.open(modal);
-
 	}
 
 	public updateItemModal(index, modal){
 		this.appointmentItem = this.appointmentItems[index]; 
-		//this.timeStruct = null;
 		this.timeStruct = this.parseStringToTime(this.appointmentItem.time);
-
-		/*this.timeStruct = {
-			"hour": 15,
-			"minute": 20,
-			"second": 0
-		}*/
-
 		this.mode = 'update';
 		//this.itemsTitle = 'Modificar Item';
 		this.modalServiceRef = this.modalService.open(modal);
 	}
 
-	public parseStringToTime(time:string) : NgbTimeStruct
-	{
-		let arr = time.split(":");
+	public parseStringToTime(time:string) : NgbTimeStruct {
+		let arrT = time.split("T");
+		let arr = arrT[1].split(":");
 		return { "hour": +arr[0], "minute": +arr[1], "second": 0 };
 	}
 

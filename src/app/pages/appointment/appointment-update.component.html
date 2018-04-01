@@ -92,9 +92,9 @@
 
 <!--AGREGAR SERVICIOS-->
 <div class="col-12">
-    <button class="btn btn-primary" (click)="createItemModal(modalService)">Agregar Servicio</button>
-    <a class="btn btn-success" [routerLink]="['../../ticket', appointment.id]" target="_blank">Ticket</a>
-    <button class="btn btn-info" (click)="createTransaction()">Crear Salida</button>
+    <button class="btn btn-primary" (click)="createItemModal(modalService)"><i class="fa fa-plus"></i> Agregar Servicio</button>
+    <a class="btn btn-success" [routerLink]="['../../ticket', appointment.id]" target="_blank"><i class="fa fa-print"></i> Ticket</a>
+    <button class="btn btn-info" (click)="createTransaction()"><i class="fa fa-shopping-cart"></i> Crear Salida</button>
 </div>
 
 <!--MODAL SERVICIO-->
@@ -129,10 +129,12 @@
                         <label>Estado</label>
                         <select class="form-control custom-select" type="text" #state="ngModel" name="state" 
                         [(ngModel)]="appointmentItem.status">
-                            <option value="0" selected></option>
-                            <option value="1">Agendada</option>
-                            <option value="2">Confirmada</option>
-                            <option value="3">Iniciada</option>
+                            <option value="Agendada">Agendada</option>
+                            <option value="Confirmada">Confirmada</option>
+                            <option value="Iniciada">Iniciada</option>
+                            <option value="Completada">Completada</option>
+                            <option value="Cancelada">Cancelada</option>
+                            <option value="Incumplida">Incumplida</option>
                         </select> 
                     </div>   
                     

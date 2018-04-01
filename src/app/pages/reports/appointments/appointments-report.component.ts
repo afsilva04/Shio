@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
-import { AppointmentItem } from 'app/pages/appointment/appointment-item.model';
-import { AppointmentService } from 'app/pages/appointment/appointment.service';
-
+import { ReportService } from 'app/pages/reports/reports.services';
+import { AppointmentsReport } from 'app/pages/reports/appointments/appointments-report.model';
 
 @Component({
     selector: 'appointments-report',
     templateUrl: './appointments-report.component.html',
-    providers: [AppointmentService]
+    providers: [ReportService]
 })
 export class AppointmentsReportComponent{
     public title: string;
-    public appointments: AppointmentItem[];
+    public appointments: AppointmentsReport[];
     public settings = {
 		selectMode: 'single',
 		hideHeader: false,
@@ -33,7 +32,7 @@ export class AppointmentsReportComponent{
 			type: 'string',
 			filter: false
           },
-          state: {
+          status: {
             title: 'Estado',
 			type: 'string'  
           },
@@ -63,15 +62,15 @@ export class AppointmentsReportComponent{
       };
 
       constructor(
-          private _appointmentService: AppointmentService
+          private _resportService: ReportService
       ) { }
       
       ngOnInit(){
           this.title = 'Reporte de citas';
 
-
-          this._appointmentService.getAllAppointmentItems().subscribe(
+          this._resportService.getAppointmentsReport().subscribe(
               response => {
+                  console.log(response);
                   this.appointments = response;
               }
           );
