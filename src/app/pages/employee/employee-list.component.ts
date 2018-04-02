@@ -65,6 +65,10 @@ export class EmployeeListComponent{
               }
           );
 
-      }
+			}
+			
+			updateEmployee(event){
+				
+			}
 
 }

@@ -72,7 +72,7 @@ export class AppointmentListComponent{
     }
 
     ngOnInit(){
-        this.appointments = [ new Appointment(1, '2018', 'nota', '1', 1, '', 1, '') ];
+        this.appointments = [ new Appointment(1, '2018', 'nota', true, 1, '', 1, '') ];
 
         this._appointmentService.getAppointments().subscribe(
             response => {

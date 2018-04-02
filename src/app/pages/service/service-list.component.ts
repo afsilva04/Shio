@@ -65,6 +65,10 @@ export class ServiceListComponent{
               }
           );
 
-      }
+			}
+			
+			updateService(event){
+				
+			}
 
 }

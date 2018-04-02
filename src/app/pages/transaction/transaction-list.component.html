@@ -1,7 +1,21 @@
 <h3>{{title}}</h3>
 <hr/>
 
-<div class="col-lg-12 mb-4">
+<!-- TABLA SMART-->
+<div widget class="card border-0 box-shadow">
+    <div class="card-header transparent border-0 text-muted"></div>
+    <div class="card-block pt-0 widget-body">
+        <div class="table-responsive">
+            <ng2-smart-table  class="table table-hover"
+                              [settings]="settings" 
+                              [source]="transactions"
+                              (edit)="updateTransaction($event)">
+            </ng2-smart-table>
+        </div>          
+    </div>
+</div>
+
+<!--div class="col-lg-12 mb-4">
     <div widget class="card border-0 box-shadow">
         <div class="card-block pt-0 widget-body table-responsive">
         	<br>         
@@ -9,7 +23,6 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <!--th>Tipo</th-->
                         <th>Fecha</th>
                         <th>Cliente</th>
                         <th>Sucursal</th>
@@ -19,7 +32,6 @@
                 <tbody>
                     <tr *ngFor="let transaction of transactions">
                         <th>{{transaction.id}}</th>
-                        <!--td>{{transaction.reason}}</td-->
                         <td>{{transaction.date}}</td>
                         <td>{{transaction.clientName}}</td>
                         <td>{{transaction.subsidiaryName}}</td>
@@ -33,4 +45,4 @@
             </table>
         </div>
     </div>
-</div>
+</div-->

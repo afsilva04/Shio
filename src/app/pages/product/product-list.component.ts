@@ -61,6 +61,10 @@ export class ProductListComponent{
               }
           );
 
-      }
+	  }
+	  
+	  updateProduct(event){
+		  
+	  }
 
 }

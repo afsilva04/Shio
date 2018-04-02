@@ -153,7 +153,9 @@ export class TransactionOutUpdateComponent{
 // ------------------- CABECERA
 	onSubmit(){
 		console.log(this.header);
-		this.header.date = this.ngbDateParserFormatter.format(this.dateStruct);
+		//this.header.date = this.ngbDateParserFormatter.format(this.dateStruct);
+		let d = this.ngbDateParserFormatter.format(this.dateStruct);
+		this.header.date = new Date(d).toISOString();
 		
 		this._transactionService.updateTransaction(this.header).subscribe(
 			response => {
@@ -369,5 +371,21 @@ export class TransactionOutUpdateComponent{
 			}
 		);
 	}
+
+	confirmTransaction(){
+		this._inventoryService.substractInventoryByTransaction(this.id).subscribe(
+			response => {
+				this._transactionService.confirmTransaction(this.id).subscribe(
+					response => {
+						this._transactionService.getTransaction(this.id).subscribe(
+							response => {
+								this.header = response;
+							}
+						);
+					}
+				);
+			}
+		);
+	}	
 
 }

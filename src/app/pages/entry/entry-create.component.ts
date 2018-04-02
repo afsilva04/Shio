@@ -29,7 +29,9 @@ export class EntryCreateComponent{
     }
 
     createEntry(){
-        this.entry.date = this.ngbDateParserFormatter.format(this.dateStruct);
+		let d = this.ngbDateParserFormatter.format(this.dateStruct);
+		this.entry.date = new Date(d).toISOString();
+
         this._entrService.createEntry(this.entry).subscribe(
             response => {
                 console.log('entrada creada');

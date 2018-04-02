@@ -49,8 +49,7 @@ export class AppointmentUpdateComponent{
 		this.title = "Modificar Cita";
 		this.titleService = "Servicio";
 		this.mode = 'update';
-		this.appointment = new Appointment(0, '', '', '', 0, '', 0, '');
-		//this.appointment = new Appointment(0, '20180909', 'not', '1', 1, 1);
+		this.appointment = new Appointment(0, '', '', false, 0, '', 0, '');
 		this.appointmentItem = new AppointmentItem(0, '', '', 0, '', 0, '', 0);
 		this.appointmentItem1 = new AppointmentItem(1, '10:00', 'Agendada', 1, '', 0, '', 1);
 		this.appointmentItems = [this.appointmentItem1];
@@ -145,7 +144,6 @@ export class AppointmentUpdateComponent{
 		this.appointmentItem.time = date.toISOString();
 		
 		console.log(this.appointmentItem);
-		//console.log(this.appointmentItem.id);
 	
 		this._appointmentService.createAppointmentItem(this.appointmentItem).subscribe(
 			response => {
@@ -156,9 +154,33 @@ export class AppointmentUpdateComponent{
 			error => {
 				let body = error.json();
 				console.log(body);
-			}
+			}                       
 		);
 	}
+
+	updateAppointmentItem(){
+		//this.appointmentItem.appointmentId = this.appointment.id;
+		
+		let dateStr = this.ngbDateParserFormatter.format(this.dateStruct);
+		let date = new Date(dateStr);
+		date.setHours(this.timeStruct.hour);
+		date.setMinutes(this.timeStruct.minute);
+		this.appointmentItem.time = date.toISOString();
+		
+		console.log(this.appointmentItem);
+	
+		this._appointmentService.updateAppointmentItem(this.appointmentItem).subscribe(
+			response => {
+				console.log('Item creado');
+				this.modalServiceRef.close();
+				this.getAppointmentItems();
+			},
+			error => {
+				let body = error.json();
+				console.log(body);
+			}                       
+		);
+	}	
 
 	public onChangeDate(){
 		console.log('cambie la fecha');
@@ -170,6 +192,7 @@ export class AppointmentUpdateComponent{
 		this.timeStruct = {	"hour": 9,	"minute": 0, "second": 0 };
 		this.appointmentItem = itemToCreate;
 		console.log(itemToCreate);
+		this.mode = 'add';
 		this.modalServiceRef = this.modalService.open(modal);
 	}
 

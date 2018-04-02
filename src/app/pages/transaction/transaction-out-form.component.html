@@ -102,7 +102,7 @@
                         </select>  
                     </div-->
 
-                    <div class="form-group col-md-12 col-lg-6">
+                    <div class="form-group col-md-12 col-lg-6" *ngIf="header.reasonId == '1' || header.reasonId == '2'">
                         <!--label>Cliente*</label>
                         <select class="form-control custom-select" type="text" #client="ngModel" name="client" [(ngModel)]="header.clientId">
                             <option *ngFor="let client of clients" [value]="client.id">

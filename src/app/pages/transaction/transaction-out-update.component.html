@@ -2,7 +2,14 @@
 <hr/>
 
 <!--BUTTONS-->
-<button class="btn btn-success btn-block" *ngIf="header.reasonId == 2" (click)="confirmTransactionAnticipated()">Confirmar Salida</button>
+<button class="btn btn-success btn-block" 
+*ngIf="header.reasonId == '2' && !header.processed && items[0] != null" 
+(click)="confirmTransactionAnticipated()">Confirmar Salida</button>
+
+<button class="btn btn-success btn-block" 
+*ngIf="(header.reasonId == '3' || header.reasonId == '4') && !header.processed && items[0] != null" 
+(click)="confirmTransaction()">Confirmar Salida</button>
+
 <br> 
 
 <!--BOTONES-->
@@ -33,7 +40,7 @@
 						<label>
 							Número de documento*
 						</label>
-						<input type="text" #numdoc="ngModel" name="numdoc" [(ngModel)]="header.id" class="form-control" required disabled>
+						<input type="text" #numdoc="ngModel" name="numdoc" [(ngModel)]="header.id" class="form-control" disabled>
 					</div>
 
 					<!--div class="form-group col-md-12 col-lg-6">
@@ -48,7 +55,9 @@
                             Fecha*
                         </label>
                         <div class="input-group">
-                            <input class="form-control" placeholder="aaaa-mm-dd" name="date" [displayMonths]="'1'" [navigation]="'select'" ngbDatepicker #date="ngbDatepicker" [(ngModel)]="dateStruct">
+                            <input class="form-control" placeholder="aaaa-mm-dd" name="date" [displayMonths]="'1'" 
+                            [navigation]="'select'" ngbDatepicker #date="ngbDatepicker" [(ngModel)]="dateStruct"
+                            [disabled]="header.processed">
                             <div class="input-group-addon" (click)="date.toggle()">
                                 <i class="fa fa-calendar"></i>
                             </div>
@@ -75,7 +84,7 @@
                     <div class="form-group col-md-12 col-lg-6">
                         <label>Motivo*</label>
                         <select class="form-control custom-select" type="text" #reason="ngModel" name="reason" 
-                        [(ngModel)]="header.reasonId">
+                        [(ngModel)]="header.reasonId" [disabled]="header.processed">
                             <option value="0" selected></option>
                             <option value="1">Venta</option>
                             <option value="2">Cortesia/Promocion/Cupon</option>
@@ -106,7 +115,7 @@
                         </select>  
                     </div-->
 
-                    <div class="form-group col-md-12 col-lg-6">
+                    <div class="form-group col-md-12 col-lg-6" *ngIf="header.reasonId == '1' || header.reasonId == '2'">
                         <!--label>Cliente*</label>
                         <select class="form-control custom-select" type="text" #client="ngModel" name="client" [(ngModel)]="header.clientId">
                             <option *ngFor="let client of clients" [value]="client.id">
@@ -119,7 +128,8 @@
                             bindLabel="searchText"
                             bindValue="id"
                             #client="ngModel" name="client" [(ngModel)]="header.clientId"
-                            notFoundText="No se encontraron clientes">
+                            notFoundText="No se encontraron clientes"
+                            [disabled]="header.processed">
                         </ng-select>  
 
                     </div>
@@ -134,7 +144,7 @@
                     <div class="form-group col-md-12 col-lg-6">
                         <label>Sucursal*</label>
                         <select class="form-control custom-select" type="text" name="subsidiary" #subsidiary="ngModel" 
-                        [(ngModel)]="header.subsidiaryId">
+                        [(ngModel)]="header.subsidiaryId" [disabled]="header.processed">
                             <option value="0" selected></option>
                             <option value="1">Olivares</option>
                             <option value="2">Luis Orci</option>
@@ -147,7 +157,7 @@
 
                 </div>	
 
-                <div class="row" align="right">
+                <div class="row" align="right" *ngIf="!header.processed">
                     <div class="form-group col-md-12 col-lg-12">
                         <input type="submit" value="Modificar Salida" class="btn btn-primary">
                     </div>
@@ -233,11 +243,11 @@
                         <!--th>TIPO</th-->
                         <th>CONCEPTO</th>
                         <th>CANTIDAD</th>
-                        <th>PRECIO</th>
-                        <th>EMPLEADO</th>
+                        <th *ngIf="header.reasonId == 1 || header.reasonId == 2">PRECIO</th>
+                        <th *ngIf="header.reasonId == 1 || header.reasonId == 2">EMPLEADO</th>
                         <!--th>ADICIONAL</th-->
                         <th *ngIf="header.reasonId == 1">ANTICIPADO</th>
-                        <th>CUPON</th>
+                        <th *ngIf="header.reasonId == 1 || header.reasonId == 2">CUPON</th>
                         <th>ACCIONES</th>
                     </tr>
                 </thead>
@@ -246,11 +256,11 @@
                         <!--td>{{item.type}}</td-->
                         <td>{{item.productId? item.productName : item.serviceName}}</td>
                         <td>{{item.quantity }}</td>
-                        <td>{{item.price}}</td>
-                        <td>{{item.employeeName}}</td>
+                        <td *ngIf="header.reasonId == 1 || header.reasonId == 2">{{item.price}}</td>
+                        <td *ngIf="header.reasonId == 1 || header.reasonId == 2">{{item.employeeName}}</td>
                         <!--td>{{item.aditional}}</td-->
                         <td align="center" *ngIf="header.reasonId == 1">{{item.anticipated}}<!--input type="checkbox" ng-checked="item.anticipated" name="anticipated"/--></td>
-                        <td>{{item.coupon}}</td>                        
+                        <td *ngIf="header.reasonId == 1 || header.reasonId == 2">{{item.coupon}}</td>                        
                         <td align="center">
                         	<!--input type="button" (click)="updateItemModal(i, modalItem)" class="btn btn-primary" value="E" /-->
                             <!--input type="button" (click)="deleteItem(i)" class="btn btn-danger" value="B" /-->
@@ -305,14 +315,14 @@
 
 <!--BUTTONS-->
 <br>
-<button class="btn btn-primary" *ngIf="!header.invoice" (click)="addItemModal(modalItem)">Agregar Item</button>
+<button class="btn btn-primary" *ngIf="!header.invoice" (click)="addItemModal(modalItem)"><i class="fa fa-plus"></i> Agregar Item</button>
 <!--button class="btn btn-primary" *ngIf="!header.invoice" (click)="addCouponModal(modalCoupon)">Agregar Cupon</button-->
-<button class="btn btn-info" *ngIf="!header.invoice && header.reasonId == 1"  (click)="simulateInvoice()" 
-    [routerLink]="['/pages/simulate-invoice', header.id, header.subsidiaryId]">Simular Factura</button>
+<button class="btn btn-info" *ngIf="!header.invoice && header.reasonId == '1' && items[0] != null"  (click)="simulateInvoice()" 
+    [routerLink]="['/pages/simulate-invoice', header.id, header.subsidiaryId]"><i class="fa fa-file-pdf-o"></i> Simular Factura</button>
 
-<button class="btn btn-danger" *ngIf="header.invoice" (click)="cancelInvoice()">Cancelar Factura</button>
-<button class="btn btn-info" *ngIf="header.invoice" (click)="printInvoice()">Imprimir Factura</button>
-<a class="btn btn-info" *ngIf="header.invoice" [routerLink]="['../../ticket-invoice', header.id]" target="_blank">Imprimir Ticket</a>
+<button class="btn btn-danger" *ngIf="header.invoice && header.reasonId == '1'" (click)="cancelInvoice()"><i class="fa fa-close"></i> Cancelar Factura</button>
+<button class="btn btn-info" *ngIf="header.invoice && header.reasonId == '1'" (click)="printInvoice()"><i class="fa fa-print"></i> Imprimir Factura</button>
+<a class="btn btn-info" *ngIf="header.invoice && header.reasonId == '1'" [routerLink]="['../../ticket-invoice', header.id]" target="_blank"><i class="fa fa-print"></i> Imprimir Ticket</a>
 
 
 <!-- MODAL WINDOW TO CREATE AND UPDATE ITEMS -->
@@ -322,7 +332,7 @@
     </div>
     <div class="modal-body">
                 <form #formCreateItem="ngForm" class="form-horizontal">
-                    <div class="form-group col-md-12 col-lg-12">
+                    <div class="form-group col-md-12 col-lg-12" *ngIf="header.reasonId == 1 || header.reasonId == 2">
                         <label>Tipo</label>
                         <select class="form-control custom-select" type="text" name="type" #subsidiary="ngModel" 
                         [(ngModel)]="item.type">
@@ -332,7 +342,8 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-md-12 col-lg-12" *ngIf="item.type == 1">
+                    <div class="form-group col-md-12 col-lg-12" 
+                    *ngIf="item.type == 1 || header.reasonId == 3 || header.reasonId == 4">
                         <!--label>Producto</label>
                         <select class="form-control custom-select" type="text" #product="ngModel" name="product" [(ngModel)]="item.productId">
                             <option *ngFor="let product of products" [value]="product.id">
@@ -377,12 +388,12 @@
                         <input type="text" #quantity="ngModel" name="quantity" [(ngModel)]="item.quantity" name="quantity" class="form-control">
                     </div>   
                     
-                    <div class="form-group col-md-12 col-lg-12">
+                    <div class="form-group col-md-12 col-lg-12" *ngIf="header.reasonId == 1 || header.reasonId == 2">
                         <label>Precio Unitario</label>
                         <input type="text" #price="ngModel" name="price" [(ngModel)]="item.price" name="price" class="form-control">
                     </div>           
                     
-                    <div class="form-group col-md-12 col-lg-12">
+                    <div class="form-group col-md-12 col-lg-12" *ngIf="header.reasonId == 1 || header.reasonId == 2">
                         <label>Empleado</label>                        
                         <select class="form-control custom-select" type="text" #employee="ngModel" name="employee" 
                         [(ngModel)]="item.employeeId">

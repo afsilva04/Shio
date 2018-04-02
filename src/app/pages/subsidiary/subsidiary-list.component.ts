@@ -61,6 +61,10 @@ export class SubsidiaryListComponent{
               }
           );
 
-      }
+			}
+			
+			updateSubsidiary(event){
+				
+			}
 
 }

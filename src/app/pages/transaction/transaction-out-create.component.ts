@@ -65,7 +65,9 @@ export class TransactionOutCreateComponent{
 // ------------------- CABECERA
 	onSubmit(){
 		console.log(this.header);
-		this.header.date = this.ngbDateParserFormatter.format(this.dateStruct);
+		//this.header.date = this.ngbDateParserFormatter.format(this.dateStruct);
+		let d = this.ngbDateParserFormatter.format(this.dateStruct);
+		this.header.date = new Date(d).toISOString();
 		
 		this._transactionService.createTransaction(this.header).subscribe(
 			response => {

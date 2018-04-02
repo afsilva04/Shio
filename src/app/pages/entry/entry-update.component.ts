@@ -70,7 +70,9 @@ export class EntryUpdateComponent{
     }
 
     updateEntry(){
-        this.entry.date = this.ngbDateParserFormatter.format(this.dateStruct);
+		let d = this.ngbDateParserFormatter.format(this.dateStruct);
+		this.entry.date = new Date(d).toISOString();
+
         this._entryService.updateEntry(this.entry).subscribe(
             response => {
                 console.log('entrada modificada');

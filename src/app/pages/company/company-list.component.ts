@@ -57,6 +57,10 @@ export class CompanyListComponent{
               }
           );
 
-      }
+			}
+			
+			updateCompany(event){
+				
+			}
 
 }
