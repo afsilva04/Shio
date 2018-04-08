@@ -67,7 +67,7 @@ export class ClientListComponent{
 				title: 'Telefono',
 				type: 'string'
 			},			
-		  cityTxt: {
+		  cityName: {
 			title: 'Ciudad',
 			type: 'string'
 		  }
@@ -85,7 +85,7 @@ export class ClientListComponent{
 		private _router:Router
 	){
 		this.title = 'Clientes';
-		this.client = new Client('', '', '', '', '', '', '', '', '', '', '', '');
+		this.client = new Client(0, '', '', '', 0, 0, 0, '', '', '', '', 0, '');
 		this.clientFilter = new ClientFilter('');
 	}
 
@@ -188,15 +188,8 @@ export class ClientListComponent{
 
 		this._clientService.getClients(this.clientFilter.text).subscribe(
 			result => {
-				if(result.code == 200){
-					//this.clients = result.data;
-					//console.log(result);
-				} else {
-					//console.log(result);
-					this.clients = result;
-					console.log(this.clients);
-					//console.log(result[0].nombre);
-				}
+				this.clients = result;
+				console.log(result);
 			}
 		);
 

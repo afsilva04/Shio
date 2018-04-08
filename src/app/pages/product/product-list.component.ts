@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductService } from 'app/pages/product/product.service';
 import { Product } from 'app/pages/product/product.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'product-list',
@@ -8,7 +9,8 @@ import { Product } from 'app/pages/product/product.model';
     providers: [ProductService]
 })
 export class ProductListComponent{
-    public title: string;
+	public title: string;
+	public filter: string;
     public products: Product[];
     public settings = {
 		selectMode: 'single',
@@ -27,17 +29,21 @@ export class ProductListComponent{
 		},
 		noDataMessage: 'No data found',
 		columns: {     
-		  name: {
+			name: {
 				title: 'Nombre',
 				type: 'string',
 				filter: false
-		  },
-		  description: {
+			},
+			description: {
 				title: 'Descripcion',
 				type: 'string'
 			},
 			price: {
 				title: 'Precio',
+				type: 'string'
+			},
+			commission: {
+				title: 'Comision(%)',
 				type: 'string'
 			},
 		},
@@ -49,13 +55,15 @@ export class ProductListComponent{
       };
 
       constructor(
-          private _employeeService: ProductService
+		  private _productService: ProductService,
+		  private _router: Router
       ) { }
       
       ngOnInit(){
-          this.title = 'Productos';
+		  this.title = 'Productos';
+		  this.filter = '';
 
-          this._employeeService.getProducts().subscribe(
+          this._productService.getProducts().subscribe(
               response => {
                   this.products = response;
               }
@@ -64,7 +72,15 @@ export class ProductListComponent{
 	  }
 	  
 	  updateProduct(event){
-		  
+			this._router.navigate(['/pages/product-update/', event.data.id]);		
 	  }
+
+	  searchProducts(){
+		this._productService.getProductsFilter(this.filter).subscribe(
+			response => {
+				this.products = response;
+			}
+		);
+	}
 
 }

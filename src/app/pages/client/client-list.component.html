@@ -158,7 +158,8 @@
                     </div>
                     <div class="form-group col-md-12 col-lg-12">
                         <label>Sucursal*</label>
-                        <select class="form-control custom-select" type="text" name="subsidiary" #subsidiary="ngModel" [(ngModel)]="client.subsidiary">
+                        <select class="form-control custom-select" type="text" name="subsidiary" #subsidiary="ngModel" 
+                        [(ngModel)]="client.subsidiary">
                             <option value="0" selected></option>
                             <option value="1">Obregon</option>
                             <option value="2">Girasol</option>
@@ -177,11 +178,14 @@
                     </div--> 
                     <div class="row">
                         <div class="form-group col-12">
-                            <button type="submit" *ngIf="mode == 'add'" (click)="addItem()" class="btn btn-primary btn-block">Agregar Cliente</button> 
+                            <button type="submit" *ngIf="mode == 'add'" class="btn btn-primary btn-block"
+                            (click)="addItem()">Agregar Cliente</button> 
                         </div> 
                         <div class="form-group col-12">
-                            <button type="button" *ngIf="mode == 'update'" (click)="createOrUpdateClient()" class="btn btn-info btn-block">Modificar Cliente</button>  
-                            <button type="button" *ngIf="mode == 'update'" (click)="cancelItemUpdate()" class="btn btn-danger btn-block">Cancelar Modificación</button>
+                            <button type="button" *ngIf="mode == 'update'" class="btn btn-info btn-block"
+                            (click)="createOrUpdateClient()">Modificar Cliente</button>  
+                            <button type="button" *ngIf="mode == 'update'" class="btn btn-danger btn-block"
+                            (click)="cancelItemUpdate()">Cancelar Modificación</button>
                         </div>
                     </div>
                 </form>         
@@ -189,5 +193,5 @@
 </ng-template>
 
 <!-- BUTTONS -->
-<br>
-<button *ngIf="clients" class="btn btn-warning" (click)="exportToExcel()">Excel</button>
+<!--br>
+<button *ngIf="clients" class="btn btn-warning" (click)="exportToExcel()">Excel</button-->

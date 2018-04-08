@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ServiceService } from 'app/pages/service/service.service';
 import { Service } from 'app/pages/service/service.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'service-list',
@@ -8,7 +9,8 @@ import { Service } from 'app/pages/service/service.model';
     providers: [ServiceService]
 })
 export class ServiceListComponent{
-    public title: string;
+		public title: string;
+		public filter: string;
     public services: Service[];
     public settings = {
 		selectMode: 'single',
@@ -39,11 +41,11 @@ export class ServiceListComponent{
 		  commission: {
 			title: 'Comision(%)',
 			type: 'string'
-          },
-          time: {
-              title: 'Tiempo(min)',
-              type: 'string'
-          }
+      },
+			time: {
+					title: 'Tiempo(min)',
+					type: 'string'
+			}
 		},
 		pager: {
 		  display: true,
@@ -53,11 +55,13 @@ export class ServiceListComponent{
       };
 
       constructor(
-          private _serviceService: ServiceService
+					private _serviceService: ServiceService,
+					private _router: Router
       ) { }
       
       ngOnInit(){
-          this.title = 'Servicios';
+					this.title = 'Servicios';
+					this.filter = '';
 
           this._serviceService.getServices().subscribe(
               response => {
@@ -68,7 +72,15 @@ export class ServiceListComponent{
 			}
 			
 			updateService(event){
-				
+				this._router.navigate(['/pages/service-update/', event.data.id]);		
+			}
+
+			searchServices(){
+				this._serviceService.getServicesFilter(this.filter).subscribe(
+					response => {
+						this.services = response;
+					}
+				);
 			}
 
 }

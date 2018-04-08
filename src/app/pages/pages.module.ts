@@ -50,6 +50,10 @@ import { AppointmentsInProgressReportComponent } from './reports/appointments-in
 import { CloseReportComponent } from './reports/close/close-report.component';
 import { DayReportComponent } from './reports/day/day-report.component';
 import { CouponsReportComponent } from './reports/coupons/coupons-report.component';
+import { ProductCreateComponent } from './product/product-create.component';
+import { ProductUpdateComponent } from './product/product-update.component';
+import { ServiceCreateComponent } from './service/service-create.component';
+import { ServiceUpdateComponent } from './service/service-update.component';
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -112,7 +116,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
     AppointmentsInProgressReportComponent,
     CloseReportComponent,
     DayReportComponent,
-    CouponsReportComponent
+    CouponsReportComponent,
+    ProductCreateComponent,
+    ProductUpdateComponent,
+    ServiceCreateComponent,
+    ServiceUpdateComponent
   ]
 })
 export class PagesModule { }

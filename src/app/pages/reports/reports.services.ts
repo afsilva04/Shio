@@ -20,6 +20,10 @@ export class ReportService{
         return this._http.get(this.url + 'reports/appointments').map(res => res.json());
     }
 
+    getAppointmentsInProgressReport(){
+        return this._http.get(this.url + 'reports/appointments-in-progress').map(res => res.json());
+    }
+
     getCloseReport(){
         return this._http.get(this.url + 'reports/close').map(res => res.json());
     }

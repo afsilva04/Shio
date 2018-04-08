@@ -20,8 +20,8 @@ export class ClientService{
     }
 
     getClients(text?){
-        console.log(this.url + 'clients/?search_txt=' + text);
-        return this._http.get(this.url + 'clients/?search_txt=' + text).map(res => res.json());
+        console.log(this.url + 'clients/search?search_txt=' + text);
+        return this._http.get(this.url + 'clients/search?search_txt=' + text).map(res => res.json());
     }
 
     getClient(id){

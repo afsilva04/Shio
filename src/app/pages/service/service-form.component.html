@@ -1,0 +1,88 @@
+<h3>{{title}}</h3>
+<hr/>
+
+<div class="row">
+	<div class="col-12 mb-4">
+		<div widget class="card border-0 box-shadow">
+			<div class="card-block widget-body">
+				
+				<form #formCreateService="ngForm" (ngSubmit)="createOrUpdateService()" class="form">
+
+					<div class="row">
+						<div class="form-group col-md-12 col-lg-6">
+							<label>Nombre*</label>
+                            <input type="text" #name="ngModel" name="name" 
+                            [(ngModel)]="service.name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group col-md-12 col-lg-6">
+							<label>Precio*</label>
+                            <input type="text" #price="ngModel" name="price" 
+                            [(ngModel)]="service.price" class="form-control">  
+						</div>		
+					</div>
+
+					<div class="row">
+						<div class="form-group col-md-12 col-lg-6">
+							<label>Description</label>
+                            <input type="text" #description="ngModel" name="description" 
+                            [(ngModel)]="service.description" class="form-control">
+						</div>
+
+						<div class="form-group col-md-12 col-lg-6">
+							<label>Comision(%)</label>
+                            <input type="text" #commission="ngModel" name="commission" 
+                            [(ngModel)]="service.commission" class="form-control">                            
+						</div>	
+					</div>
+
+					<div class="row">
+						<div class="form-group col-md-12 col-lg-6">
+							<label>Codigo</label>
+                            <input type="text" #codbar="ngModel" name="codbar" 
+                            [(ngModel)]="service.codbar" class="form-control">
+						</div>						
+
+						<div class="form-group col-md-12 col-lg-6">
+							<label>Clave</label>
+                            <input type="text" #key="ngModel" name="key" 
+                            [(ngModel)]="service.key" class="form-control">
+						</div>	
+					</div>
+
+					<div class="row">
+						<div class="form-group col-md-12 col-lg-6">
+							<label>Unidad de medida</label>
+                            <input type="text" #unit="ngModel" name="unit" 
+                            [(ngModel)]="service.unit" class="form-control"> 
+						</div>		
+
+						<div class="form-group col-md-12 col-lg-6">
+                            <label>Activo</label>
+                            <input type="text" #active="ngModel" name="active" 
+                            [(ngModel)]="service.active" class="form-control"> 
+						</div>							
+                    </div>	
+                    
+                    <div class="row">
+						<div class="form-group col-md-12 col-lg-6">
+							<label>Tiempo*</label>
+                            <input type="text" #time="ngModel" name="time" 
+                            [(ngModel)]="service.time" class="form-control"> 
+						</div>									
+					</div>	
+
+					<br>
+					<div class="row" align="right">
+						<div class="form-group col-md-12 col-lg-12">
+							<input type="submit" value="{{title}}" class="btn btn-primary"
+							[disabled]="!service.name || !service.price || !service.time"
+							>
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
-import { AppointmentItem } from 'app/pages/appointment/appointment-item.model';
-import { AppointmentService } from 'app/pages/appointment/appointment.service';
 import { Observable } from 'rxjs';
+import { ReportService } from '../reports.services';
+import { AppointmentsInProgressReport } from '../appointments-in-progress/appointments-in-progress.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'appointments-in-progress-report',
     templateUrl: './appointments-in-progress.component.html',
-    providers: [AppointmentService]
+    providers: [ReportService]
 })
 export class AppointmentsInProgressReportComponent{
     public title: string;
-    public appointments: AppointmentItem[];
+    public appointments: AppointmentsInProgressReport[];
     public alive: boolean;
     public settings = {
 		selectMode: 'single',
@@ -29,16 +30,16 @@ export class AppointmentsInProgressReportComponent{
 		},
 		noDataMessage: 'No data found',
 		columns: {     
-          state: {
+          status: {
             title: 'Estado',
 			type: 'string'  
           },
-		  time: {
+		  started: {
 			title: 'Hora Inicio',
             type: 'string'
           },
-          left: {
-            title: 'Restante',
+          minutesLeft: {
+            title: 'Restante(min)',
             type: 'string'
           },                    
 		  serviceName: {
@@ -58,7 +59,13 @@ export class AppointmentsInProgressReportComponent{
               type: 'string'
           }
 
-		},
+        },
+        rowClassFunction: (row) => {
+            if (row.data.minutesLeft < 0) {
+              return 'text-danger';
+            }
+            return '';
+        },
 		pager: {
 		  display: true,
 		  perPage: 10
@@ -67,7 +74,8 @@ export class AppointmentsInProgressReportComponent{
       };
 
       constructor(
-          private _appointmentService: AppointmentService
+          private _reportService: ReportService,
+          private _router: Router
       ) { }
       
       ngOnInit(){
@@ -75,14 +83,22 @@ export class AppointmentsInProgressReportComponent{
             this.title = 'Reporte de citas en curso';
 
             Observable.interval(10000).takeWhile(() => this.alive).subscribe(
-                () => console.log('llamando fun cada 10s')
+                () => this.getReportData()
             );
 
-            this._appointmentService.getAllAppointmentItems().subscribe(
-                response => {
-                    this.appointments = response;
-                }
-            );
+            this.getReportData();
+      }
+
+      getReportData(){
+        this._reportService.getAppointmentsInProgressReport().subscribe(
+            response => {
+                this.appointments = response;
+            }
+        );
+      }
+
+      updateAppointment(event){
+        this._router.navigate(['/pages/appointment-update/', event.data.appointmentId]);	
       }
 
       ngOnDestroy(){

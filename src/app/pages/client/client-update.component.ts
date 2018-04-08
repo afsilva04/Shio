@@ -22,7 +22,7 @@ export class ClientUpdateComponent{
 		private _toastrService:ToastrService
 	){
 		this.title = 'Actualizar Cliente';
-		this.client = new Client ('', '', '', '', '', '', '', '', '', '', '', '');
+		this.client = new Client(0, '', '', '', 0, 0, 0, '', '', '', '', 0, '');
 		this.options = this._toastrService.toastrConfig;
     }
     

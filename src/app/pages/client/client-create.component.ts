@@ -11,12 +11,12 @@ import { ToastrService, ToastrConfig } from 'ngx-toastr';
 	})
 export class ClientCreateComponent{
 	public title:string;
-	public success: boolean;
+	//public success: boolean;
 	public client:Client;
 	public options:ToastrConfig;
 	public toastrMessage:string;
 	public toastrTitle:string;
-	private lastInserted: number[] = [];
+	//private lastInserted: number[] = [];
 
 	constructor(
 		private _clientService:ClientService,
@@ -24,9 +24,9 @@ export class ClientCreateComponent{
 		private _toastrService:ToastrService
 	){
 		this.title = 'Crear Cliente';
-		this.success = null;
+		//this.success = null;
 		//this.client = new Client ('', '', '', '', '', '', '', '', '', '', '', '');
-		this.client = new Client (null, null, null, null, null, null, null, null, null, null, null, null);
+		this.client = new Client(0, '', '', '', 0, 0, 0, '', '', '', '', 0, '');
 		this.options = this._toastrService.toastrConfig;
 		this.toastrMessage = 'Mensaje!!!';
 		this.toastrTitle = 'Titulo!!!';

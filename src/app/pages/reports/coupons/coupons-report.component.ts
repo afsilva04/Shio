@@ -48,7 +48,7 @@ export class CouponsReportComponent{
 			type: 'string'
           },          
           clientName: {
-            title: 'Client',
+            title: 'Cliente',
             type: 'string'
           }
 		},

@@ -60,7 +60,7 @@ export const verticalMenuItems = [
     //CLIENTES
     new Menu (206, 'Clientes', null, null, 'handshake-o', null, true, 0),
     new Menu (207, 'Ver Clientes', '/pages/client-list', null, 'users', null, false, 206),
-    //new Menu (208, 'Crear Cliente', '/pages/client-create', null, 'user-plus', null, false, 206),
+    new Menu (208, 'Crear Cliente', '/pages/client-create', null, 'user-plus', null, false, 206),
 
     //SUCURSALES
     new Menu (212, 'Sucursales', null, null, 'briefcase', null, true, 0),
@@ -75,12 +75,12 @@ export const verticalMenuItems = [
     //SERVICIOS
     new Menu (218, 'Servicios', null, null, 'thumbs-up', null, true, 0),
     new Menu (219, 'Ver Servicios', '/pages/service-list', null, 'list-ul', null, false, 218),
-    //new Menu (220, 'Crear Servicio', '/pages/service-create', null, 'plus', null, false, 218),
+    new Menu (220, 'Crear Servicio', '/pages/service-create', null, 'plus', null, false, 218),
 
     //PRODUCTOS
     new Menu (221, 'Productos', null, null, 'dropbox', null, true, 0),
     new Menu (222, 'Ver Productos', '/pages/product-list', null, 'list-ul', null, false, 221),
-    //new Menu (223, 'Crear Producto', '/pages/product-create', null, 'plus', null, false, 221)   
+    new Menu (223, 'Crear Producto', '/pages/product-create', null, 'plus', null, false, 221)   
 
 
 

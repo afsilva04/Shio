@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ReportService } from 'app/pages/reports/reports.services';
 import { AppointmentsReport } from 'app/pages/reports/appointments/appointments-report.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'appointments-report',
@@ -62,7 +63,8 @@ export class AppointmentsReportComponent{
       };
 
       constructor(
-          private _resportService: ReportService
+          private _resportService: ReportService,
+          private _router: Router
       ) { }
       
       ngOnInit(){
@@ -75,6 +77,10 @@ export class AppointmentsReportComponent{
               }
           );
 
+      }
+
+      updateAppointment(event){
+        this._router.navigate(['/pages/appointment-update/', event.data.appointmentId]);	
       }
 
 }

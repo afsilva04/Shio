@@ -44,7 +44,8 @@
 
 						<div class="form-group col-md-12 col-lg-6">
 							<label>País</label>
-							<select class="form-control custom-select" type="text" name="country" #country="ngModel" [(ngModel)]="client.country">
+							<select class="form-control custom-select" type="text" name="country" #country="ngModel" 
+							[(ngModel)]="client.countryId">
 								<option value="0" selected></option>
 								<option value="1">Mexico</option>
 							</select>  
@@ -54,7 +55,8 @@
 					<div class="row">
 						<div class="form-group col-md-12 col-lg-6">
 							<label>Estado</label>
-							<select class="form-control custom-select" type="text" name="state" #state="ngModel" [(ngModel)]="client.state">
+							<select class="form-control custom-select" type="text" name="state" #state="ngModel" 
+							[(ngModel)]="client.stateId">
 								<option value="0" selected></option>
 								<option value="1">Sonora</option>
 							</select>  
@@ -62,7 +64,8 @@
 
 						<div class="form-group col-md-12 col-lg-6">
 							<label>Ciudad</label>
-							<select class="form-control custom-select" type="text" name="city" #city="ngModel" [(ngModel)]="client.city">
+							<select class="form-control custom-select" type="text" name="city" #city="ngModel" 
+							[(ngModel)]="client.cityId">
 								<option value="0" selected></option>
 								<option value="1">Obregon</option>
 							</select> 
@@ -72,7 +75,8 @@
 					<div class="row">
 						<div class="form-group col-md-12 col-lg-6">
 							<label>Colonia</label>
-							<select class="form-control custom-select" type="text" name="colony" #colony="ngModel" [(ngModel)]="client.colony">
+							<select class="form-control custom-select" type="text" name="colony" #colony="ngModel" 
+							[(ngModel)]="client.colony">
 								<option value="0" selected></option>
 								<option value="1">Colonia1</option>
 							</select>  
@@ -99,7 +103,8 @@
 					<div class="row">
 						<div class="form-group col-md-12 col-lg-6">
 							<label>Sucursal*</label>
-							<select class="form-control custom-select" type="text" name="subsidiary" #subsidiary="ngModel" [(ngModel)]="client.subsidiary">
+							<select class="form-control custom-select" type="text" name="subsidiary" #subsidiary="ngModel" 
+							[(ngModel)]="client.subsidiaryId">
 								<option value="0" selected></option>
 								<option value="1">Obregon</option>
 								<option value="2">Girasol</option>
@@ -114,7 +119,8 @@
 					<br>
 					<div class="row" align="right">
 						<div class="form-group col-md-12 col-lg-12">
-							<input type="submit" value="{{title}}" class="btn btn-primary">
+							<input type="submit" value="{{title}}" class="btn btn-primary"
+							[disabled]="!client.name || !client.phone">
 						</div>
 					</div>
 

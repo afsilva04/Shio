@@ -47,7 +47,7 @@
                             <div class="input-group">
                                 <input class="form-control" placeholder="aaaa-mm-dd" name="date" 
                                 [displayMonths]="'1'" [navigation]="'select'" ngbDatepicker #date="ngbDatepicker" 
-                                [(ngModel)]="dateStruct" (ngModelChange)="onChangeDate()">
+                                [(ngModel)]="dateStruct" (ngModelChange)="onChangeDate()" (click)="date.toggle()">
                                 <div class="input-group-addon" (click)="date.toggle()">
                                     <i class="fa fa-calendar"></i>
                                 </div>
@@ -103,55 +103,6 @@
 		</div>
 	</div>
 </div>
-
-<!--AGREGAR SERVICIOS-->
-<div class="col-12">
-    <button class="btn btn-primary" (click)="addServiceModal(modalService)">Agregar Servicio</button>
-</div>
-
-<!--MODAL SERVICIO-->
-<ng-template #modalService>
-    <div class="modal-header">
-        {{titleService}}
-    </div>
-    <div class="modal-body">
-                <form #formService="ngForm" (ngSubmit)="createAppointmentItem()" class="form-horizontal">
-                    <div class="form-group col-md-12 col-lg-12">
-                        <label>Hora</label>
-                        <ngb-timepicker name="time" [(ngModel)]="timeStruct" [meridian]="true"></ngb-timepicker>                     
-                    </div>
-                    <div class="form-group col-md-12 col-lg-12">
-                        <label>Servicio</label>                        
-                        <select class="form-control custom-select" type="text" #service="ngModel" name="service" 
-                        [(ngModel)]="appointmentItem.serviceId">
-                            <option value="00" selected></option>
-                            <option value="01">Corte</option>
-                            <option value="02">Depilación</option>
-                        </select>                         
-                    </div>   
-                    <div class="form-group col-md-12 col-lg-12">
-                        <label>Estado</label>
-                        <select class="form-control custom-select" type="text" #state="ngModel" name="state" 
-                        [(ngModel)]="appointmentItem.status">
-                            <option value="00" selected></option>
-                            <option value="01">Agendada</option>
-                            <option value="02">Confirmada</option>
-                            <option value="03">Iniciada</option>
-                        </select> 
-                    </div>                       
-                    <br>
-                    <div class="row">
-                        <div class="form-group col-12">
-                            <button type="submit" *ngIf="mode == 'add'" class="btn btn-primary btn-block">Agregar Servicio</button> 
-                        </div> 
-                        <div class="form-group col-12">
-                            <button type="button" *ngIf="mode == 'update'" (click)="updatePaymentMethod(paymentMethod.id)" class="btn btn-info btn-block">Modificar Servicio</button>  
-                            <button type="button" *ngIf="mode == 'update'" (click)="cancelPaymentMethodUpdate()" class="btn btn-danger btn-block">Cancelar Modificación</button>
-                        </div>
-                    </div>
-                </form>         
-    </div>
-</ng-template>
 
 <!--CITAS AGENDADAS-->
 <!--br>
