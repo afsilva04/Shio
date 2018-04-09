@@ -5,10 +5,12 @@ export class Close {
         public productName: string,
         public serviceId: number,
         public serviceName: string,
+        public concept: string,
         public quantity: number,
         public price: string,
         public total: number,
-        public commision: string,
+        public commission: string,
+        public commissionTotal: string,
         public employeeId: number,
         public employeeName: string,
         public clientId: number,
@@ -16,4 +18,12 @@ export class Close {
         public subsidiaryId: number,
         public subsidiaryName: string
     ) { }
+}
+
+export class CloseResume {
+    constructor(
+        public commission:number,
+        public total:number,
+        public items:Close[]
+    ) {}
 }

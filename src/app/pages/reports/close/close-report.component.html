@@ -1,6 +1,20 @@
 <h3>{{title}}</h3>
 <hr/>
 
+<div class="row">
+    <div class="col-6">
+        <div class="alert alert-success text-center">
+            <strong>Comision:</strong> {{closeResume.commission | number}}
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="alert alert-success text-center">
+            <strong>Total:</strong> {{closeResume.total | number}}
+        </div>
+    </div>
+</div>
+
+
 <!-- TABLA SMART-->
 <div widget class="card border-0 box-shadow">
     <div class="card-header transparent border-0 text-muted"></div>

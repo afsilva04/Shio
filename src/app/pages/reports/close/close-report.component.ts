@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppointmentItem } from 'app/pages/appointment/appointment-item.model';
 import { ReportService } from 'app/pages/reports/reports.services';
-import { Close } from 'app/pages/reports/close/close.model';
+import { Close, CloseResume } from 'app/pages/reports/close/close.model';
 
 @Component({
     selector: 'close-report',
@@ -10,6 +10,7 @@ import { Close } from 'app/pages/reports/close/close.model';
 })
 export class CloseReportComponent{
     public title: string;
+    public closeResume: CloseResume;
     public closeItems: Close[];
     public settings = {
 		selectMode: 'single',
@@ -36,13 +37,9 @@ export class CloseReportComponent{
             title: 'Motivo',
 			type: 'string'  
           },
-          productName: {
-            title: 'Producto',
+          concept: {
+            title: 'Concepto',
 			type: 'string'  
-          },
-          serviceName: {
-            title: 'Servicio',
-			type: 'string'   
           },
 		  quantity: {
 			title: 'Cantidad',
@@ -56,10 +53,14 @@ export class CloseReportComponent{
               title: 'Total',
               type: 'string'
           },
-		  commission: {
+		  commision: {
+			title: 'Comision(%)',
+			type: 'string'
+          },  
+		  commisionTotal: {
 			title: 'Comision',
 			type: 'string'
-          },          
+          },                    
           employeeName: {
               title: 'Empleado',
               type: 'string'
@@ -89,8 +90,9 @@ export class CloseReportComponent{
           this.title = 'Reporte de cierre';
 
           this._reportService.getCloseReport().subscribe(
-              response => {
-                  this.closeItems = response;
+              (response:CloseResume) => {
+                  this.closeResume = response;
+                  this.closeItems = response.items;
               }
           );
 
