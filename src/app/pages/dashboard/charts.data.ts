@@ -1,26 +1,26 @@
 export const single = [
     {
-      name: 'Germany',
+      name: 'Obregon',
       value: 40632
     },
     {
-      name: 'United States',
+      name: 'Reforma',
       value: 49737
     },
     {
-      name: 'France',
+      name: 'Luis Orci',
       value: 36745
     },
     {
-      name: 'United Kingdom',
+      name: 'Girasol',
       value: 36240
     },
     {
-      name: 'Spain',
+      name: 'Olivares',
       value: 33000
     },
     {
-      name: 'Italy',
+      name: 'Dila',
       value: 35800
     }
   ];

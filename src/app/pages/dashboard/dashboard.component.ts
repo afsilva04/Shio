@@ -4,8 +4,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  encapsulation: ViewEncapsulation.None
+  templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent  {
 

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { DashboardComponent } from './dashboard.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 export const routes = [
   { path: '', component: DashboardComponent, pathMatch: 'full' }
@@ -12,7 +13,8 @@ export const routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
+    NgxChartsModule
   ],
   declarations: [
     DashboardComponent
