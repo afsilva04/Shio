@@ -36,7 +36,8 @@ export class AppointmentsInProgressReportComponent{
           },
 		  started: {
 			title: 'Hora Inicio',
-            type: 'string'
+            type: 'string',
+            valuePrepareFunction: (value) => { return new Date(value).toLocaleString() }
           },
           minutesLeft: {
             title: 'Restante(min)',

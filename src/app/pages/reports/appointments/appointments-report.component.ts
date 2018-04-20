@@ -31,8 +31,7 @@ export class AppointmentsReportComponent{
 		  time: {
 			title: 'Hora',
 			type: 'string',
-			filter: false
-          },
+            valuePrepareFunction: (value) => { return new Date(value).toLocaleString() }          },
           status: {
             title: 'Estado',
 			type: 'string'  

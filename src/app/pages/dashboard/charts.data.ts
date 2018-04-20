@@ -10,7 +10,7 @@ export const single = [
     {
       name: 'Luis Orci',
       value: 36745
-    },
+    }/*,
     {
       name: 'Girasol',
       value: 36240
@@ -22,7 +22,7 @@ export const single = [
     {
       name: 'Dila',
       value: 35800
-    }
+    }*/
   ];
   
   export const multi = [

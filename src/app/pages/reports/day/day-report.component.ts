@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppointmentItem } from 'app/pages/appointment/appointment-item.model';
 import { ReportService } from 'app/pages/reports/reports.services';
-import { Day } from 'app/pages/reports/day/day.model';
+import { Day, DayResume } from 'app/pages/reports/day/day.model';
 
 
 @Component({
@@ -12,6 +12,7 @@ import { Day } from 'app/pages/reports/day/day.model';
 export class DayReportComponent{
     public title: string;
     public days: Day[];
+    public dayReport: DayResume[];
     public settings = {
 		selectMode: 'single',
 		hideHeader: false,
@@ -33,13 +34,9 @@ export class DayReportComponent{
             title: 'Motivo',
 			type: 'string'  
           },
-          productName: {
-            title: 'Producto',
+          concept: {
+            title: 'Concepto',
 			type: 'string'  
-          },
-          serviceName: {
-            title: 'Servicio',
-			type: 'string'   
           },
 		  quantity: {
 			title: 'Cantidad',
@@ -72,10 +69,12 @@ export class DayReportComponent{
       
       ngOnInit(){
           this.title = 'Reporte del dia';
+          this.dayReport = [];
 
           this._reportService.getDayReport().subscribe(
               response => {
-                  this.days = response;
+                  this.dayReport = response;
+                  console.log(this.dayReport);
               }
           );
 

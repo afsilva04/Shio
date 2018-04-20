@@ -28,11 +28,7 @@ export class CloseReportComponent{
 		  editButtonContent: '<i class="fa fa-pencil mr-3 text-primary"></i>'
 		},
 		noDataMessage: 'No data found',
-		columns: {     
-		  date: {
-			title: 'Fecha',
-			type: 'string'
-          },    
+		columns: {         
           reason: {
             title: 'Motivo',
 			type: 'string'  

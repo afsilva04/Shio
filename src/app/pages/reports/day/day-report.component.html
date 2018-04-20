@@ -1,6 +1,37 @@
 <h3>{{title}}</h3>
 <hr/>
 
+<div class="row">
+    <div class="col-4">
+        <div class="alert alert-success text-center">
+            <strong>Clientes atendidas:</strong> {{dayReport.customersServed}}
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="alert alert-success text-center">
+            <strong>Citas reagendadas:</strong> {{dayReport.rescheduledAppointments}}
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="alert alert-success text-center">
+            <strong>Citas dia siguiente:</strong> {{dayReport.nextDayAppointments}}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <div class="alert alert-success text-center">
+            <strong>Ticket promedio:</strong> {{dayReport.avgTicket}}
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="alert alert-warning text-center">
+            <strong>Venta del dia:</strong> {{dayReport.salesTotal}}
+        </div>
+    </div>
+</div>
+
+
 <!-- TABLA SMART-->
 <div widget class="card border-0 box-shadow">
     <div class="card-header transparent border-0 text-muted"></div>
@@ -8,7 +39,7 @@
         <div class="table-responsive">
             <ng2-smart-table  class="table table-hover"
                               [settings]="settings" 
-                              [source]="days">
+                              [source]="dayReport.items">
             </ng2-smart-table>
         </div>          
     </div>
