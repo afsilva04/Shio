@@ -84,6 +84,7 @@ export class CloseReportComponent{
       
       ngOnInit(){
           this.title = 'Reporte de cierre';
+          this.closeResume = new CloseResume(0,0,[]);
 
           this._reportService.getCloseReport().subscribe(
               (response:CloseResume) => {

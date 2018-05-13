@@ -4,6 +4,7 @@ import { Global } from '../global';
 import { Appointment } from 'app/pages/appointment/appointment.model';
 import { retry } from 'rxjs/operator/retry';
 import { AppointmentItem, AppointmentItemCreate } from 'app/pages/appointment/appointment-item.model';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class AppointmentService{
@@ -11,7 +12,7 @@ export class AppointmentService{
     public url:string;
     
     constructor(
-        private _http:Http
+        private _http:AuthHttp
     ){
         this.url = Global.url;
     }

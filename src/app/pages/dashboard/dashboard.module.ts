@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { DashboardComponent } from './dashboard.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { AppointmentListComponent } from '../appointment/appointment-list.component';
 
 export const routes = [
   { path: '', component: DashboardComponent, pathMatch: 'full' }

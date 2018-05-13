@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { single, multi } from './charts.data';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +21,9 @@ export class DashboardComponent  {
   public explodeSlices = false;
   public doughnut = false;
 
-  constructor() {
+  constructor(
+    private userService: UserService
+  ) {
     Object.assign(this, {single});   
   }
   

@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Global } from '../global';
 import { Product } from './product.model';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class ProductService{
     public url:string;
 
     constructor(
-        private _http:Http
+        private _http:AuthHttp
     ){
         this.url = Global.url;
     }

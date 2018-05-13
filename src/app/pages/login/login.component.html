@@ -8,10 +8,17 @@
                 <h2>SHIO login</h2>
                 <!--a routerLink="/register" class="transition">Don't have an account? Sign up now!</a-->
                 <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="text-left mt-4">
-                    <div class="form-group">
+                    <div *ngIf="invalidLogin" class="alert alert-danger">
+                        Usuario y/o contraseña invalida 
+                    </div>
+                    <!--div class="form-group">
                         <input [formControl]="email" class="form-control validation-field" placeholder="Email" type="text">                      
                         <small class="text-danger" *ngIf="form.get('email').touched && form.get('email').hasError('required')">Email es obligatorio</small>                              
                         <small class="text-danger" *ngIf="form.get('email').touched && form.get('email').hasError('email')">Email invalido</small>
+                    </div-->
+                    <div class="form-group">
+                        <input [formControl]="username" class="form-control validation-field" placeholder="Username" type="text">                      
+                        <small class="text-danger" *ngIf="form.get('username').touched && form.get('username').hasError('required')">Usuario es obligatorio</small>                              
                     </div>
                     <div class="form-group">
                         <input [formControl]="password" class="form-control validation-field" placeholder="Password" type="password">

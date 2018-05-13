@@ -12,24 +12,34 @@ import { UserService } from '../user/user.service';
 export class LoginComponent {
   public router: Router;
   public form:FormGroup;
-  public email:AbstractControl;
+  public username:AbstractControl;
   public password:AbstractControl;
+  public invalidLogin:boolean;
 
   constructor(router:Router, fb:FormBuilder, private user: UserService) {
       this.router = router;
       this.form = fb.group({
-          'email': ['', Validators.compose([Validators.required, emailValidator])],
-          'password': ['', Validators.compose([Validators.required, Validators.minLength(6)])]
+          'username': ['', Validators.compose([Validators.required])],
+          'password': ['', Validators.compose([Validators.required, Validators.minLength(1)])]
       });
 
-      this.email = this.form.controls['email'];
+      this.username = this.form.controls['username'];
       this.password = this.form.controls['password'];
+      this.invalidLogin = false;
   }
 
   public onSubmit(values:Object):void {
       if (this.form.valid) {
-          this.user.setUserLoggedIn();
-          this.router.navigate(['pages/dashboard']);
+          console.log(values);
+          this.user.login(values).subscribe(
+              response => {
+                  if(response) {
+                    this.router.navigate(['pages/dashboard']);
+                  } else {
+                    this.invalidLogin = true;
+                  }
+              }
+          );
       }
   }
 

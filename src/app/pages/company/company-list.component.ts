@@ -49,7 +49,7 @@ export class CompanyListComponent{
       ) { }
       
       ngOnInit(){
-          this.title = 'Productos';
+          this.title = 'Empresas';
 
           this._companyService.getCompanies().subscribe(
               response => {

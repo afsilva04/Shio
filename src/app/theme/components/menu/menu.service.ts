@@ -3,19 +3,21 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Menu } from './menu.model';
-import { verticalMenuItems } from './menu';
+import { verticalMenuItems, verticalMenuItemsAdmin } from './menu';
 import { horizontalMenuItems } from './menu';
+import { UserService } from '../../../pages/user/user.service';
 
 @Injectable()
 export class MenuService {
 
   constructor(private location:Location, 
               private renderer2:Renderer2,
-              private router:Router){ } 
+              private router:Router,
+              private userService: UserService){ } 
 
 
   public getVerticalMenuItems():Array<Menu> {
-    return verticalMenuItems;
+    return this.userService.currentUser.admin? verticalMenuItemsAdmin : verticalMenuItems;
   }
 
   public getHorizontalMenuItems():Array<Menu> {

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Sale } from 'app/pages/reports/sales/sales.model';
-import { SalesService } from 'app/pages/reports/sales/sales.services';
+import { ReportService } from '../reports.services';
 
 @Component({
     selector: 'sales-report',
     templateUrl: './sales-report.component.html',
-    providers: [SalesService]
+    providers: [ReportService]
 })
 export class SalesReportComponent{
     public title: string;
@@ -72,13 +72,13 @@ export class SalesReportComponent{
       };
 
       constructor(
-          private _salesService: SalesService
+          private _reportService: ReportService
       ) { }
       
       ngOnInit(){
           this.title = 'Reporte de Ventas';
 
-          this._salesService.getSalesReport().subscribe(
+          this._reportService.getSalesReport().subscribe(
               response => {
                   this.sales = response;
               }

@@ -4,13 +4,14 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { Client } from './client.model' ;
 import { Global } from '../global';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class ClientService{
     public url:string;
 
     constructor(
-        private _http:Http
+        private _http:AuthHttp
     ){
         this.url = Global.url;
     }

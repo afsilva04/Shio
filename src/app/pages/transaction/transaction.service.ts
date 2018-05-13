@@ -5,13 +5,14 @@ import { Observable } from 'rxjs/Observable';
 import { Global } from '../global';
 import { EntsalHeader } from 'app/pages/transaction/entsal-header.model';
 import { EntsalItem } from 'app/pages/transaction/entsal-item.model';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class TransactionService{
     public url:string;
 
     constructor(
-        private _http:Http
+        private _http:AuthHttp
     ){
         this.url = Global.url;
     }

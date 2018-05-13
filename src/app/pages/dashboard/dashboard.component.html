@@ -1,5 +1,5 @@
 <div class="col-12 mb-4">
-    <div widget class="card border-0 box-shadow">
+    <div widget class="card border-0 box-shadow" *ngIf="userService.currentUser.admin">
         <div class="card-header transparent border-0 text-muted">
             <h5 class="mb-0">Ventas del día</h5>
         </div>
@@ -14,6 +14,8 @@
             </div>
         </div>
     </div>
+
+    <!--appointment-list></appointment-list-->
 </div>
 
 

@@ -11,6 +11,16 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { AuthGuard } from './auth.guard';
 import { UserService } from './pages/user/user.service';
+import { AuthGuardAdmin } from './auth-guard-admin';
+import { AUTH_PROVIDERS } from 'angular2-jwt';
+
+
+import { Http, RequestOptions } from '@angular/http';
+import { provideAuth, AuthHttp, AuthConfig } from 'angular2-jwt';
+
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp( new AuthConfig({}), http, options);
+}
 
 @NgModule({
   declarations: [
@@ -25,7 +35,13 @@ import { UserService } from './pages/user/user.service';
     HttpModule,
     NgxChartsModule
   ],
-  providers: [ AppSettings, AuthGuard, UserService ],
+  providers: [ AppSettings, AuthGuard, UserService, AuthGuardAdmin, 
+    {
+      provide: AuthHttp,
+      useFactory: authHttpServiceFactory,
+      deps: [ Http, RequestOptions ]
+    }
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
