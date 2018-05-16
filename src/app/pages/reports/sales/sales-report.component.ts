@@ -31,12 +31,8 @@ export class SalesReportComponent{
 			title: 'Fecha',
 			type: 'string',
 			valuePrepareFunction: (value) => { return new Date(value).toLocaleString() }          },
-          productName: {
-			title: 'Producto',
-			type: 'string'
-          },
-          serviceName: {
-			title: 'Servicio',
+          concept: {
+			title: 'Concepto',
 			type: 'string'
           },
 		  quantity: {

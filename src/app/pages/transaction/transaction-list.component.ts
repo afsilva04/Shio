@@ -52,7 +52,8 @@ export class TransactionListComponent{
           },
           date: {
             title: 'Fecha',
-			type: 'string'  
+			type: 'string',
+			valuePrepareFunction: (value) => { return new Date(value).toLocaleString() }        
           },
 		  reasonId: {
 			title: 'Motivo',

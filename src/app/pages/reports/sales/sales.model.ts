@@ -5,6 +5,7 @@ export class Sale {
         public productName: string,
         public serviceId: number,
         public serviceName: string,
+        public concept: string,
         public quantity: number,
         public price: string,
         public total: number,

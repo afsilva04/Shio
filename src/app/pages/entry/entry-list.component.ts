@@ -35,7 +35,8 @@ export class EntryListComponent{
 		  },
 		  date: {
 			title: 'Fecha',
-			type: 'string'
+			type: 'string',
+			valuePrepareFunction: (value) => { return new Date(value).toLocaleString() }
 		  },
 		  subsidiaryName: {
 			title: 'Sucursal',

@@ -57,8 +57,8 @@ export class AppointmentService{
     updateAppointmentItem(item: AppointmentItem){
         let params = JSON.stringify(item);
         let headers = new Headers({'Content-Type':'application/json'});
-
-        return this._http.put(this.url + 'appointment-items', params, {headers: headers}).map(res => res.json());
+        
+        return this._http.post(this.url + 'appointment-items', params, {headers: headers}).map(res => res.json());
     }
 
     deleteAppointmentItem(id){
