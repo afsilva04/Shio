@@ -185,7 +185,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of appointmentItems; let i = index;">
-                        <td>{{item.time}}</td>
+                        <td>{{item.time | date:'HH:mm a'}}</td>
                         <td>{{item.serviceName}}</td>
                         <td>{{item.status}}</td>
                         <td>{{item.employeeName}}</td>
