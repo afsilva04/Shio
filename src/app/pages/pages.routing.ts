@@ -16,8 +16,8 @@ import { AppointmentListComponent } from './appointment/appointment-list.compone
 import { ClientCreateComponent } from './client/client-create.component';
 import { ClientUpdateComponent } from './client/client-update.component';
 import { ClientListComponent } from './client/client-list.component';
-import { TicketComponent } from './appointment/ticket.component'
-import { TicketInvoiceComponent } from './invoice/ticket-invoice.component';
+// import { TicketComponent } from './appointment/ticket.component'
+// import { TicketInvoiceComponent } from './invoice/ticket-invoice.component';
 import { EmployeeListComponent } from './employee/employee-list.component'
 import { SubsidiaryListComponent } from './subsidiary/subsidiary-list.component'
 import { ProductListComponent } from './product/product-list.component';
@@ -63,8 +63,8 @@ export const routes: Routes = [
             { path: 'appointment-create', component: AppointmentCreateComponent, canActivate: [AuthGuard] },
             { path: 'appointment-update/:id', component: AppointmentUpdateComponent, canActivate: [AuthGuard] },            
             { path: 'appointment-list', component: AppointmentListComponent, canActivate: [AuthGuard] },
-            { path: 'ticket/:id', component: TicketComponent, canActivate: [AuthGuard] },
-            { path: 'ticket-invoice/:id', component: TicketInvoiceComponent, canActivate: [AuthGuard] },
+            // { path: 'ticket/:id', component: TicketComponent, canActivate: [AuthGuard] },
+            // { path: 'ticket-invoice/:id', component: TicketInvoiceComponent, canActivate: [AuthGuard] },
             { path: 'employee-list', component: EmployeeListComponent, canActivate: [AuthGuard] },   
             { path: 'subsidiary-list', component: SubsidiaryListComponent, canActivate: [AuthGuard, AuthGuardAdmin] } ,  
             { path: 'product-list', component: ProductListComponent, canActivate: [AuthGuard] },

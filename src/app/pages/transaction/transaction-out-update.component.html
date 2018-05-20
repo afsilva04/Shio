@@ -322,7 +322,7 @@
 
 <button class="btn btn-danger" *ngIf="header.invoice && header.reasonId == '1'" (click)="cancelInvoice()"><i class="fa fa-close"></i> Cancelar Factura</button>
 <button class="btn btn-info" *ngIf="header.invoice && header.reasonId == '1'" (click)="printInvoice()"><i class="fa fa-print"></i> Imprimir Factura</button>
-<a class="btn btn-info" *ngIf="header.invoice && header.reasonId == '1'" [routerLink]="['../../ticket-invoice', header.id]" target="_blank"><i class="fa fa-print"></i> Imprimir Ticket</a>
+<a class="btn btn-info" *ngIf="header.invoice && header.reasonId == '1'" [routerLink]="['../../../ticket-invoice', header.id]" target="_blank"><i class="fa fa-print"></i> Imprimir Ticket</a>
 
 
 <!-- MODAL WINDOW TO CREATE AND UPDATE ITEMS -->

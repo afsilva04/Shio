@@ -1,3 +1,23 @@
+<style media="print">
+    @page {
+        size: auto;
+        margin: 0;
+            }
+    
+    @media print {
+    a {
+        display:none;
+    }
+        @page {
+            size: A7;
+            margin: 0;
+        }
+        #printPageButton {
+        display: none;
+        }
+    }       
+</style>
+
 <div id="invoice" class="container">
     
     <!--TITULO Y CABECERA -->   
@@ -18,7 +38,7 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <strong>Fecha de la orden:</strong><br>
-                                    <h4>{{invoice.transaction.date}}</h4>
+                                    <h4>{{invoice.transaction.date | date:'yyyy-MM-dd' }}</h4>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +67,7 @@
                                                     <td><strong>Item</strong></td>
                                                     <td class="text-center"><strong>Cantidad</strong></td>
                                                     <td class="text-right"><strong>Precio Unitario</strong></td>
-                                                    <td class="text-right"><strong>Adicional</strong></td>
+                                                    <!--td class="text-right"><strong>Adicional</strong></td-->
                                                     <td class="text-right"><strong>Total</strong></td>
                                                 </tr>
                                             </thead>
@@ -56,28 +76,28 @@
                                                     <td>{{item.productId? item.productName : item.serviceName}}</td>
                                                     <td class="text-center">{{item.quantity}}</td>
                                                     <td class="text-right">{{item.price}}</td>
-                                                    <td class="text-right">{{item.aditional}}</td>
+                                                    <!--td class="text-right">{{item.aditional}}</td-->
                                                     <td class="text-right">{{item.quantity * item.price + item.aditional}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Subtotal</strong></td>
                                                     <td class="text-center"></td>
                                                     <td class="text-center"></td>
-                                                    <td class="text-center"></td>
+                                                    <!--td class="text-center"></td-->
                                                     <td class="text-right">{{invoice.subtotal}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>IVA</strong></td>
                                                     <td class="text-center"></td>
                                                     <td class="text-center"></td>
-                                                    <td class="text-center"></td>
+                                                    <!--td class="text-center"></td-->
                                                     <td class="text-right">{{invoice.tax}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Total</strong></td>
                                                     <td class="text-center"></td>
                                                     <td class="text-center"></td>
-                                                    <td class="text-center"></td>
+                                                    <!--td class="text-center"></td-->
                                                     <td class="text-right">{{invoice.total}}</td>
                                                 </tr>
                                             </tbody>
@@ -89,6 +109,14 @@
                     </div>
                 </div>
             </div>
+
+            <br>
+            <div class="row">
+                <div class="col-md-12" align="right">               
+                    <a id="printPageButton" onClick="window.print();" class="btn btn-info">Imprimir</a>
+                </div> 
+            </div> 
+
         </div>
     </div>
 </div>

@@ -18,6 +18,9 @@ import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { Http, RequestOptions } from '@angular/http';
 import { provideAuth, AuthHttp, AuthConfig } from 'angular2-jwt';
 
+import { TicketInvoiceComponent } from './pages/invoice/ticket-invoice.component';
+import { TicketComponent } from './pages/appointment/ticket.component'
+
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp( new AuthConfig({}), http, options);
 }
@@ -25,7 +28,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    TicketInvoiceComponent,
+    TicketComponent
   ],
   imports: [
     BrowserModule,

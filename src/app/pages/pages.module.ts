@@ -33,8 +33,8 @@ import { SimulateInvoiceComponent } from './invoice/simulate-invoice.component';
 import { AppointmentCreateComponent } from './appointment/appointment-create.component';
 import { AppointmentUpdateComponent } from './appointment/appointment-update.component';
 import { AppointmentListComponent } from './appointment/appointment-list.component';
-import { TicketComponent } from './appointment/ticket.component'
-import { TicketInvoiceComponent } from './invoice/ticket-invoice.component';
+// import { TicketComponent } from './appointment/ticket.component'
+// import { TicketInvoiceComponent } from './invoice/ticket-invoice.component';
 import { EmployeeListComponent } from './employee/employee-list.component'
 import { SubsidiaryListComponent } from './subsidiary/subsidiary-list.component'
 import { ProductListComponent } from './product/product-list.component';
@@ -100,8 +100,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ClientCreateComponent,
     ClientUpdateComponent,
     ClientListComponent,
-    TicketComponent,
-    TicketInvoiceComponent,
+    // TicketComponent,
+    // TicketInvoiceComponent,
     EmployeeListComponent,
     SubsidiaryListComponent,
     ProductListComponent,

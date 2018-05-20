@@ -33,4 +33,8 @@ export class TicketInvoiceComponent {
         );
     }
 
+    ngAfterViewInit(){
+        document.getElementById('preloader').classList.add('hide');                 
+    }
+
 }
